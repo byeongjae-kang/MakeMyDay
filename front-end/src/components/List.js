@@ -17,7 +17,7 @@ const useStyle = makeStyles((theme) => ({
   }
 }));
 
-export default function List({ list, title }) {
+export default function List({ list, title, index }) {
   const classes = useStyle();
   return (
     <Paper className={classes.list}>
@@ -31,7 +31,7 @@ export default function List({ list, title }) {
             {list.tasks.map((task, index) =>
           (<Task task={task} key={task.id} index={index}/>
             ))}
-        {provided.placeholder}
+        {provided.placeholder} 
           </div>
         )}
         

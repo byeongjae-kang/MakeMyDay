@@ -1,21 +1,19 @@
 DROP TABLE IF EXISTS users CASCADE;
+
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
-  first_name VARCHAR(255) NOT NULL,
-  last_name VARCHAR(255) NOT NULL,
+  user_name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
-  password VARCHAR(255) NOT NULL
+  password VARCHAR(255) NOT NULL,
+  avatar VARCHAR(255) NOT NULL
 );
 
-DROP TABLE IF EXISTS users CASCADE;
-CREATE TABLE user_project (
-  user_id SERIAL PRIMARY KEY,
-  project_id SERIAL PRIMARY KEY
-)
 
-DROP TABLE IF EXISTS users CASCADE;
-CREATE TABLE user_task (
-  user_id SERIAL PRIMARY KEY,
-)
+-- ********not used so commented out*************
+
+-- DROP TABLE IF EXISTS users CASCADE;
+-- CREATE TABLE user_task (
+--   user_id SERIAL PRIMARY KEY,
+-- )
 
 

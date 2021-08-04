@@ -23,3 +23,12 @@ VALUES
   (4, 1),
   (4, 2),
   (4, 3);
+
+
+  INSERT INTO tasks (name, status, priority, start_date, due_date) VALUES('make template for pages', 'In Progress', 1, 'Aug 05 2021', 'Aug 15 2021');
+INSERT INTO tasks (name, status, priority, start_date, due_date) VALUES('create components', 'In Progress', 2, 'Aug 01 2021', 'Aug 03 2021');
+INSERT INTO tasks (name, status, priority, start_date, due_date) VALUES('create routes for front end', 'In Progress', 3,'Aug 15 2021', 'Aug 25 2021');
+INSERT INTO tasks (name, status, priority, start_date, due_date) VALUES('create routes for back end', 'In Progress', 1, 'Aug 04 2021', 'Aug 08 2021');
+INSERT INTO tasks (name, status, priority, start_date, due_date) VALUES('search for articles api', 'In Progress', 2, 'Aug 02 2021', 'Aug 10 2021');
+INSERT INTO tasks (name, status, priority, start_date, due_date) VALUES('connect websocket', 'In Progress', 3, 'Aug 25 2021', 'Aug 30 2021');
+INSERT INTO tasks (name, status, priority, start_date, due_date) VALUES('create chat feature', 'In Progress', 4, 'Aug 05 2021', 'Aug 05 2021');

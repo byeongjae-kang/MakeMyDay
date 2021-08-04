@@ -20,67 +20,62 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import { DateRangePickerComponent } from "@syncfusion/ej2-react-calendars";
+import "./Calendar.css";
 
 export default function Form(props) {
   const [description, setDescription] = useState("");
   const classes = useStyles();
+
   return (
     <div>
       <Container className={classes.modalForm}>
+        <TextField
+          placeholder="Title goes here!"
+          multiline
+          variant="outlined"
+          fullWidth
+        />
+        <br />
+        <br />
+        <CloseIcon className={classes.closeIcon}></CloseIcon>
+        <br />
+        <br />
+        <Typography>Select Date Range</Typography>
+        <DateRangePickerComponent
+          placeholder="Enter Date Range"
+          format="MMM dd yyyy"
+        ></DateRangePickerComponent>
         <Typography>Priority</Typography>
         <FormControl className={classes.formControl}>
           <Select>
-            <MenuItem value={10}>Low</MenuItem>
-            <MenuItem value={20}>Medium</MenuItem>
-            <MenuItem value={30}>High</MenuItem>
+            <MenuItem value={3}>High</MenuItem>
+            <MenuItem value={2}>Medium</MenuItem>
+            <MenuItem value={1}>Low</MenuItem>
           </Select>
         </FormControl>
         <Typography>Status</Typography>
         <FormControl className={classes.formControl}>
           <Select>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+            <MenuItem value={10}>In Progress</MenuItem>
+            <MenuItem value={20}>Backlog</MenuItem>
+            <MenuItem value={30}>On Hold</MenuItem>
+            <MenuItem value={30}>Completed</MenuItem>
           </Select>
         </FormControl>
         <Grid container className={classes.titleArea}>
-          <CloseIcon className={classes.closeIcon}></CloseIcon>
+          <Typography>members</Typography>
           <Grid item className={classes.textArea}>
-            {/* title */}
             <div className={classes.root}>
-              <Avatar
-                alt="Remy Sharp"
-                src="/broken-image.jpg"
-                className={classes.orange}
-              >
-                B
-              </Avatar>
-              <Avatar
-                alt="Remy Sharp"
-                src="/broken-image.jpg"
-                className={classes.orange}
-              />
+              <Avatar className={classes.orange}>B</Avatar>
+              <Avatar className={classes.orange} />
               <Avatar src="/broken-image.jpg" />
             </div>
-            <TextField
-              placeholder="Add Comments..."
-              multiline
-              variant="outlined"
-            />
           </Grid>
-          <Typography>members</Typography>
 
           <Typography variant="h4">Comments</Typography>
           <Box justifyContent="flex-end" className={classes.commentContainer}>
-            <Avatar
-              alt="Remy Sharp"
-              src="/broken-image.jpg"
-              className={classes.orange}
-            >
-              B
-            </Avatar>{" "}
+            <Avatar>B</Avatar>
             <Typography>
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy text
@@ -96,14 +91,12 @@ export default function Form(props) {
           </Box>
           <Grid className={classes.commentArea}>
             {/* Description */}
-            <Avatar
-              alt="Remy Sharp"
-              src="/broken-image.jpg"
-              className={classes.orange}
-            >
-              B
-            </Avatar>
-            <TextField placeholder="Add Comments..." variant="outlined" />
+            <Avatar className={classes.purple}>OP</Avatar>
+            <TextField
+              placeholder="Add Comments..."
+              variant="outlined"
+              fullWidth
+            />
           </Grid>
         </Grid>
         {/* <ButtonGroup className={classes.buttons}>

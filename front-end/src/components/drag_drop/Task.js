@@ -1,6 +1,12 @@
 import { useState } from "react";
-import { Card, Paper, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import {
+  Card,
+  FormHelperText,
+  Paper,
+  Typography,
+  Grid,
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
 import { Draggable } from "react-beautiful-dnd";
 import ModalContainer from "../form/ModalContainer";
 import ModalForm from "../form/ModalForm";
@@ -9,11 +15,18 @@ const useStyle = makeStyles((theme) => ({
   task: {
     padding: theme.spacing(1, 1, 1, 2),
     margin: theme.spacing(1),
+    display: "flex",
+    flexDirection: "columns",
+    justifyContent: "space-between",
 
     background: "#fff",
     "&:hover": {
       backgroundColor: "lightblue",
     },
+  },
+  rightModal: {
+    display: "flex",
+    alignItems: "center",
   },
 }));
 
@@ -30,6 +43,11 @@ const PriorityIcon = (props) => {
 export default function Task({ task, index }) {
   const classes = useStyle();
   // console.log("task----", task)
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpen = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <Draggable draggableId={task.id.toString()} index={index}>
       {(provided) => (
@@ -39,11 +57,13 @@ export default function Task({ task, index }) {
           {...provided.draggableProps}
         >
           <Paper className={classes.task}>
-            <ModalContainer>
-              <ModalForm />
-            </ModalContainer>
             <Typography>{task.name}</Typography>
-            <PriorityIcon priority={task.priority} />
+            <Grid className={classes.rightModal}>
+              <ModalContainer>
+                <ModalForm />
+              </ModalContainer>
+              <PriorityIcon priority={task.priority} />
+            </Grid>
           </Paper>
         </div>
       )}

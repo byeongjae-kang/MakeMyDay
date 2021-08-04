@@ -1,11 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { deepOrange } from "@material-ui/core/colors";
+import { deepOrange, deepPurple } from "@material-ui/core/colors";
 const useStyles = makeStyles((theme) => ({
   modalContainer: {},
   modalForm: {
     padding: "20px",
-    overflow: "hidden",
-    position: "relative",
   },
   buttons: {
     display: "flex",
@@ -20,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
   commentArea: {
     display: "flex",
     flexDirection: "row",
-    width: "100%",
   },
   commentContainer: {
     padding: "20px",
@@ -42,6 +39,10 @@ const useStyles = makeStyles((theme) => ({
   orange: {
     color: theme.palette.getContrastText(deepOrange[500]),
     backgroundColor: deepOrange[500],
+  },
+  purple: {
+    color: theme.palette.getContrastText(deepPurple[500]),
+    backgroundColor: deepPurple[500],
   },
   formControl: {
     margin: theme.spacing(1),

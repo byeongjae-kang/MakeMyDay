@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Dialog from "@material-ui/core/Dialog";
 import { Button, Container } from "@material-ui/core";
-
+import CreateIcon from "@material-ui/icons/Create";
 export default function ModalContainer(props) {
   const [open, setOpen] = useState(false);
 
@@ -14,9 +14,11 @@ export default function ModalContainer(props) {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Sign Up
-      </Button>
+      <CreateIcon
+        color="secondary"
+        onClick={handleClickOpen}
+        style={{ cursor: "pointer" }}
+      ></CreateIcon>
       <Dialog onClose={handleClose} open={open}>
         <Container
           id="customized-dialog-title"

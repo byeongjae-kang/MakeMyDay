@@ -1,3 +1,4 @@
+<<<<<<< HEAD:front-end/src/components/drag_drop/List.js
 import React, { useState } from 'react';
 import { Paper, CssBaseline } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -6,14 +7,27 @@ import ListTitle from './ListTitle';
 import NewTask from './NewTask';
 import TaskInput from './TaskInput';
 import { Droppable } from 'react-beautiful-dnd';
+=======
+import React, { useState } from "react";
+import { Paper, CssBaseline } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import Task from "./Task";
+import ListTitle from "./ListTitle";
+import NewTask from "./NewTask";
+import TaskInput from "./TaskInput";
+import { lists, updateLists } from "../utils/fakeData";
+import { Droppable } from "react-beautiful-dnd";
+import ModalForm from "./form/ModalForm";
+import CustomizedDialogs from "./form/ModalContainer";
+>>>>>>> backup:front-end/src/components/List.js
 
 const useStyle = makeStyles((theme) => ({
   list: {
-    width: '300px',
-    backgroundColor: '#EDECF0',
+    width: "300px",
+    backgroundColor: "#EDECF0",
     marginLeft: theme.spacing(1),
-    padding: theme.spacing(0.1)
-  }
+    padding: theme.spacing(0.1),
+  },
 }));
 
 export default function List({ list, title, index, onSubmit }) {
@@ -30,17 +44,23 @@ export default function List({ list, title, index, onSubmit }) {
       {title === "In Progress" ? <NewTask onSubmit={onSubmit} /> : null}
       <Droppable droppableId={list.id.toString()}>
         {(provided) => (
+<<<<<<< HEAD:front-end/src/components/drag_drop/List.js
           <div
           ref={provided.innerRef} {...provided.droppableProps}>
             {sortedTasks.map((task, index) =>
           (<Task task={task} key={task.id} index={index}/>
             ))}
         {provided.placeholder} 
+=======
+          <div ref={provided.innerRef} {...provided.droppableProps}>
+            {list.tasks.map((task, index) => (
+              <Task task={task} key={task.id} index={index} />
+            ))}
+            {provided.placeholder}
+>>>>>>> backup:front-end/src/components/List.js
           </div>
         )}
-        
       </Droppable>
-
     </Paper>
-  )
+  );
 }

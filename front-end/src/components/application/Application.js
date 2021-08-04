@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { createTheme, ThemeProvider } from '@material-ui/core'
 import Layout from './Layout'
-import Projects from '../projects/Projects'
+import ProjectList from '../projects/ProjectList'
 import TaskBody from '../drag_drop/TasksBody'
 import Landing from '../landing_page/Landing'
 const theme = createTheme({})
@@ -14,7 +14,7 @@ export default function Application() {
         <Layout>
           <Switch>
             <Route exact path="/projects">
-              <Projects />
+              <ProjectList />
             </Route>
             <Route exact path="/dashboard">
              <TaskBody/>

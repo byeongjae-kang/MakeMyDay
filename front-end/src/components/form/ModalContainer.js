@@ -12,6 +12,7 @@ export default function ModalContainer({ isDialogOpened, handleCloseDialog }) {
   const handleClose = () => {
     // setOpen(false);
     handleCloseDialog(false);
+    // console.log("-----clickedCloseIcon");
   };
 
   return (

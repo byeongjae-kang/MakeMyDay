@@ -44,7 +44,11 @@ export default function Task({ task, index }) {
   const classes = useStyle();
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
   };
   return (
     <Draggable draggableId={task.id.toString()} index={index}>
@@ -54,7 +58,7 @@ export default function Task({ task, index }) {
           {...provided.dragHandleProps}
           {...provided.draggableProps}
         >
-          <Paper
+          <Card
             className={classes.task}
             onClick={() => handleOpen()}
             style={{ cursor: "pointer" }}
@@ -63,13 +67,11 @@ export default function Task({ task, index }) {
             <Grid className={classes.rightModal}>
               <ModalContainer
                 isDialogOpened={isOpen}
-                handleCloseDialog={() => setIsOpen(false)}
-              >
-                <ModalForm />
-              </ModalContainer>
+                handleCloseDialog={handleClose}
+              ></ModalContainer>
               <PriorityIcon priority={task.priority} />
             </Grid>
-          </Paper>
+          </Card>
         </div>
       )}
     </Draggable>

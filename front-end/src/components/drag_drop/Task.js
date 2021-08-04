@@ -42,9 +42,7 @@ const PriorityIcon = (props) => {
 
 export default function Task({ task, index }) {
   const classes = useStyle();
-  // console.log("task----", task)
   const [isOpen, setIsOpen] = useState(false);
-
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
@@ -56,10 +54,17 @@ export default function Task({ task, index }) {
           {...provided.dragHandleProps}
           {...provided.draggableProps}
         >
-          <Paper className={classes.task}>
+          <Paper
+            className={classes.task}
+            onClick={() => handleOpen()}
+            style={{ cursor: "pointer" }}
+          >
             <Typography>{task.name}</Typography>
             <Grid className={classes.rightModal}>
-              <ModalContainer>
+              <ModalContainer
+                isDialogOpened={isOpen}
+                handleCloseDialog={() => setIsOpen(false)}
+              >
                 <ModalForm />
               </ModalContainer>
               <PriorityIcon priority={task.priority} />

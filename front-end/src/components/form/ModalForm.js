@@ -23,24 +23,26 @@ import Select from "@material-ui/core/Select";
 import { DateRangePickerComponent } from "@syncfusion/ej2-react-calendars";
 import "./Calendar.css";
 
-export default function Form(props) {
+export default function Form({ clickCloseIcon }) {
   const [description, setDescription] = useState("");
   const classes = useStyles();
 
   return (
     <div>
       <Container className={classes.modalForm}>
+        <CloseIcon
+          className={classes.closeIcon}
+          onClick={clickCloseIcon}
+        ></CloseIcon>
+        <br />
+        <br />
         <TextField
           placeholder="Title goes here!"
           multiline
           variant="outlined"
           fullWidth
         />
-        <br />
-        <br />
-        <CloseIcon className={classes.closeIcon}></CloseIcon>
-        <br />
-        <br />
+
         <Typography>Select Date Range</Typography>
         <DateRangePickerComponent
           placeholder="Enter Date Range"

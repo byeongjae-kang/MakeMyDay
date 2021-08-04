@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Card, Paper, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Draggable } from "react-beautiful-dnd";
-import ModalContainer from "./form/ModalContainer";
-import ModalForm from "./form/ModalForm";
+import ModalContainer from "../form/ModalContainer";
+import ModalForm from "../form/ModalForm";
 import Button from "@material-ui/core/Button";
 const useStyle = makeStyles((theme) => ({
   task: {

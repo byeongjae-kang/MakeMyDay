@@ -18,13 +18,9 @@ export default function ListTitle(props) {
   const classes = useStyle();
   return (
     <Paper className={classes.title}>
-<<<<<<< HEAD:front-end/src/components/drag_drop/ListTitle.js
       <Typography className={classes.text}>
-        {props.title} {" "} ({props.length})
+        {props.title} ({props.length})
       </Typography>
-=======
-      <Typography className={classes.text}>{props.title}</Typography>
->>>>>>> backup:front-end/src/components/ListTitle.js
     </Paper>
   );
 }

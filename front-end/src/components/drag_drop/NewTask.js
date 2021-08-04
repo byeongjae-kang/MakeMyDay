@@ -25,11 +25,7 @@ export default function NewTask(props) {
   return (
     <div className={classes.top}>
       <Collapse in={open}>
-<<<<<<< HEAD:front-end/src/components/drag_drop/NewTask.js
-        <TaskInput onSubmit={props.onSubmit} setOpen={setOpen}/>
-=======
-        <TaskInput setOpen={setOpen} />
->>>>>>> backup:front-end/src/components/NewTask.js
+        <TaskInput onSubmit={props.onSubmit} setOpen={setOpen} />
       </Collapse>
       <Collapse in={!open}>
         <Paper

@@ -17,11 +17,7 @@
     "cors": "^2.8.5",
     "dotenv": "^2.0.0",
     "express": "^4.17.1",
-<<<<<<< HEAD
     "morgan": "^1.10.0",
-=======
-    "fontsource-roboto": "^4.0.0",
->>>>>>> backup
     "pg": "^8.7.1"
   },
   "devDependencies": {

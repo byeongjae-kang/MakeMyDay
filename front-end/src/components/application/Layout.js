@@ -3,7 +3,7 @@ import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
 import { useTheme } from "@material-ui/core/styles";
-import { useStyles } from "./LayoutStyle";
+import { useStyles } from './LayoutStyle'
 
 import {
   Avatar,
@@ -17,7 +17,7 @@ import {
   ListItemIcon,
   ListItemText,
   Toolbar,
-  Typography,
+  Typography
 } from "@material-ui/core";
 
 import { AddCircleOutlineOutlined, SubjectOutlined } from "@material-ui/icons/";
@@ -26,6 +26,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import InsertChartIcon from "@material-ui/icons/InsertChart";
 import MenuIcon from "@material-ui/icons/Menu";
+
 
 export default function MiniDrawer({ children }) {
   const classes = useStyles();
@@ -38,23 +39,23 @@ export default function MiniDrawer({ children }) {
     {
       text: "DASHBOARD",
       icon: <DashboardIcon color="action" />,
-      path: "/dashboard",
+      path: "/dashboard"
     },
     {
       text: "GRANTT CHART",
       icon: <InsertChartIcon color="action" />,
-      path: "/gantt",
+      path: "/gantt"
     },
     {
       text: "PROJECTS",
       icon: <SubjectOutlined color="action" />,
-      path: "/projects",
+      path: "/projects"
     },
     {
       text: "CREATE PROJECTS",
       icon: <AddCircleOutlineOutlined color="action" />,
-      path: "/create",
-    },
+      path: "/create"
+    }
   ];
 
   const handleDrawerOpen = () => {
@@ -72,7 +73,7 @@ export default function MiniDrawer({ children }) {
         elevation={2}
         position="fixed"
         className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
+          [classes.appBarShift]: open
         })}
       >
         <Toolbar>
@@ -82,7 +83,7 @@ export default function MiniDrawer({ children }) {
             onClick={handleDrawerOpen}
             edge="start"
             className={clsx(classes.menuButton, {
-              [classes.hide]: open,
+              [classes.hide]: open
             })}
           >
             <MenuIcon />
@@ -103,13 +104,13 @@ export default function MiniDrawer({ children }) {
         variant="permanent"
         className={clsx(classes.drawer, {
           [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
+          [classes.drawerClose]: !open
         })}
         classes={{
           paper: clsx({
             [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-          }),
+            [classes.drawerClose]: !open
+          })
         }}
       >
         <div className={classes.toolbar}>

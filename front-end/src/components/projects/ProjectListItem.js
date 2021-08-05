@@ -123,7 +123,7 @@ export default function ProjectListItems({ project, users, handleDelete }) {
         <CardActions>
           {project.users.map((user) => {
             return (
-              <IconButton className={classes.person}>
+              <IconButton key={user.id} className={classes.person}>
                 <Avatar alt={user.name} src={user.avatar} />
               </IconButton>
             );

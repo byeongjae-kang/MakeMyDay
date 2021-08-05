@@ -3,7 +3,7 @@ import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
 import { useTheme } from "@material-ui/core/styles";
-import { useStyles } from './LayoutStyle'
+import { useStyles } from "./LayoutStyle";
 
 import {
   Avatar,
@@ -20,13 +20,12 @@ import {
   Typography
 } from "@material-ui/core";
 
-import { AddCircleOutlineOutlined, SubjectOutlined } from "@material-ui/icons/";
+import SubjectOutlined from "@material-ui/icons/SubjectOutlined";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import InsertChartIcon from "@material-ui/icons/InsertChart";
 import MenuIcon from "@material-ui/icons/Menu";
-
 
 export default function MiniDrawer({ children }) {
   const classes = useStyles();
@@ -50,11 +49,6 @@ export default function MiniDrawer({ children }) {
       text: "PROJECTS",
       icon: <SubjectOutlined color="action" />,
       path: "/projects"
-    },
-    {
-      text: "CREATE PROJECTS",
-      icon: <AddCircleOutlineOutlined color="action" />,
-      path: "/create"
     }
   ];
 

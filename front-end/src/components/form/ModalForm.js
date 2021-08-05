@@ -23,10 +23,11 @@ import Select from "@material-ui/core/Select";
 import { DateRangePickerComponent } from "@syncfusion/ej2-react-calendars";
 import "./Calendar.css";
 
-export default function Form() {
+export default function Form({ tasks }) {
   const [description, setDescription] = useState("");
   const classes = useStyles();
 
+  console.log({ tasks });
   return (
     <div>
       <Container className={classes.modalForm}>

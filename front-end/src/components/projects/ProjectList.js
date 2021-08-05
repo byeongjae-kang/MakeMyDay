@@ -3,7 +3,9 @@ import Container from "@material-ui/core/Container";
 import Masonry from "react-masonry-css";
 import ProjectListItems from "./ProjectListItem";
 import axios from "axios";
-import './ProjectList.css'
+import "./ProjectList.css";
+import CreateProject from "./createProject/CreateProject";
+
 export default function ProjectList() {
   const [state, setprojects] = useState({
     users: [],
@@ -20,13 +22,10 @@ export default function ProjectList() {
         });
       }
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [state]);
   const handleEdit = async (id) => {
     await axios.patch(`http://localhost8080/api/projects/${id}`);
-    
   };
-
 
   const handleDelete = async (id) => {
     await axios.delete(`http://localhost8080/api/projects/${id}`);
@@ -36,16 +35,16 @@ export default function ProjectList() {
       projects: newProjects
     });
   };
-  
-  
 
   const HaveProjectWithUsers = (project, users) => {
-    const updatedProject = project.users.map((userId) => users.find((userDetail) => userDetail.id === userId));
-  
+    const updatedProject = project.users.map((userId) =>
+      users.find((userDetail) => userDetail.id === userId)
+    );
+
     return {
-       ...project,
-       users: updatedProject
-    }
+      ...project,
+      users: updatedProject
+    };
   };
 
   const breakpoints = {
@@ -56,12 +55,13 @@ export default function ProjectList() {
 
   return (
     <Container>
+      <CreateProject users={state.users} />
       <Masonry
         breakpointCols={breakpoints}
         className="my-masonry-grid"
         columnClassName="my-masonry-grid_column"
       >
-        {state.projects.map((project) => (
+        {state.projects.reverse().map((project) => (
           <div key={project.id}>
             <ProjectListItems
               project={HaveProjectWithUsers(project, state.users)}

@@ -9,7 +9,6 @@ function Navbar(props) {
         <p className="navbar-logo">MakeMyDay Logo</p>
         <ul className="navbar-list">
           <li onClick={() => {
-            console.log("it clicked")
             props.setTrigger(!props.trigger)}
           }>
             Log in

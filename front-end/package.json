@@ -5,11 +5,11 @@
   "dependencies": {
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.60",
     "@syncfusion/ej2-react-calendars": "^19.2.47",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
-    "@thetechcompany/react-gantt-timeline": "^0.4.14",
     "axios": "^0.21.1",
     "lodash": "^4.17.21",
     "react": "^17.0.2",

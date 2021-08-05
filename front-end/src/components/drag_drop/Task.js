@@ -8,7 +8,6 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { Draggable } from "react-beautiful-dnd";
-import ModalContainer from "../form/ModalContainer";
 import ModalForm from "../form/ModalForm";
 import Button from "@material-ui/core/Button";
 const useStyle = makeStyles((theme) => ({
@@ -40,40 +39,25 @@ const PriorityIcon = (props) => {
   }
 };
 
-export default function Task({ task, index }) {
+export default function Task({ task, index, key }) {
   const classes = useStyle();
-  const [isOpen, setIsOpen] = useState(false);
-  const handleOpen = () => {
-    setIsOpen(true);
-  };
+  const [openPopup, setOpenPopup] = useState(false);
 
-  const handleClose = () => {
-    setIsOpen(false);
-  };
   return (
-    <Draggable draggableId={task.id.toString()} index={index}>
-      {(provided) => (
-        <div
-          ref={provided.innerRef}
-          {...provided.dragHandleProps}
-          {...provided.draggableProps}
-        >
-          <Card
-            className={classes.task}
-            onClick={() => handleOpen()}
-            style={{ cursor: "pointer" }}
-          >
-            <Typography>{task.name}</Typography>
-            <Grid className={classes.rightModal}>
-              <ModalContainer
-                isDialogOpened={isOpen}
-                handleCloseDialog={handleClose}
-              ></ModalContainer>
-              <PriorityIcon priority={task.priority} />
-            </Grid>
-          </Card>
-        </div>
-      )}
-    </Draggable>
+    <div>
+      <Card className={classes.task} style={{ cursor: "pointer" }}>
+        <button onClick={() => setOpenPopup(true)}></button>
+        <Typography>{task.name}</Typography>
+        <Grid className={classes.rightModal}>
+          <ModalForm
+            closePopup={() => setOpenPopup(false)}
+            openPopup={openPopup}
+            setOpenPopup={setOpenPopup}
+            task={task}
+          />
+          <PriorityIcon priority={task.priority} />
+        </Grid>
+      </Card>
+    </div>
   );
 }

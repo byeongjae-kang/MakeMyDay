@@ -1,44 +1,65 @@
 import { useState } from "react";
+import { Dialog, DialogTitle, DialogContent } from "@material-ui/core/";
 import {
   Grid,
-  Paper,
   TextField,
-  Button,
   Typography,
   Container,
-  ButtonGroup,
-  Card,
   Box,
+  // ButtonGroup,
+  // Button,
+  // Card,
+  // Paper,
 } from "@material-ui/core";
-import SaveIcon from "@material-ui/icons/Save";
-import DeleteIcon from "@material-ui/icons/Delete";
 import useStyles from "./Styles";
-import CloseIcon from "@material-ui/icons/Close";
 import Avatar from "@material-ui/core/Avatar";
-import InputLabel from "@material-ui/core/InputLabel";
+import CloseIcon from "@material-ui/icons/Close";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { DateRangePickerComponent } from "@syncfusion/ej2-react-calendars";
 import "./Calendar.css";
+import axios from "axios";
+import useApplicationData from "../../hooks/useApplicationData";
 
-export default function Form({ tasks }) {
+export default function Form(props) {
+  const { openPopup, setOpenPopup, closePopup } = props;
+  const [title, setTitle] = useState("");
+  const [avatar, setAvatar] = useState("");
+  const [priority, setPriority] = useState("");
   const [description, setDescription] = useState("");
+
   const classes = useStyles();
 
-  console.log({ tasks });
+  const handleChange = (e) => {
+    setDescription(e.target.value);
+  };
+
+  console.log(props);
+
   return (
-    <div>
+    <Dialog onClose={closePopup} open={openPopup}>
+      <button onClick={closePopup} className={classes.closeIcon}></button>
       <Container className={classes.modalForm}>
-        <CloseIcon className={classes.closeIcon}></CloseIcon>
+        <DialogTitle></DialogTitle>
+        <DialogContent></DialogContent>
+
         <br />
         <br />
         <TextField
-          placeholder="Title goes here!"
           multiline
           variant="outlined"
           fullWidth
+          value={title}
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              console.log(e.target.value);
+            }
+          }}
         />
         <Typography>Select Date Range</Typography>
         <DateRangePickerComponent
@@ -48,18 +69,18 @@ export default function Form({ tasks }) {
         <Typography>Priority</Typography>
         <FormControl className={classes.formControl}>
           <Select>
-            <MenuItem value={3}>High</MenuItem>
-            <MenuItem value={2}>Medium</MenuItem>
-            <MenuItem value={1}>Low</MenuItem>
+            <MenuItem value="High">High</MenuItem>
+            <MenuItem value="Medium">Medium</MenuItem>
+            <MenuItem value="Low">Low</MenuItem>
           </Select>
         </FormControl>
         <Typography>Status</Typography>
         <FormControl className={classes.formControl}>
           <Select>
-            <MenuItem value={10}>In Progress</MenuItem>
-            <MenuItem value={20}>Backlog</MenuItem>
-            <MenuItem value={30}>On Hold</MenuItem>
-            <MenuItem value={30}>Completed</MenuItem>
+            <MenuItem value="In Progress">In Progress</MenuItem>
+            <MenuItem value="Backlog">Backlog</MenuItem>
+            <MenuItem value="Completed">Completed</MenuItem>
+            <MenuItem value="On Hold">On Hold</MenuItem>
           </Select>
         </FormControl>
         <Grid container className={classes.titleArea}>
@@ -71,8 +92,8 @@ export default function Form({ tasks }) {
               <Avatar src="/broken-image.jpg" />
             </div>
           </Grid>
-
           <Typography variant="h4">Comments</Typography>
+          {props.children}
           <Box justifyContent="flex-end" className={classes.commentContainer}>
             <Avatar>B</Avatar>
             <Typography>
@@ -93,34 +114,16 @@ export default function Form({ tasks }) {
             <Avatar className={classes.purple}>OP</Avatar>
             <TextField
               placeholder="Add Comments..."
+              value={description}
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
               variant="outlined"
               fullWidth
             />
           </Grid>
         </Grid>
-        {/* <ButtonGroup className={classes.buttons}>
-          <Grid item>
-            <Button
-              color="primary"
-              variant="contained"
-              type="submit"
-              startIcon={<SaveIcon />}
-            >
-              Save
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button
-              variant="outlined"
-              type="submit"
-              color="primary"
-              startIcon={<DeleteIcon />}
-            >
-              Cancel
-            </Button>
-          </Grid>
-        </ButtonGroup> */}
       </Container>
-    </div>
+    </Dialog>
   );
 }

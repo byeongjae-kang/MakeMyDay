@@ -29,7 +29,6 @@ export default function UserSelector({ users, getUserIds }) {
             </p>
           </div>
         )}
-        defaultValue={[users[0]]}
         renderInput={(params) => (
           <TextField
             {...params}

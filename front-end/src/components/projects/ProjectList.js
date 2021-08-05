@@ -7,7 +7,7 @@ import "./ProjectList.css";
 import CreateProject from "./createProject/CreateProject";
 
 export default function ProjectList() {
-  const [state, setprojects] = useState({
+  const [state, setState] = useState({
     users: [],
     projects: []
   });
@@ -15,14 +15,15 @@ export default function ProjectList() {
   useEffect(() => {
     Promise.all([axios.get("/api/users"), axios.get("api/projects")]).then(
       (all) => {
-        setprojects({
+        setState({
           ...state,
           users: all[0].data,
           projects: all[1].data
         });
       }
     );
-  }, [state]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const handleEdit = async (id) => {
     await axios.patch(`http://localhost8080/api/projects/${id}`);
   };
@@ -30,7 +31,7 @@ export default function ProjectList() {
   const handleDelete = async (id) => {
     await axios.delete(`http://localhost8080/api/projects/${id}`);
     const newProjects = state.projects.filter((project) => project.id !== id);
-    setprojects({
+    setState({
       ...state,
       projects: newProjects
     });
@@ -55,7 +56,7 @@ export default function ProjectList() {
 
   return (
     <Container>
-      <CreateProject users={state.users} />
+      <CreateProject users={state.users} state={state} setState={setState}/>
       <Masonry
         breakpointCols={breakpoints}
         className="my-masonry-grid"

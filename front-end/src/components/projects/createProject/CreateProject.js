@@ -23,8 +23,7 @@ import DatePickers from "../datePicker/DatePicker";
 import UserSelector from "../userSelector/UserSelector";
 import { useStyles } from "./CreateProjectStyle";
 
-
-export default function CreateProject({ users }) {
+export default function CreateProject({ users, state, setState }) {
   const classes = useStyles();
   const history = useHistory();
   const [open, setOpen] = useState(false);
@@ -63,16 +62,29 @@ export default function CreateProject({ users }) {
     if (description === "") {
       setdescriptionError(true);
     }
+
+    const copiedState = { ...state };
+    const copiedProjects = copiedState.projects;
+    const newProject = {
+      name: title,
+      description: description,
+      status: status,
+      users: userId,
+      start_date: new Date(),
+      due_Date: selectedDate
+    }
+    copiedProjects.push(newProject)
+
     if (title && description) {
       return axios
-        .post(`http://localhost:8080/api/projects`, {
-          title: title,
-          description: description,
-          status: status,
-          userId: userId,
-          dueDate: selectedDate
+        .post(`http://localhost:8080/api/projects`, newProject)
+        .then(() => {
+          history.push("/projects");
+          setState({
+            ...state,
+            projects: copiedProjects
+          });
         })
-        .then(() => history.push("/projects"))
         .catch((err) => console.log(err.message));
     }
   };

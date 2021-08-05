@@ -46,7 +46,7 @@ app.get("/api/projects", (req, res) => {
     JOIN user_projects ON projects.id = project_id
     GROUP BY projects.id
   `;
-  
+
 
   pool
     .query(query)
@@ -72,21 +72,18 @@ app.post("/api/users", async (req, res) => {
   }
 });
 
-app.post("/api/tasks", async(req, res) => {
+app.post("/api/tasks", async (req, res) => {
   try {
     const { name } = req.body;
-    await pool.query(
-      "INSERT INTO tasks (name, priority, status) VALUES($1, $2, $3)",
-      [name, 3, "In Progress"]
-    );
+    await pool.query(`INSERT INTO tasks (name) VALUES ($1)`, [name]);
     const tasks = await pool.query("SELECT * FROM tasks;");
     res.json(tasks.rows);
   } catch (err) {
-    console.error(err.message);
+    console.error(err.message)
   }
-});
+})
 
-app.get("/api/tasks", async(req, res) => {
+app.get("/api/tasks", async (req, res) => {
   try {
     const tasks = await pool.query("SELECT * FROM tasks;");
     res.json(tasks.rows);
@@ -96,20 +93,24 @@ app.get("/api/tasks", async(req, res) => {
   }
 });
 
-app.put("/api/tasks/:id", async(req, res) => {
+app.put("/api/tasks/:id", async (req, res) => {
   try {
-    const status = req.body.status;
-    const id = Number(req.params.id);
-    await pool.query("UPDATE tasks SET status = $1 WHERE id = $2;", [
-      status,
-      id
-    ]);
-    const tasks = await pool.query("SELECT * FROM tasks;");
-    res.send(tasks.rows);
+    const { start, end, status } = req.body
+    const id = Number(req.params.id)
+
+    if (!status) {
+      await pool.query(`UPDATE tasks SET start = $1, "end"=$2 WHERE id = $3;`, [start, end, id]);
+    } else {
+      await pool.query(`UPDATE tasks SET status=$1 WHERE id = $2;`, [status, id]);
+    }
+    const tasks = await pool.query
+      ("SELECT * FROM tasks;");
+    res.json(tasks.rows)
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).send(err)
   }
-});
+})
+
 
 //Listener
 app.listen(port, () => console.log(`listening on localhost:${port}`));

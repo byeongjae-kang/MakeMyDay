@@ -18,8 +18,8 @@ const useStyles = makeStyles((theme) => ({
   },
   status: {
     color: (project) => {
-      if (project.status === "On Hold") {
-        return yellow[500];
+      if (project.status === "On hold") {
+        return yellow[700];
       }
       if (project.status === "Cancelled") {
         return pink[500];
@@ -55,7 +55,7 @@ export default function ProjectListItems({ project, users, handleDelete }) {
   const open = Boolean(anchorEl);
   const history = useHistory();
   const currentRoute = useRouteMatch();
-  
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -103,7 +103,7 @@ export default function ProjectListItems({ project, users, handleDelete }) {
 
       <Divider />
 
-      <CardContent 
+      <CardContent
         className={classes.content}
         onClick={() => history.push(`${currentRoute.url}/${project.id}/tasks`)}
       >
@@ -123,7 +123,7 @@ export default function ProjectListItems({ project, users, handleDelete }) {
         <CardActions>
           {project.users.map((user) => {
             return (
-              <IconButton className={classes.person}>
+              <IconButton key={user.id} className={classes.person}>
                 <Avatar alt={user.name} src={user.avatar} />
               </IconButton>
             );

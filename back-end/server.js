@@ -46,8 +46,6 @@ app.get("/api/projects", (req, res) => {
     JOIN user_projects ON projects.id = project_id
     GROUP BY projects.id
   `;
-
-
   pool
     .query(query)
     .then((result) => {
@@ -58,6 +56,28 @@ app.get("/api/projects", (req, res) => {
       pool.end();
     });
 });
+
+app.post(`/api/projects`, (req, res) => {
+  const { name, description, status, users, start_date, due_Date} = req.body;
+  const query = `
+    INSERT INTO projects (name, description, status, start_date,  due_date)
+    VALUES ($1, $2, $3, $4, $5) RETURNING *
+  `;
+  pool.query(query, [name, description, status, start_date, due_Date])
+    .then(result => {
+      users.forEach(id => {
+        pool.query(`
+          INSERT INTO user_projects (project_id, user_id)
+          VALUES ($1, $2)
+        `, [result.rows[0].id, id])
+          .then((result) => res.json({ message:'success', result: result}))
+          .catch((err) => console.log('error2', err.message))
+      });
+    })
+    .catch(err => console.log("error", err.message));
+  
+});
+
 
 app.post("/api/users", async (req, res) => {
   try {

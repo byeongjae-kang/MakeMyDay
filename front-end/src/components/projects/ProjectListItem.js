@@ -14,7 +14,7 @@ import { green, pink, yellow } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
-    minWidth: 275
+    minWidth: 275,
   },
   status: {
     color: (project) => {
@@ -25,24 +25,24 @@ const useStyles = makeStyles((theme) => ({
         return pink[500];
       }
       return green[700];
-    }
+    },
   },
   content: {
-    marginBottom: 20
+    marginBottom: 20,
   },
 
   person: {
     height: 10,
     padding: 0,
     margin: theme.spacing(1),
-    width: theme.spacing(3)
+    width: theme.spacing(3),
   },
   footer: {
     padding: 10,
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between"
-  }
+    justifyContent: "space-between",
+  },
 }));
 
 const ITEM_HEIGHT = 48;
@@ -95,8 +95,8 @@ export default function ProjectListItems({ project, state, handleDelete }) {
               PaperProps={{
                 style: {
                   maxHeight: ITEM_HEIGHT * 4.5,
-                  width: "20ch"
-                }
+                  width: "20ch",
+                },
               }}
             >
               {options.map((option) => (

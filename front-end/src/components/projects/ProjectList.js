@@ -28,13 +28,18 @@ export default function ProjectList() {
     await axios.patch(`http://localhost8080/api/projects/${id}`);
   };
 
-  const handleDelete = async (id) => {
-    await axios.delete(`http://localhost8080/api/projects/${id}`);
-    const newProjects = state.projects.filter((project) => project.id !== id);
-    setState({
-      ...state,
-      projects: newProjects,
-    });
+  const handleDelete = (projectId) => {
+    axios
+      .delete(`api/projects/${projectId}`)
+      .then((result) => {
+        axios.get(`api/projects`).then((result) => {
+          setState({
+            ...state,
+            projects: [...result.data],
+          });
+        });
+      })
+      .catch((err) => console.error("could not delete", err.message));
   };
 
   const HaveProjectWithUsers = (project, users) => {
@@ -57,6 +62,7 @@ export default function ProjectList() {
   return (
     <Container>
       <CreateProject users={state.users} state={state} setState={setState} />
+      <br />
       <Masonry
         breakpointCols={breakpoints}
         className="my-masonry-grid"

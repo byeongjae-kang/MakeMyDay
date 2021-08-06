@@ -1,7 +1,13 @@
 import { useState } from "react";
-import { Dialog, DialogTitle, DialogContent } from "@material-ui/core/";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  Divider,
+} from "@material-ui/core/";
 import {
   Grid,
+  Button,
   TextField,
   Typography,
   Container,
@@ -16,37 +22,40 @@ import Avatar from "@material-ui/core/Avatar";
 import CloseIcon from "@material-ui/icons/Close";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
+import Menu from "@material-ui/core/Menu";
 import Select from "@material-ui/core/Select";
 import { DateRangePickerComponent } from "@syncfusion/ej2-react-calendars";
 import "./Calendar.css";
-import axios from "axios";
-import useApplicationData from "../../hooks/useApplicationData";
-
+import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
+import AutoComplete from "./AutoComplete";
+// import useApplicationData from "../../hooks/useApplicationData";
+// import UserSelector from "components/projects/userSelector/UserSelector";
 export default function Form(props) {
-  const { openPopup, setOpenPopup, closePopup } = props;
-  const [title, setTitle] = useState("");
+  const { openPopup, closePopup, task } = props;
+  const [title, setTitle] = useState(task.name);
   const [avatar, setAvatar] = useState("");
-  const [priority, setPriority] = useState("");
+  const [priority, setPriority] = useState(task.priority);
+  const [status, setStatus] = useState(task.status);
   const [description, setDescription] = useState("");
 
   const classes = useStyles();
-
-  const handleChange = (e) => {
-    setDescription(e.target.value);
-  };
 
   console.log(props);
 
   return (
     <Dialog onClose={closePopup} open={openPopup}>
-      <button onClick={closePopup} className={classes.closeIcon}></button>
-      <Container className={classes.modalForm}>
-        <DialogTitle></DialogTitle>
-        <DialogContent></DialogContent>
-
-        <br />
-        <br />
+      <Grid container className={classes.alignRight}>
+        <Grid container className={classes.divide}>
+          <Grid />
+          <CloseIcon
+            onClick={closePopup}
+            className={classes.closeIcon}
+          ></CloseIcon>
+        </Grid>
+      </Grid>
+      <DialogTitle>
         <TextField
+          className={classes.field}
           multiline
           variant="outlined"
           fullWidth
@@ -55,75 +64,81 @@ export default function Form(props) {
             setTitle(e.target.value);
           }}
           onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
+            e.preventDefault();
+            if (e.charCode == 13) {
               console.log(e.target.value);
             }
           }}
         />
-        <Typography>Select Date Range</Typography>
-        <DateRangePickerComponent
-          placeholder="Enter Date Range"
-          format="MMM dd yyyy"
-        ></DateRangePickerComponent>
-        <Typography>Priority</Typography>
-        <FormControl className={classes.formControl}>
-          <Select>
-            <MenuItem value="High">High</MenuItem>
-            <MenuItem value="Medium">Medium</MenuItem>
-            <MenuItem value="Low">Low</MenuItem>
-          </Select>
-        </FormControl>
-        <Typography>Status</Typography>
-        <FormControl className={classes.formControl}>
-          <Select>
-            <MenuItem value="In Progress">In Progress</MenuItem>
-            <MenuItem value="Backlog">Backlog</MenuItem>
-            <MenuItem value="Completed">Completed</MenuItem>
-            <MenuItem value="On Hold">On Hold</MenuItem>
-          </Select>
-        </FormControl>
-        <Grid container className={classes.titleArea}>
-          <Typography>members</Typography>
-          <Grid item className={classes.textArea}>
-            <div className={classes.root}>
-              <Avatar className={classes.orange}>B</Avatar>
-              <Avatar className={classes.orange} />
-              <Avatar src="/broken-image.jpg" />
-            </div>
-          </Grid>
-          <Typography variant="h4">Comments</Typography>
-          {props.children}
-          <Box justifyContent="flex-end" className={classes.commentContainer}>
-            <Avatar>B</Avatar>
-            <Typography>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
-            </Typography>
-          </Box>
-          <Grid className={classes.commentArea}>
-            {/* Description */}
-            <Avatar className={classes.purple}>OP</Avatar>
-            <TextField
-              placeholder="Add Comments..."
-              value={description}
-              onChange={(e) => {
-                setDescription(e.target.value);
-              }}
-              variant="outlined"
-              fullWidth
-            />
+      </DialogTitle>
+      {/* <AutoComplete /> */}
+      <DialogContent dividers className={classes.dialogSize}>
+        <Grid container className={classes.divide}>
+          <Grid />
+          <Grid className={classes.selectContainer}>
+            <Typography>Select Members</Typography>
+            <Select className={classes.select}>
+              <MenuItem value="In Progress">In Progress</MenuItem>
+            </Select>
           </Grid>
         </Grid>
-      </Container>
+
+        <Grid className={classes.selectContainer}>
+          <Typography>Select Date Range</Typography>
+          <DateRangePickerComponent
+            placeholder="Enter Date Range"
+            format="MMM dd yyyy"
+          ></DateRangePickerComponent>
+
+          <Grid container className={classes.divide}>
+            <Grid className={classes.selectContainer}>
+              <Typography>Priority</Typography>
+              <Select
+                className={classes.select}
+                value={priority}
+                onChange={(e) => {
+                  setPriority(e.target.value);
+                }}
+              >
+                <MenuItem value="1">High</MenuItem>
+                <MenuItem value="2">Medium</MenuItem>
+                <MenuItem value="3">Low</MenuItem>
+              </Select>
+            </Grid>
+
+            <Grid className={classes.selectContainer}>
+              <Typography>Status</Typography>
+              <Select
+                className={classes.select}
+                value={status}
+                onChange={(e) => {
+                  setStatus(e.target.value);
+                }}
+              >
+                <MenuItem value="In Progress">In Progress</MenuItem>
+                <MenuItem value="Backlog">Backlog</MenuItem>
+                <MenuItem value="Completed">Completed</MenuItem>
+                <MenuItem value="On Hold">On Hold</MenuItem>
+              </Select>
+            </Grid>
+          </Grid>
+
+          <Grid container className={classes.divide}>
+            <Grid />
+            <Grid className={classes.alignRight}>
+              <Button
+                type="submit"
+                color="secondary"
+                variant="contained"
+                endIcon={<KeyboardArrowRightIcon />}
+                onClick={closePopup}
+              >
+                Save
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
+      </DialogContent>
     </Dialog>
   );
 }

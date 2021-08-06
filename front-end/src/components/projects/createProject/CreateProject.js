@@ -12,7 +12,7 @@ import {
   Radio,
   RadioGroup,
   TextField,
-  Typography
+  Typography,
 } from "@material-ui/core";
 
 import AddIcon from "@material-ui/icons/Add";
@@ -33,7 +33,9 @@ export default function CreateProject({ users, state, setState }) {
   const [descriptionError, setdescriptionError] = useState(false);
   const [status, setStatus] = useState("In progress");
   const [userId, setuserId] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]);
+  const [selectedDate, setSelectedDate] = useState(
+    new Date().toISOString().split("T")[0]
+  );
 
   const getUserIds = (selectedusers) => {
     const arrUserIds = selectedusers.map((user) => user.id);
@@ -70,23 +72,20 @@ export default function CreateProject({ users, state, setState }) {
       description: description,
       status: status,
       users: userId,
-      start_date: new Date().toISOString().split("T")[0],
-      due_Date: selectedDate
-    }
-    copiedProjects.push(newProject)
+      start_date: new Date(),
+      due_Date: selectedDate,
+    };
+    copiedProjects.push(newProject);
 
     if (title && description) {
       return axios
         .post(`/api/projects`, newProject)
         .then(() => {
-          axios.get(`/api/projects`)
-            .then(result => {
-              setState({
-                ...state,
-                projects: result.data
-              });
-              history.push("/projects");
-            })
+          history.push("/projects");
+          setState({
+            ...state,
+            projects: copiedProjects,
+          });
         })
         .catch((err) => console.log(err.message));
     }
@@ -114,7 +113,7 @@ export default function CreateProject({ users, state, setState }) {
           </Typography>
         </DialogTitle>
         <DialogContent dividers>
-          <Container size="sm">
+          <Container size="md">
             <form noValidate autoComplete="off" onSubmit={handleSubmit}>
               <TextField
                 className={classes.field}

@@ -7,8 +7,15 @@ import useApplicationData from "../../hooks/useApplicationData";
 import axios from "axios";
 import cloneDeep from "lodash/cloneDeep";
 
-export default function TasksBody(props) {
-  const { state, setState, updateDragDrop, createTasks } = useApplicationData();
+export default function TasksBody() {
+  const {
+    state,
+    setState,
+    updateDragDrop,
+    createTasks,
+    deleteTask,
+    updateTask,
+  } = useApplicationData();
   // console.log("state--------", state)
   const onDragEnd = ({ destination, source, draggableId }) => {
     let newState = cloneDeep(state.lists);
@@ -52,10 +59,8 @@ export default function TasksBody(props) {
               key={list.id}
               index={index}
               onSubmit={createTasks}
-              description={list.description}
-              status={list.status}
-              end={list.end}
-              start={list.start}
+              deleteTask={deleteTask}
+              updateTask={updateTask}
             />
           ))}
         </Box>

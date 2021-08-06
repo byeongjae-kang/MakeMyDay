@@ -12,6 +12,7 @@ import { Avatar, CardActions, Divider, makeStyles } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { green, pink, yellow } from "@material-ui/core/colors";
 
+
 const useStyles = makeStyles((theme) => ({
   listItem: {
     minWidth: 275
@@ -49,7 +50,7 @@ const ITEM_HEIGHT = 48;
 
 const options = ["Edit", "Delete"];
 
-export default function ProjectListItems({ project, users, handleDelete }) {
+export default function ProjectListItems({ project, state, handleDelete, handleClickOpen }) {
   const classes = useStyles(project);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -60,7 +61,17 @@ export default function ProjectListItems({ project, users, handleDelete }) {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (e, projectId, state) => {
+    const value = e.target.getAttribute("value");
+
+    if (value === "Delete") {
+      handleDelete(projectId);
+    }
+    if (value === "Edit") {
+      handleClickOpen(projectId, value)
+      history.push(`${currentRoute.url}/${projectId}`)
+    }
+
     setAnchorEl(null);
   };
 
@@ -92,7 +103,11 @@ export default function ProjectListItems({ project, users, handleDelete }) {
               }}
             >
               {options.map((option) => (
-                <MenuItem key={option} onClick={handleClose}>
+                <MenuItem
+                  key={option}
+                  value={option}
+                  onClick={(e) => handleClose(e, project.id, state)}
+                >
                   {option}
                 </MenuItem>
               ))}

@@ -82,6 +82,50 @@ app.post(`/api/projects`, (req, res) => {
     .catch((err) => console.log("error", err.message));
 });
 
+app.get(`/api/projects/:id`, (req, res) => {
+  const projectId = req.params.id;
+  pool.query(`SELECT * FROM projects WHERE id = $1`, [projectId])
+    .then(result => res.json(result.rows))
+    .catch(err => console.log("could not get", err.message));
+});
+
+app.get(`/api/user_projects/:id`, (req, res) => {
+  const projectId = req.params.id;
+  pool.query(`SELECT * FROM user_projects WHERE project_id = $1`, [projectId])
+    .then(result => res.json(result.rows))
+    .catch(err => console.log("could not get", err.message));
+});
+
+app.put(`/api/projects/:id`, (req, res) => {
+  const projectId = req.params.id;
+  const { name, description, status, users, modified_date, due_Date } = req.body;
+  const query = `
+    UPDATE projects 
+    SET name = $1, description = $2, status = $3, modified_date = $4,  due_date = $5
+    WHERE id = $6
+    RETURNING *
+  `;
+
+  pool.query(query, [name, description, status, modified_date, due_Date, projectId])
+    .then(() => {
+      pool.query(`
+        DELETE FROM user_projects WHERE project_id = $1`, [projectId])
+        .then(() => {
+          users.forEach((id) => {
+            pool
+              .query(`
+                INSERT INTO user_projects (project_id, user_id)
+                VALUES ($1, $2) RETURNING *
+              `,[projectId, id])
+              .then((result) => res.json(result.rows))
+              .catch((err) => console.log("error2", err.message));
+          });
+        });
+    })
+    .catch(err => console.log("could not update", err.message));
+});
+
+
 app.delete(`/api/projects/:id`, (req, res) => {
   const projectId = req.params.id;
   pool

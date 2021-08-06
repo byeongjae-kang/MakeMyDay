@@ -9,27 +9,28 @@ import { TaskContext } from "components/context/UseContext";
 const theme = createTheme({});
 export default function Application() {
   return (
-    <TaskContext.Provider>
-      <ThemeProvider theme={theme}>
-        <Router>
-          <Layout>
-            <Switch>
-              <Route exact path="/projects">
-                <ProjectList />
-              </Route>
-              <Route exact path="/dashboard">
-                <TaskBody />
-              </Route>
-              <Route exact path="/login">
-                <Landing />
-              </Route>
-              <Route exact path="/gantt">
-                <Gantt />
-              </Route>
-            </Switch>
-          </Layout>
-        </Router>
-      </ThemeProvider>
-    </TaskContext.Provider>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Layout>
+          <Switch>
+            <Route exact path="/projects">
+              <ProjectList />
+            </Route>
+            <Route exact path="/projects/:id">
+              <ProjectList />
+            </Route>
+            <Route exact path="/dashboard">
+              <TaskBody />
+            </Route>
+            <Route exact path="/login">
+              <Landing />
+            </Route>
+            <Route exact path="/gantt">
+              <Gantt />
+            </Route>
+          </Switch>
+        </Layout>
+      </Router>
+    </ThemeProvider>
   );
 }

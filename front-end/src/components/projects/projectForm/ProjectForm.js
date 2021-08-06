@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React from "react";
+import { useParams } from "react-router-dom";
 import {
   Button,
   Container,
@@ -15,88 +15,35 @@ import {
   Typography,
 } from "@material-ui/core";
 
-import AddIcon from "@material-ui/icons/Add";
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
 
-import axios from "axios";
 import DatePickers from "../datePicker/DatePicker";
 import UserSelector from "../userSelector/UserSelector";
-import { useStyles } from "./CreateProjectStyle";
+import { useStyles } from "./ProjectFormStyle";
 
-export default function CreateProject({ users, state, setState }) {
+export default function ProjectForm({
+  users,
+  handleDateChange,
+  handleClose,
+  handleSubmit,
+  selectedDate,
+  open,
+  titleError,
+  descriptionError,
+  description,
+  setdescription,
+  title,
+  setTitle,
+  status,
+  setStatus,
+  getUserIds,
+  userId,
+}) {
   const classes = useStyles();
-  const history = useHistory();
-  const [open, setOpen] = useState(false);
-  const [title, setTitle] = useState("");
-  const [titleError, setTitleError] = useState(false);
-  const [description, setdescription] = useState("");
-  const [descriptionError, setdescriptionError] = useState(false);
-  const [status, setStatus] = useState("In progress");
-  const [userId, setuserId] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(
-    new Date().toISOString().split("T")[0]
-  );
-
-  const getUserIds = (selectedusers) => {
-    const arrUserIds = selectedusers.map((user) => user.id);
-    setuserId(arrUserIds);
-  };
-
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setTitleError(false);
-    setdescriptionError(false);
-
-    if (title === "") {
-      setTitleError(true);
-    }
-    if (description === "") {
-      setdescriptionError(true);
-    }
-
-    const copiedState = { ...state };
-    const copiedProjects = copiedState.projects;
-    const newProject = {
-      name: title,
-      description: description,
-      status: status,
-      users: userId,
-      start_date: new Date(),
-      due_Date: selectedDate,
-    };
-    copiedProjects.push(newProject);
-
-    if (title && description) {
-      return axios
-        .post(`/api/projects`, newProject)
-        .then(() => {
-          history.push("/projects");
-          setState({
-            ...state,
-            projects: copiedProjects,
-          });
-        })
-        .catch((err) => console.log(err.message));
-    }
-  };
+  const param = useParams();
 
   return (
     <div>
-      <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
-        <AddIcon />
-        CREATE NEW PROJECTS
-      </Button>
       <Dialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -109,15 +56,20 @@ export default function CreateProject({ users, state, setState }) {
             component="h2"
             gutterBottom
           >
-            Create a New Project
+            {param ? "Edit" : "Create a New"} Project
           </Typography>
         </DialogTitle>
         <DialogContent dividers>
-          <Container size="md">
-            <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+          <Container size="sm">
+            <form
+              noValidate
+              autoComplete="off"
+              onSubmit={(e) => handleSubmit(e, param)}
+            >
               <TextField
                 className={classes.field}
                 onChange={(e) => setTitle(e.target.value)}
+                value={title}
                 label="Project Title"
                 variant="outlined"
                 color="secondary"
@@ -128,6 +80,7 @@ export default function CreateProject({ users, state, setState }) {
               <TextField
                 className={classes.field}
                 onChange={(e) => setdescription(e.target.value)}
+                value={description}
                 label="description"
                 variant="outlined"
                 color="secondary"
@@ -138,7 +91,11 @@ export default function CreateProject({ users, state, setState }) {
                 error={descriptionError}
               />
 
-              <UserSelector users={users} getUserIds={getUserIds} />
+              <UserSelector
+                users={users}
+                getUserIds={getUserIds}
+                userId={userId}
+              />
 
               <div className={classes.divide}>
                 <FormControl className={classes.field}>
@@ -180,7 +137,6 @@ export default function CreateProject({ users, state, setState }) {
                 color="secondary"
                 variant="contained"
                 endIcon={<KeyboardArrowRightIcon />}
-                onClick={handleClose}
               >
                 Save
               </Button>

@@ -11,7 +11,7 @@ export default function DatePickers({ selectedDate, handleDateChange }) {
         id="date"
         label="Due Date"
         type="date"
-        defaultValue={selectedDate}
+        value={selectedDate}
         onChange={(e) => handleDateChange(e.target.value)}
         className={classes.textField}
         InputLabelProps={{

@@ -1,125 +1,167 @@
 import { useState } from "react";
 import {
+  Button,
+  Container,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+  TextField,
+  Typography,
   Grid,
   Paper,
-  TextField,
-  Button,
-  Typography,
-  Container,
-  ButtonGroup,
-  Card,
-  Box,
 } from "@material-ui/core";
-import SaveIcon from "@material-ui/icons/Save";
-import DeleteIcon from "@material-ui/icons/Delete";
 import useStyles from "./Styles";
-import CloseIcon from "@material-ui/icons/Close";
 import Avatar from "@material-ui/core/Avatar";
-import InputLabel from "@material-ui/core/InputLabel";
+import CloseIcon from "@material-ui/icons/Close";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
+import Menu from "@material-ui/core/Menu";
 import Select from "@material-ui/core/Select";
-import { DateRangePickerComponent } from "@syncfusion/ej2-react-calendars";
+import DatePickers from "components/projects/datePicker/DatePicker";
 import "./Calendar.css";
-
-export default function Form() {
+import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
+import UserSelector from "components/projects/userSelector/UserSelector";
+// import useApplicationData from "../../hooks/useApplicationData";
+// import UserSelector from "components/projects/userSelector/UserSelector";
+export default function Form(props) {
+  const { openPopup, closePopup, task } = props;
+  const [title, setTitle] = useState(task.name);
+  const [avatar, setAvatar] = useState("");
+  const [priority, setPriority] = useState(task.priority);
+  const [status, setStatus] = useState(task.status);
   const [description, setDescription] = useState("");
+
   const classes = useStyles();
 
+  // console.log(props);
+
   return (
-    <div>
-      <Container className={classes.modalForm}>
-        <CloseIcon className={classes.closeIcon}></CloseIcon>
-        <br />
-        <br />
+    <Dialog onClose={closePopup} open={openPopup}>
+      <Grid container>
+        <Grid container className={classes.divide}>
+          <Grid />
+          <CloseIcon
+            onClick={closePopup}
+            className={classes.closeIcon}
+          ></CloseIcon>
+        </Grid>
+      </Grid>
+      <DialogTitle>
+        <FormLabel>Title</FormLabel>
         <TextField
-          placeholder="Title goes here!"
+          className={classes.field}
           multiline
           variant="outlined"
           fullWidth
+          value={title}
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
+          onKeyDown={(e) => {
+            e.preventDefault();
+            if (e.charCode == 13) {
+              console.log(e.target.value);
+            }
+          }}
         />
-        <Typography>Select Date Range</Typography>
-        <DateRangePickerComponent
-          placeholder="Enter Date Range"
-          format="MMM dd yyyy"
-        ></DateRangePickerComponent>
-        <Typography>Priority</Typography>
-        <FormControl className={classes.formControl}>
-          <Select>
-            <MenuItem value={3}>High</MenuItem>
-            <MenuItem value={2}>Medium</MenuItem>
-            <MenuItem value={1}>Low</MenuItem>
-          </Select>
-        </FormControl>
-        <Typography>Status</Typography>
-        <FormControl className={classes.formControl}>
-          <Select>
-            <MenuItem value={10}>In Progress</MenuItem>
-            <MenuItem value={20}>Backlog</MenuItem>
-            <MenuItem value={30}>On Hold</MenuItem>
-            <MenuItem value={30}>Completed</MenuItem>
-          </Select>
-        </FormControl>
-        <Grid container className={classes.titleArea}>
-          <Typography>members</Typography>
-          <Grid item className={classes.textArea}>
-            <div className={classes.root}>
-              <Avatar className={classes.orange}>B</Avatar>
-              <Avatar className={classes.orange} />
-              <Avatar src="/broken-image.jpg" />
-            </div>
-          </Grid>
+      </DialogTitle>
+      {/* ---------------------------------------------------------------------------------- */}
 
-          <Typography variant="h4">Comments</Typography>
-          <Box justifyContent="flex-end" className={classes.commentContainer}>
-            <Avatar>B</Avatar>
-            <Typography>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
-            </Typography>
-          </Box>
-          <Grid className={classes.commentArea}>
-            {/* Description */}
-            <Avatar className={classes.purple}>OP</Avatar>
-            <TextField
-              placeholder="Add Comments..."
-              variant="outlined"
-              fullWidth
+      <DialogContent dividers>
+        <br />
+        {/*-----------------------------Select Users Component---------------------------------------- */}
+        <FormLabel>Select Members</FormLabel>
+        <Select fullWidth className={classes.select}>
+          <MenuItem value="1">UserSelector</MenuItem>
+          {/* <UserSelector></UserSelector> */}
+        </Select>
+
+        {/* --------------------------------Status Component-------------------------------------------------- */}
+        <div className={classes.divide}>
+          <FormControl>
+            <br />
+            <br />
+            <FormLabel>Project Status</FormLabel>
+            <RadioGroup
+              value={status}
+              onChange={(e) => {
+                setStatus(e.target.value);
+              }}
+            >
+              <FormControlLabel
+                value="In Progress"
+                control={<Radio />}
+                label="In Progress"
+              />
+              <FormControlLabel
+                value="Backlog"
+                control={<Radio />}
+                label="Backlog"
+              />
+              <FormControlLabel
+                value="On Hold"
+                control={<Radio />}
+                label="On Hold"
+              />
+              <FormControlLabel
+                value="Completed"
+                control={<Radio />}
+                label="Completed"
+              />
+            </RadioGroup>
+          </FormControl>
+
+          {/* --------------------------------Priority Component------------------------------------------------- */}
+          <div>
+            <FormLabel>Priority</FormLabel>
+            <Select
+              className={classes.select}
+              value={priority}
+              onChange={(e) => {
+                setPriority(e.target.value);
+              }}
+            >
+              <MenuItem value="1">High</MenuItem>
+              <MenuItem value="2">Medium</MenuItem>
+              <MenuItem value="3">Low</MenuItem>
+            </Select>
+            {/* ----------------------------------Start Date Component----------------------------------------- */}
+            <FormLabel>Select Start Date</FormLabel>
+
+            <DatePickers
+            // selectedDate={selectedDate}
+            // handleDateChange={handleDateChange}
             />
-          </Grid>
-        </Grid>
-        {/* <ButtonGroup className={classes.buttons}>
-          <Grid item>
+            {/* ----------------------------------End Date Component----------------------------------------- */}
+            <FormLabel>Select End Date</FormLabel>
+            <DatePickers
+            // selectedDate={selectedDate}
+            // handleDateChange={handleDateChange}
+            />
+          </div>
+        </div>
+
+        {/* ---------------------------------Save Button -------------------------------------- */}
+        <Grid container className={classes.divide}>
+          <Grid />
+          <Grid>
             <Button
-              color="primary"
-              variant="contained"
+              className={classes.button}
               type="submit"
-              startIcon={<SaveIcon />}
+              color="secondary"
+              variant="contained"
+              endIcon={<KeyboardArrowRightIcon />}
+              onClick={closePopup}
             >
               Save
             </Button>
           </Grid>
-          <Grid item>
-            <Button
-              variant="outlined"
-              type="submit"
-              color="primary"
-              startIcon={<DeleteIcon />}
-            >
-              Cancel
-            </Button>
-          </Grid>
-        </ButtonGroup> */}
-      </Container>
-    </div>
+        </Grid>
+      </DialogContent>
+    </Dialog>
   );
 }

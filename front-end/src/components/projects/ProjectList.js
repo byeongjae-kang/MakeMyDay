@@ -12,7 +12,7 @@ import { Button } from "@material-ui/core";
 export default function ProjectList() {
   const [state, setState] = useState({
     users: [],
-    projects: []
+    projects: [],
   });
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function ProjectList() {
         setState({
           ...state,
           users: all[0].data,
-          projects: all[1].data
+          projects: all[1].data,
         });
       }
     );
@@ -35,7 +35,7 @@ export default function ProjectList() {
         axios.get(`api/projects`).then((result) => {
           setState({
             ...state,
-            projects: [...result.data]
+            projects: [...result.data],
           });
         });
       })
@@ -49,14 +49,14 @@ export default function ProjectList() {
 
     return {
       ...project,
-      users: updatedProject
+      users: updatedProject,
     };
   };
 
   const breakpoints = {
     default: 3,
     1100: 2,
-    700: 1
+    700: 1,
   };
 
   const [open, setOpen] = useState(false);

@@ -177,16 +177,28 @@ app.put("/api/tasks/:id", async (req, res) => {
       await pool.query(`UPDATE tasks SET start = $1, "end"=$2 WHERE id = $3;`, [
         start,
         end,
-        id
+        id,
       ]);
     } else {
       await pool.query(`UPDATE tasks SET status=$1 WHERE id = $2;`, [
         status,
-        id
+        id,
       ]);
     }
     const tasks = await pool.query("SELECT * FROM tasks;");
     res.json(tasks.rows);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.delete("/api/tasks/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleteTask = await pool.query(`DELETE FROM tasks WHERE id = $1`, [
+      id,
+    ]);
+    res.json(deleteTask);
   } catch (err) {
     res.status(500).send(err);
   }

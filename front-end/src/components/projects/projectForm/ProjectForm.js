@@ -12,7 +12,7 @@ import {
   Radio,
   RadioGroup,
   TextField,
-  Typography
+  Typography,
 } from "@material-ui/core";
 
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
@@ -37,7 +37,7 @@ export default function ProjectForm({
   status,
   setStatus,
   getUserIds,
-  userId
+  userId,
 }) {
   const classes = useStyles();
   const param = useParams();

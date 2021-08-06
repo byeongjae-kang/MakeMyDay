@@ -49,7 +49,7 @@ const ITEM_HEIGHT = 48;
 
 const options = ["Edit", "Delete"];
 
-export default function ProjectListItems({ project, users, handleDelete }) {
+export default function ProjectListItems({ project, state, handleDelete }) {
   const classes = useStyles(project);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -60,7 +60,14 @@ export default function ProjectListItems({ project, users, handleDelete }) {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (e, projectId, state) => {
+    const value = e.target.getAttribute("value");
+    console.log(projectId);
+
+    if (value === "Delete") {
+      handleDelete(projectId);
+    }
+
     setAnchorEl(null);
   };
 
@@ -92,7 +99,11 @@ export default function ProjectListItems({ project, users, handleDelete }) {
               }}
             >
               {options.map((option) => (
-                <MenuItem key={option} onClick={handleClose}>
+                <MenuItem
+                  key={option}
+                  value={option}
+                  onClick={(e) => handleClose(e, project.id, state)}
+                >
                   {option}
                 </MenuItem>
               ))}

@@ -31,26 +31,16 @@ import AutoComplete from "./AutoComplete";
 // import useApplicationData from "../../hooks/useApplicationData";
 // import UserSelector from "components/projects/userSelector/UserSelector";
 export default function Form(props) {
-  const {
-    openPopup,
-    setOpenPopup,
-    closePopup,
-    users,
-    getUserIds,
-    task,
-    key,
-    updateTask,
-  } = props;
+  const { openPopup, closePopup, task } = props;
   const [title, setTitle] = useState(task.name);
   const [avatar, setAvatar] = useState("");
-  const [priority, setPriority] = useState("");
+  const [priority, setPriority] = useState(task.priority);
+  const [status, setStatus] = useState(task.status);
   const [description, setDescription] = useState("");
 
   const classes = useStyles();
 
-  const handleChange = (e) => {
-    setDescription(e.target.value);
-  };
+  console.log(props);
 
   return (
     <Dialog onClose={closePopup} open={openPopup}>
@@ -92,24 +82,39 @@ export default function Form(props) {
             </Select>
           </Grid>
         </Grid>
+
         <Grid className={classes.selectContainer}>
           <Typography>Select Date Range</Typography>
           <DateRangePickerComponent
             placeholder="Enter Date Range"
             format="MMM dd yyyy"
           ></DateRangePickerComponent>
+
           <Grid container className={classes.divide}>
             <Grid className={classes.selectContainer}>
               <Typography>Priority</Typography>
-              <Select className={classes.select}>
-                <MenuItem value="High">High</MenuItem>
-                <MenuItem value="Medium">Medium</MenuItem>
-                <MenuItem value="Low">Low</MenuItem>
+              <Select
+                className={classes.select}
+                value={priority}
+                onChange={(e) => {
+                  setPriority(e.target.value);
+                }}
+              >
+                <MenuItem value="1">High</MenuItem>
+                <MenuItem value="2">Medium</MenuItem>
+                <MenuItem value="3">Low</MenuItem>
               </Select>
             </Grid>
+
             <Grid className={classes.selectContainer}>
               <Typography>Status</Typography>
-              <Select className={classes.select}>
+              <Select
+                className={classes.select}
+                value={status}
+                onChange={(e) => {
+                  setStatus(e.target.value);
+                }}
+              >
                 <MenuItem value="In Progress">In Progress</MenuItem>
                 <MenuItem value="Backlog">Backlog</MenuItem>
                 <MenuItem value="Completed">Completed</MenuItem>
@@ -117,6 +122,7 @@ export default function Form(props) {
               </Select>
             </Grid>
           </Grid>
+
           <Grid container className={classes.divide}>
             <Grid />
             <Grid className={classes.alignRight}>

@@ -7,7 +7,7 @@ import useApplicationData from "../../hooks/useApplicationData";
 import axios from "axios";
 import cloneDeep from "lodash/cloneDeep";
 
-export default function TasksBody(props) {
+export default function TasksBody() {
   const {
     state,
     setState,
@@ -59,10 +59,6 @@ export default function TasksBody(props) {
               key={list.id}
               index={index}
               onSubmit={createTasks}
-              description={list.description}
-              status={list.status}
-              end={list.end}
-              start={list.start}
               deleteTask={deleteTask}
               updateTask={updateTask}
             />

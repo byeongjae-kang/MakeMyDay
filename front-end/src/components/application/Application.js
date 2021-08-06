@@ -1,12 +1,12 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { createTheme, ThemeProvider } from '@material-ui/core'
-import Layout from './Layout'
-import ProjectList from '../projects/ProjectList'
-import TaskBody from '../drag_drop/TasksBody'
-import Landing from '../landing_page/Landing'
-import Gantt from '../gantt/Gantt'
-const theme = createTheme({})
-
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { createTheme, ThemeProvider } from "@material-ui/core";
+import Layout from "./Layout";
+import ProjectList from "../projects/ProjectList";
+import TaskBody from "../drag_drop/TasksBody";
+import Landing from "../landing_page/Landing";
+import Gantt from "../gantt/Gantt";
+import { TaskContextProvider } from "context/TaskContext";
+const theme = createTheme({});
 
 export default function Application() {
   return (
@@ -18,13 +18,13 @@ export default function Application() {
               <ProjectList />
             </Route>
             <Route exact path="/dashboard">
-             <TaskBody/>
+              <TaskBody />
             </Route>
             <Route exact path="/login">
-             <Landing/>
+              <Landing />
             </Route>
             <Route exact path="/gantt">
-              <Gantt/>
+              <Gantt />
             </Route>
           </Switch>
         </Layout>
@@ -32,4 +32,3 @@ export default function Application() {
     </ThemeProvider>
   );
 }
-

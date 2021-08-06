@@ -109,6 +109,9 @@ export default function useApplicationData() {
         taskDetails["id"] = task.id;
         taskDetails["name"] = task.name;
         taskDetails["priority"] = task.priority;
+        taskDetails["status"] = task.status;
+        taskDetails["end"] = task.end;
+        taskDetails["start"] = task.start;
         tasksForList.push(taskDetails);
       }
     }
@@ -146,7 +149,7 @@ export default function useApplicationData() {
     axios
       .put(`http://localhost:8080/api/tasks/${id}`, { status: newStatus })
       .then((result) => {
-        console.log("result in drag and drop---", result);
+        // console.log("result in drag and drop---", result);
         let [listState, tasks] = updateLists(state.lists, result.data);
         setState((prev) => ({ ...prev, tasks: tasks, lists: listState }));
       });
@@ -158,7 +161,7 @@ export default function useApplicationData() {
     axios
       .post("http://localhost:8080/api/tasks", { name: name })
       .then((result) => {
-        console.log("result------", result);
+        // console.log("result------", result);
         let [listState, tasks] = updateLists(state.lists, result.data);
 
         setState((prev) => ({ ...prev, tasks: tasks, lists: listState }));

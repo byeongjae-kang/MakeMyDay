@@ -84,7 +84,7 @@ const PriorityIcon = (props) => {
   }
 };
 
-export default function Task({ users, task, index, deleteTask, updateTask }) {
+export default function Task({ task, index, deleteTask, updateTask }) {
   const classes = useStyle();
   // const { deleteTask } = useApplicationData();
   const [openPopup, setOpenPopup] = useState(false);
@@ -97,6 +97,7 @@ export default function Task({ users, task, index, deleteTask, updateTask }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   return (
     <Draggable draggableId={task.id.toString()} index={index}>
       {(provided) => (
@@ -112,9 +113,9 @@ export default function Task({ users, task, index, deleteTask, updateTask }) {
                 <div>
                   <MoreVertIcon
                     aria-controls="simple-menu"
+                    style={{ cursor: "pointer" }}
                     aria-haspopup="true"
                     onClick={handleClick}
-                    style={{ cursor: "pointer" }}
                   >
                     Open Menu
                   </MoreVertIcon>
@@ -149,7 +150,6 @@ export default function Task({ users, task, index, deleteTask, updateTask }) {
                     openPopup={openPopup}
                     setOpenPopup={setOpenPopup}
                     task={task}
-                    users={users}
                     updateTask={updateTask}
                   />
                   <Grid group className={classes.divide}>

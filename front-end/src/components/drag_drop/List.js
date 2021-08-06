@@ -17,10 +17,8 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 export default function List({
-  task,
   list,
   title,
-  index,
   onSubmit,
   deleteTask,
   updateTask,

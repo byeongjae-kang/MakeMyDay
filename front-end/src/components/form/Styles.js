@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
       color: "red",
     },
     marginRight: 20,
+    cursor: "pointer",
   },
   divide: {
     display: "flex",
@@ -42,8 +43,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
   dialogSize: {
-    minHeight: "35vh",
-    minWidth: "80vh",
+    // minHeight: "35vh",
+    // minWidth: "80vh",
   },
 }));
 

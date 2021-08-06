@@ -56,7 +56,7 @@ export default function ProjectForm({
             component="h2"
             gutterBottom
           >
-            {param ? "Edit" : "Create a New"} Project
+            {param.id ? "Edit" : "Create a New"} Project
           </Typography>
         </DialogTitle>
         <DialogContent dividers>

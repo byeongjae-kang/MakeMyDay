@@ -68,14 +68,21 @@ app.post(`/api/projects`, (req, res) => {
       users.forEach(id => {
         pool.query(`
           INSERT INTO user_projects (project_id, user_id)
-          VALUES ($1, $2)
+          VALUES ($1, $2) RETURNING *
         `, [result.rows[0].id, id])
-          .then((result) => res.json({ message:'success', result: result}))
+          .then((result) => res.json(result.rows))
           .catch((err) => console.log('error2', err.message))
       });
     })
     .catch(err => console.log("error", err.message));
   
+});
+
+app.delete(`/api/projects/:id`, (req, res) => {
+  const projectId = req.params.id;
+  pool.query(`DELETE FROM projects WHERE id = $1 RETURNING *`, [projectId])
+    .then(result => res.json(result.rows[0]))
+    .catch(err => console.log('could not delete', err.message))
 });
 
 

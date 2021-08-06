@@ -12,7 +12,7 @@ import {
   Radio,
   RadioGroup,
   TextField,
-  Typography
+  Typography,
 } from "@material-ui/core";
 
 import AddIcon from "@material-ui/icons/Add";
@@ -71,9 +71,9 @@ export default function CreateProject({ users, state, setState }) {
       status: status,
       users: userId,
       start_date: new Date(),
-      due_Date: selectedDate
-    }
-    copiedProjects.push(newProject)
+      due_Date: selectedDate,
+    };
+    copiedProjects.push(newProject);
 
     if (title && description) {
       return axios
@@ -82,7 +82,7 @@ export default function CreateProject({ users, state, setState }) {
           history.push("/projects");
           setState({
             ...state,
-            projects: copiedProjects
+            projects: copiedProjects,
           });
         })
         .catch((err) => console.log(err.message));
@@ -111,7 +111,7 @@ export default function CreateProject({ users, state, setState }) {
           </Typography>
         </DialogTitle>
         <DialogContent dividers>
-          <Container size="sm">
+          <Container size="md">
             <form noValidate autoComplete="off" onSubmit={handleSubmit}>
               <TextField
                 className={classes.field}

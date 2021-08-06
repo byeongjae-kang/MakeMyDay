@@ -15,8 +15,9 @@ export default function TaskInput(props) {
   // console.log("before       ", state)
   let name;
   const classes = useStyle();
-  function handleKeyPress(target) {
-    if (target.charCode == 13) {
+  function handleKeyPress(e) {
+    if (e.charCode == 13) {
+      e.preventDefault();
       console.log("name", name);
       props.onSubmit(name);
       props.setOpen(false);

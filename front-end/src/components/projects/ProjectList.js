@@ -9,7 +9,7 @@ import CreateProject from "./createProject/CreateProject";
 export default function ProjectList() {
   const [state, setState] = useState({
     users: [],
-    projects: []
+    projects: [],
   });
 
   useEffect(() => {
@@ -18,11 +18,11 @@ export default function ProjectList() {
         setState({
           ...state,
           users: all[0].data,
-          projects: all[1].data
+          projects: all[1].data,
         });
       }
     );
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleEdit = async (id) => {
     await axios.patch(`http://localhost8080/api/projects/${id}`);
@@ -33,7 +33,7 @@ export default function ProjectList() {
     const newProjects = state.projects.filter((project) => project.id !== id);
     setState({
       ...state,
-      projects: newProjects
+      projects: newProjects,
     });
   };
 
@@ -44,19 +44,19 @@ export default function ProjectList() {
 
     return {
       ...project,
-      users: updatedProject
+      users: updatedProject,
     };
   };
 
   const breakpoints = {
     default: 3,
     1100: 2,
-    700: 1
+    700: 1,
   };
 
   return (
     <Container>
-      <CreateProject users={state.users} state={state} setState={setState}/>
+      <CreateProject users={state.users} state={state} setState={setState} />
       <Masonry
         breakpointCols={breakpoints}
         className="my-masonry-grid"

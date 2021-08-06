@@ -16,9 +16,16 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-export default function List({ list, title, index, onSubmit }) {
+export default function List({
+  task,
+  list,
+  title,
+  index,
+  onSubmit,
+  deleteTask,
+  updateTask,
+}) {
   const classes = useStyle();
-
   const sortedTasks = list.tasks.sort((a, b) => {
     return a.priority - b.priority;
   });
@@ -32,7 +39,13 @@ export default function List({ list, title, index, onSubmit }) {
         {(provided) => (
           <div ref={provided.innerRef} {...provided.droppableProps}>
             {sortedTasks.map((task, index) => (
-              <Task task={task} key={task.id} index={index} />
+              <Task
+                task={task}
+                key={task.id}
+                index={index}
+                deleteTask={deleteTask}
+                updateTask={updateTask}
+              />
             ))}
             {provided.placeholder}
           </div>

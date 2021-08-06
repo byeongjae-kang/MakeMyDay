@@ -184,5 +184,22 @@ export default function useApplicationData() {
       .catch((err) => console.log(err));
   }
 
-  return { state, setState, updateDragDrop, createTasks, updateTask };
+  function deleteTask(id) {
+    axios
+      .delete(`http://localhost:8080/api/tasks/${id}`)
+      .then((result) => {
+        let [listState, tasks] = updateLists(state.lists, result.data);
+
+        setState((prev) => ({ ...prev, tasks: tasks, lists: listState }));
+      })
+      .catch((err) => console.log(err));
+  }
+  return {
+    state,
+    setState,
+    updateDragDrop,
+    createTasks,
+    updateTask,
+    deleteTask,
+  };
 }

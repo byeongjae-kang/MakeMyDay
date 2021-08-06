@@ -70,42 +70,36 @@ export default function ProjectList() {
     new Date().toISOString().split("T")[0]
   );
   const history = useHistory();
-  
-
 
   const handleClickOpen = (projectId, value) => {
     if ("Edit" === value) {
       handleEdit(projectId);
     } else {
-      setTitle('')
-      setTitleError(false)
-      setdescription('')
-      setdescriptionError(false)
-      setStatus("In progress")
-      setuserId([])
-      setSelectedDate(new Date().toISOString().split("T")[0])
+      setTitle("");
+      setTitleError(false);
+      setdescription("");
+      setdescriptionError(false);
+      setStatus("In progress");
+      setuserId([]);
+      setSelectedDate(new Date().toISOString().split("T")[0]);
       setOpen(true);
     }
   };
 
   const handleEdit = (projectId) => {
-    
     Promise.all([
       axios.get(`/api/projects/${projectId}`),
       axios.get(`/api/user_projects/${projectId}`)
     ]).then((result) => {
-    
       const { name, description, status, due_date } = result[0].data[0];
-      setTitle(name)
-      setdescription(description)
-      setStatus(status)
-      setSelectedDate(due_date.split("T")[0])
-      const users = result[1].data.map(user => user.user_id)
-      setuserId(users)
-      console.log(userId)
+      setTitle(name);
+      setdescription(description);
+      setStatus(status);
+      setSelectedDate(due_date.split("T")[0]);
+      const users = result[1].data.map((user) => user.user_id);
+      setuserId(users);
       setOpen(true);
     });
-    
   };
 
   const getUserIds = (selectedusers) => {
@@ -122,7 +116,7 @@ export default function ProjectList() {
     history.push(`/projects`);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, param) => {
     e.preventDefault();
     setTitleError(false);
     setdescriptionError(false);
@@ -134,8 +128,6 @@ export default function ProjectList() {
       setdescriptionError(true);
     }
 
-    const copiedState = { ...state };
-    const copiedProjects = copiedState.projects;
     const newProject = {
       name: title,
       description: description,
@@ -144,29 +136,49 @@ export default function ProjectList() {
       start_date: new Date().toISOString().split("T")[0],
       due_Date: selectedDate
     };
-    copiedProjects.push(newProject);
 
-    if (title && description) {
-      axios
-        .post(`/api/projects`, newProject)
-        .then(() => {
+    if (param.id) {
+      newProject["modified_date"] = new Date().toISOString().split("T")[0];
+
+      if (title && description) {
+        axios.put(`/api/projects/${param.id}`, newProject).then(() => {
           axios.get(`/api/projects`).then((result) => {
             setState({
               ...state,
               projects: result.data
             });
-            history.push("/projects");
-            
+            handleClose();
           });
-        })
-        .catch((err) => console.log(err.message));
+        });
+      }
+    } else {
+      newProject["start_date"] = new Date().toISOString().split("T")[0];
+
+      if (title && description) {
+        axios
+          .post(`/api/projects`, newProject)
+          .then(() => {
+            axios.get(`/api/projects`).then((result) => {
+              setState({
+                ...state,
+                projects: result.data
+              });
+              handleClose();
+            });
+          })
+          .catch((err) => console.log(err.message));
+      }
     }
-    
   };
 
   return (
     <Container>
-      <Button variant="outlined" value={"Create"} color="secondary" onClick={handleClickOpen}>
+      <Button
+        variant="outlined"
+        value={"Create"}
+        color="secondary"
+        onClick={handleClickOpen}
+      >
         <AddIcon />
         CREATE NEW PROJECTS
       </Button>

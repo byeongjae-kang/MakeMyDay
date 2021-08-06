@@ -15,21 +15,35 @@ import {
   Typography
 } from "@material-ui/core";
 
-
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
 
 import DatePickers from "../datePicker/DatePicker";
 import UserSelector from "../userSelector/UserSelector";
 import { useStyles } from "./ProjectFormStyle";
 
-export default function ProjectForm({ users, handleDateChange, handleClose, handleSubmit, selectedDate, open, titleError, descriptionError, description, setdescription, title, setTitle, status, setStatus, getUserIds, userId}) {
+export default function ProjectForm({
+  users,
+  handleDateChange,
+  handleClose,
+  handleSubmit,
+  selectedDate,
+  open,
+  titleError,
+  descriptionError,
+  description,
+  setdescription,
+  title,
+  setTitle,
+  status,
+  setStatus,
+  getUserIds,
+  userId
+}) {
   const classes = useStyles();
   const param = useParams();
-  
 
   return (
     <div>
-      
       <Dialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -47,7 +61,11 @@ export default function ProjectForm({ users, handleDateChange, handleClose, hand
         </DialogTitle>
         <DialogContent dividers>
           <Container size="sm">
-            <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+            <form
+              noValidate
+              autoComplete="off"
+              onSubmit={(e) => handleSubmit(e, param)}
+            >
               <TextField
                 className={classes.field}
                 onChange={(e) => setTitle(e.target.value)}
@@ -73,7 +91,11 @@ export default function ProjectForm({ users, handleDateChange, handleClose, hand
                 error={descriptionError}
               />
 
-              <UserSelector users={users} getUserIds={getUserIds} userId={userId}/>
+              <UserSelector
+                users={users}
+                getUserIds={getUserIds}
+                userId={userId}
+              />
 
               <div className={classes.divide}>
                 <FormControl className={classes.field}>
@@ -115,7 +137,6 @@ export default function ProjectForm({ users, handleDateChange, handleClose, hand
                 color="secondary"
                 variant="contained"
                 endIcon={<KeyboardArrowRightIcon />}
-                onClick={handleClose}
               >
                 Save
               </Button>

@@ -147,7 +147,7 @@ export default function ProjectList() {
     copiedProjects.push(newProject);
 
     if (title && description) {
-      return axios
+      axios
         .post(`/api/projects`, newProject)
         .then(() => {
           axios.get(`/api/projects`).then((result) => {
@@ -156,10 +156,12 @@ export default function ProjectList() {
               projects: result.data
             });
             history.push("/projects");
+            
           });
         })
         .catch((err) => console.log(err.message));
     }
+    
   };
 
   return (

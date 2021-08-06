@@ -31,9 +31,9 @@ export default function CreateProject({ users, state, setState }) {
   const [titleError, setTitleError] = useState(false);
   const [description, setdescription] = useState("");
   const [descriptionError, setdescriptionError] = useState(false);
-  const [status, setStatus] = useState("In Progress");
+  const [status, setStatus] = useState("In progress");
   const [userId, setuserId] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]);
 
   const getUserIds = (selectedusers) => {
     const arrUserIds = selectedusers.map((user) => user.id);
@@ -70,20 +70,23 @@ export default function CreateProject({ users, state, setState }) {
       description: description,
       status: status,
       users: userId,
-      start_date: new Date(),
+      start_date: new Date().toISOString().split("T")[0],
       due_Date: selectedDate
     }
     copiedProjects.push(newProject)
 
     if (title && description) {
       return axios
-        .post(`http://localhost:8080/api/projects`, newProject)
+        .post(`/api/projects`, newProject)
         .then(() => {
-          history.push("/projects");
-          setState({
-            ...state,
-            projects: copiedProjects
-          });
+          axios.get(`/api/projects`)
+            .then(result => {
+              setState({
+                ...state,
+                projects: result.data
+              });
+              history.push("/projects");
+            })
         })
         .catch((err) => console.log(err.message));
     }

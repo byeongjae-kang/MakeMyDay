@@ -1,33 +1,30 @@
 import { useState } from "react";
 import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  Divider,
-} from "@material-ui/core/";
-import {
-  Grid,
   Button,
+  Container,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
   TextField,
   Typography,
-  Container,
-  Box,
-  // ButtonGroup,
-  // Button,
-  // Card,
-  // Paper,
+  Grid,
+  Paper,
 } from "@material-ui/core";
 import useStyles from "./Styles";
 import Avatar from "@material-ui/core/Avatar";
 import CloseIcon from "@material-ui/icons/Close";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
 import Menu from "@material-ui/core/Menu";
 import Select from "@material-ui/core/Select";
-import { DateRangePickerComponent } from "@syncfusion/ej2-react-calendars";
+import DatePickers from "components/projects/datePicker/DatePicker";
 import "./Calendar.css";
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
-import AutoComplete from "./AutoComplete";
+import UserSelector from "components/projects/userSelector/UserSelector";
 // import useApplicationData from "../../hooks/useApplicationData";
 // import UserSelector from "components/projects/userSelector/UserSelector";
 export default function Form(props) {
@@ -44,7 +41,7 @@ export default function Form(props) {
 
   return (
     <Dialog onClose={closePopup} open={openPopup}>
-      <Grid container className={classes.alignRight}>
+      <Grid container>
         <Grid container className={classes.divide}>
           <Grid />
           <CloseIcon
@@ -54,6 +51,7 @@ export default function Form(props) {
         </Grid>
       </Grid>
       <DialogTitle>
+        <FormLabel>Title</FormLabel>
         <TextField
           className={classes.field}
           multiline
@@ -71,71 +69,96 @@ export default function Form(props) {
           }}
         />
       </DialogTitle>
-      {/* <AutoComplete /> */}
-      <DialogContent dividers className={classes.dialogSize}>
+      {/* ---------------------------------------------------------------------------------- */}
+
+      <DialogContent dividers>
+        <br />
+        {/*-----------------------------Select Users Component---------------------------------------- */}
+        <FormLabel>Select Members</FormLabel>
+        <Select fullWidth className={classes.select}>
+          <MenuItem value="1">UserSelector</MenuItem>
+          {/* <UserSelector></UserSelector> */}
+        </Select>
+
+        {/* --------------------------------Status Component-------------------------------------------------- */}
+        <div className={classes.divide}>
+          <FormControl>
+            <br />
+            <br />
+            <FormLabel>Project Status</FormLabel>
+            <RadioGroup
+              value={status}
+              onChange={(e) => {
+                setStatus(e.target.value);
+              }}
+            >
+              <FormControlLabel
+                value="In Progress"
+                control={<Radio />}
+                label="In Progress"
+              />
+              <FormControlLabel
+                value="Backlog"
+                control={<Radio />}
+                label="Backlog"
+              />
+              <FormControlLabel
+                value="On Hold"
+                control={<Radio />}
+                label="On Hold"
+              />
+              <FormControlLabel
+                value="Completed"
+                control={<Radio />}
+                label="Completed"
+              />
+            </RadioGroup>
+          </FormControl>
+
+          {/* --------------------------------Priority Component------------------------------------------------- */}
+          <div>
+            <FormLabel>Priority</FormLabel>
+            <Select
+              className={classes.select}
+              value={priority}
+              onChange={(e) => {
+                setPriority(e.target.value);
+              }}
+            >
+              <MenuItem value="1">High</MenuItem>
+              <MenuItem value="2">Medium</MenuItem>
+              <MenuItem value="3">Low</MenuItem>
+            </Select>
+            {/* ----------------------------------Start Date Component----------------------------------------- */}
+            <FormLabel>Select Start Date</FormLabel>
+
+            <DatePickers
+            // selectedDate={selectedDate}
+            // handleDateChange={handleDateChange}
+            />
+            {/* ----------------------------------End Date Component----------------------------------------- */}
+            <FormLabel>Select End Date</FormLabel>
+            <DatePickers
+            // selectedDate={selectedDate}
+            // handleDateChange={handleDateChange}
+            />
+          </div>
+        </div>
+
+        {/* ---------------------------------Save Button -------------------------------------- */}
         <Grid container className={classes.divide}>
           <Grid />
-          <Grid className={classes.selectContainer}>
-            <Typography>Select Members</Typography>
-            <Select className={classes.select}>
-              <MenuItem value="In Progress">In Progress</MenuItem>
-            </Select>
-          </Grid>
-        </Grid>
-
-        <Grid className={classes.selectContainer}>
-          <Typography>Select Date Range</Typography>
-          <DateRangePickerComponent
-            placeholder="Enter Date Range"
-            format="MMM dd yyyy"
-          ></DateRangePickerComponent>
-
-          <Grid container className={classes.divide}>
-            <Grid className={classes.selectContainer}>
-              <Typography>Priority</Typography>
-              <Select
-                className={classes.select}
-                value={priority}
-                onChange={(e) => {
-                  setPriority(e.target.value);
-                }}
-              >
-                <MenuItem value="1">High</MenuItem>
-                <MenuItem value="2">Medium</MenuItem>
-                <MenuItem value="3">Low</MenuItem>
-              </Select>
-            </Grid>
-
-            <Grid className={classes.selectContainer}>
-              <Typography>Status</Typography>
-              <Select
-                className={classes.select}
-                value={status}
-                onChange={(e) => {
-                  setStatus(e.target.value);
-                }}
-              >
-                <MenuItem value="In Progress">In Progress</MenuItem>
-                <MenuItem value="Backlog">Backlog</MenuItem>
-                <MenuItem value="Completed">Completed</MenuItem>
-                <MenuItem value="On Hold">On Hold</MenuItem>
-              </Select>
-            </Grid>
-          </Grid>
-
-          <Grid container className={classes.divide}>
-            <Grid />
-            <Grid className={classes.alignRight}>
-              <Button
-                type="submit"
-                color="secondary"
-                variant="contained"
-                endIcon={<KeyboardArrowRightIcon />}
-                onClick={closePopup}
-              >
-                Save
-              </Button>
-            </Grid>
+          <Grid>
+            <Button
+              className={classes.button}
+              type="submit"
+              color="secondary"
+              variant="contained"
+              endIcon={<KeyboardArrowRightIcon />}
+              onClick={closePopup}
+            >
+              Save
+            </Button>
           </Grid>
         </Grid>
       </DialogContent>

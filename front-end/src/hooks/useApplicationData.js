@@ -179,9 +179,9 @@ export default function useApplicationData() {
         priority: priority,
       })
       .then((result) => {
-        console.log("result in gantt---", result.data);
+        // console.log("result in gantt---", result.data);
         let [listState, tasks] = updateLists(state.lists, result.data);
-        console.log();
+        // console.log();
         setState((prev) => ({ ...prev, tasks: tasks, lists: listState }));
       })
       .catch((err) => console.log(err));

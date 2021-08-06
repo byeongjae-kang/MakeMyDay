@@ -40,7 +40,7 @@ export default function Form(props) {
 
   const classes = useStyles();
 
-  console.log(props);
+  // console.log(props);
 
   return (
     <Dialog onClose={closePopup} open={openPopup}>

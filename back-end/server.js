@@ -71,11 +71,11 @@ app.post(`/api/projects`, (req, res) => {
           .query(
             `
           INSERT INTO user_projects (project_id, user_id)
-          VALUES ($1, $2)
+          VALUES ($1, $2) RETURNING *
         `,
             [result.rows[0].id, id]
           )
-          .then((result) => res.json({ message: "success", result: result }))
+          .then((result) => res.json(result.rows))
           .catch((err) => console.log("error2", err.message));
       });
     })
@@ -124,19 +124,6 @@ app.get("/api/tasks", async (req, res) => {
   }
 });
 
-app.get("/api/tasks/:id", async (req, res) => {
-  try {
-    const tasks = await pool.query("SELECT * FROM tasks WHERE id = $1", [
-      req.params.id,
-    ]);
-
-    res.json(tasks.rows[0]);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send(err);
-  }
-});
-
 app.put("/api/tasks/:id", async (req, res) => {
   try {
     const { start, end, status } = req.body;
@@ -156,7 +143,9 @@ app.put("/api/tasks/:id", async (req, res) => {
     }
     const tasks = await pool.query("SELECT * FROM tasks;");
     res.json(tasks.rows);
-  } catch (err) {}
+  } catch (err) {
+    res.status(500).send(err);
+  }
 });
 
 app.delete("/api/tasks/:id", async (req, res) => {

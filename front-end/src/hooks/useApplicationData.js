@@ -188,15 +188,14 @@ export default function useApplicationData() {
   }
 
   function deleteTask(id) {
-    axios
-      .delete(`http://localhost:8080/api/tasks/${id}`)
-      .then((result) => {
-        let [listState, tasks] = updateLists(state.lists, result.data);
-
-        setState((prev) => ({ ...prev, tasks: tasks, lists: listState }));
-      })
-      .catch((err) => console.log(err));
+    const task = { ...state.tasks[id], tasks: null };
+    const tasks = { ...state.tasks, [id]: task };
+    return axios.delete(`http://localhost:8080/api/tasks/${id}`).then(() => {
+      setState({ ...state, tasks });
+      updateTask(id);
+    });
   }
+
   return {
     state,
     setState,

@@ -86,7 +86,6 @@ export default function CreateProject({ users, state, setState }) {
                 projects: result.data
               });
               history.push("/projects");
-              console.log(state);
             })
         })
         .catch((err) => console.log(err.message));

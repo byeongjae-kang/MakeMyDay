@@ -62,7 +62,6 @@ export default function ProjectListItems({ project, state, handleDelete }) {
 
   const handleClose = (e, projectId, state) => {
     const value = e.target.getAttribute("value");
-    console.log(projectId);
 
     if (value === "Delete") {
       handleDelete(projectId);

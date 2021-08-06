@@ -37,7 +37,6 @@ export default function ProjectList() {
             ...state,
             projects: [...result.data]
           });
-          console.log(state);
         });
       })
       .catch((err) => console.error("could not delete", err.message));

@@ -66,6 +66,8 @@ export default function ProjectListItems({ project, state, handleDelete }) {
     if (value === "Delete") {
       handleDelete(projectId);
     }
+    if (value === "Edit") {
+    }
 
     setAnchorEl(null);
   };

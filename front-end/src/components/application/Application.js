@@ -17,6 +17,9 @@ export default function Application() {
             <Route exact path="/projects">
               <ProjectList />
             </Route>
+            <Route exact path="/projects/:id">
+              <ProjectList />
+            </Route>
             <Route exact path="/dashboard">
              <TaskBody/>
             </Route>

@@ -3,7 +3,13 @@ import { useStyles } from "./UserSelectorStyle";
 import { Avatar, TextField } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
-export default function UserSelector({ users, getUserIds }) {
+const getDefaultUsers = (userId, users) => {
+  return userId.map(id => {
+    return users.find(user => user.id === id)
+  })
+}
+
+export default function UserSelector({ users, getUserIds, userId }) {
   const classes = useStyles();
 
   return (
@@ -14,6 +20,7 @@ export default function UserSelector({ users, getUserIds }) {
         limitTags={2}
         id="multiple-limit-tags"
         options={users}
+        defaultValue={getDefaultUsers(userId, users)}
         getOptionLabel={(user) => user.user_name}
         renderOption={(user) => (
           <div className={classes.members}>

@@ -172,6 +172,7 @@ export default function Form(props) {
                   type="date"
                   value={startDate}
                   className={classes.textField}
+                  onChange={(e) => setStartDate(e.target.value)}
                 />
               </form>
             </FormGroup>
@@ -183,6 +184,7 @@ export default function Form(props) {
                   type="date"
                   value={endDate}
                   className={classes.textField}
+                  onChange={(e) => setEndDate(e.target.value)}
                 />
               </form>
             </FormGroup>

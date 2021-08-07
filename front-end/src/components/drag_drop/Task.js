@@ -143,7 +143,7 @@ export default function Task({ task, index, deleteTask, updateTask }) {
             />
             <Divider />
             <CardContent>
-              <Grid Container className={classes.divide}>
+              <Grid container className={classes.divide}>
                 <Grid className={classes.rightModal}>
                   <ModalForm
                     closePopup={() => setOpenPopup(false)}

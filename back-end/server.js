@@ -149,10 +149,11 @@ app.post("/api/users", async (req, res) => {
 
 app.post("/api/tasks", async (req, res) => {
   try {
-    const { name } = req.body;
-    await pool.query(`INSERT INTO tasks (name) VALUES ($1)`, [name]);
-    const tasks = await pool.query("SELECT * FROM tasks;");
-    res.json(tasks.rows);
+    const { name, project_id } = req.body;
+   console.log("name and project_id", name, project_id)
+    const result = await pool.query(`INSERT INTO tasks (name, project_id) VALUES ($1, $2) RETURNING *`, [name, project_id]);
+    
+    res.json(result.rows);
   } catch (err) {
     console.error(err.message);
   }
@@ -160,7 +161,7 @@ app.post("/api/tasks", async (req, res) => {
 
 app.get("/api/tasks", async (req, res) => {
   try {
-    const tasks = await pool.query("SELECT * FROM tasks;");
+   const tasks = await pool.query("SELECT projects.name AS project_name, users.user_name, users.avatar, tasks.* FROM projects JOIN tasks ON tasks.project_id = projects.id JOIN users ON users.id = tasks.user_id");
     res.json(tasks.rows);
   } catch (err) {
     console.error(err.message);
@@ -172,21 +173,20 @@ app.put("/api/tasks/:id", async (req, res) => {
   try {
     const { start, end, status } = req.body;
     const id = Number(req.params.id);
-
     if (!status) {
-      await pool.query(`UPDATE tasks SET start = $1, "end"=$2 WHERE id = $3;`, [
+      const result = await pool.query(`UPDATE tasks SET start = $1, "end"=$2 WHERE id = $3 RETURNING *`, [
         start,
         end,
         id,
       ]);
+      res.json(result.rows);
     } else {
-      await pool.query(`UPDATE tasks SET status=$1 WHERE id = $2;`, [
+      const result = await pool.query(`UPDATE tasks SET status = $1 WHERE id = $2 RETURNING *`, [
         status,
         id,
       ]);
+      res.json(result.rows);
     }
-    const tasks = await pool.query("SELECT * FROM tasks;");
-    res.json(tasks.rows);
   } catch (err) {
     res.status(500).send(err);
   }

@@ -85,13 +85,12 @@ const PriorityIcon = (props) => {
   }
 };
 
-export default function Task({ index, updateTask }) {
-  const { deleteTasks, projects, task } = useContext(ProjectContext);
+export default function Task({ index, updateTask, task }) {
+  const { deleteTasks, projects } = useContext(ProjectContext);
   const classes = useStyle();
   // const { deleteTask } = useApplicationData();
   const [openPopup, setOpenPopup] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };

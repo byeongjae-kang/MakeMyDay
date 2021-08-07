@@ -1,6 +1,9 @@
 import { useState, useContext } from "react";
 import ProjectContext from "../../context/ProjectContext";
 import axios from "axios";
+import cloneDeep from "lodash/cloneDeep";
+import { deleteTask } from "../../hooks/helpers";
+
 import {
   Button,
   Container,
@@ -29,8 +32,8 @@ export default function Form(props) {
   // const { state, setState } = useApplicationData();
 
   const classes = useStyles();
-  const { openPopup, task, closePopup } = props;
-  const { setState } = useContext(ProjectContext);
+  const { openPopup, task, setTask, closePopup } = props;
+  const { projects, setState } = useContext(ProjectContext);
   const [title, setTitle] = useState(task.name);
   const [avatar, setAvatar] = useState("");
   const [priority, setPriority] = useState(task.priority);
@@ -44,7 +47,6 @@ export default function Form(props) {
   );
 
   // console.log("state here", state);
-  console.log(task);
   // description: null
   // end: "2021-08-08T07:00:00.000Z"
   // id: 11
@@ -58,8 +60,15 @@ export default function Form(props) {
   const handleSubmit = (e, taskId, projectId) => {
     e.preventDefault();
     console.log(projectId);
+    console.log(taskId);
+    console.log(title);
+    console.log(description);
+    console.log(status);
+    console.log(startDate);
+    console.log(endDate);
+    console.log(priority);
+
     const editTask = {
-      id: taskId,
       name: title,
       description: description,
       status: status,
@@ -70,20 +79,25 @@ export default function Form(props) {
 
     if (startDate < endDate) {
       axios
-        .put(`/api/projects/${projectId}/tasks`, editTask)
+        .put(`/api/projects/${projectId}/tasks/${taskId}`, editTask)
         .then((result) => {
-          console.log(result.data);
-
+          console.log("result in edit", result.data);
+          let project = cloneDeep(projects[result.data.project_id]);
+          let tasks = project.tasks;
+          tasks = deleteTask(result.data.id, tasks);
+          const newTask = [...tasks, result.data];
+          project.tasks = newTask;
+          setState((prev) => ({ ...prev, [result.data.project_id]: project }));
           // axios.get(`/api/task`).then((result) => {
           //   console.log(result.data);
           // setState({
           //   ...state,
           //   tasks: result.data,
-          // });
-          // handleClose();
-          // });
-        })
-        .catch((err) => console.log(err.message));
+        });
+      // handleClose();
+      // });
+      //     })
+      //     .catch((err) => console.log(err.message));
     }
   };
 

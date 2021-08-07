@@ -191,9 +191,21 @@ app.get("/api/tasks", async (req, res) => {
   }
 });
 
-app.put(`/api/projects/:project_id/tasks`, (req, res) => {
-  console.log("req.body", req.body);
-  console.log("req params", req.params);
+app.put(`/api/projects/:project_id/tasks/:task_id`, (req, res) => {
+  // param { project_id: '4', task_id: '26' }
+  const { name, description, status, start, end, priority } = req.body;
+  const taskId = req.params.task_id;
+  const query = `
+    UPDATE  tasks SET name = $1, description = $2, status = $3, start = $4, "end" = $5, priority = $6
+    WHERE id = $7 RETURNING *
+  `;
+  pool
+    .query(query, [name, description, status, start, end, priority, taskId])
+    .then((result) => {
+      console.log(result.rows[0]);
+      res.json(result.rows[0]);
+    })
+    .catch((err) => console.log("could not edit", err.message));
 });
 
 app.put("/api/tasks/:id", async (req, res) => {

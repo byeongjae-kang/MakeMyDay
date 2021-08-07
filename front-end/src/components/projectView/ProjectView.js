@@ -113,6 +113,7 @@ function ProjectView() {
 
   const stateData = {
     projects,
+    setState,
     updateTask,
     updateDragDrop,
     createTask,

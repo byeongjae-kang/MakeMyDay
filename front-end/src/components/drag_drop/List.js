@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Paper, CssBaseline } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Task from "./Task";
 import ListTitle from "./ListTitle";
 import NewTask from "./NewTask";
-import TaskInput from "./TaskInput";
 import { Droppable } from "react-beautiful-dnd";
 
 const useStyle = makeStyles((theme) => ({
@@ -32,7 +31,7 @@ export default function List({
     <Paper className={classes.list}>
       <CssBaseline />
       <ListTitle title={title} length={list.tasks.length} />
-      {title === "In Progress" ? <NewTask onSubmit={onSubmit} /> : null}
+      {title === "In Progress" ? <NewTask /> : null}
       <Droppable droppableId={list.id.toString()}>
         {(provided) => (
           <div ref={provided.innerRef} {...provided.droppableProps}>

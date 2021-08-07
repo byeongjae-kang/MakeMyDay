@@ -24,7 +24,7 @@ export default function NewTask(props) {
   return (
     <div className={classes.top}>
       <Collapse in={open}>
-        <TaskInput onSubmit={props.onSubmit} setOpen={setOpen} />
+        <TaskInput setOpen={setOpen} />
       </Collapse>
       <Collapse in={!open}>
         <Paper

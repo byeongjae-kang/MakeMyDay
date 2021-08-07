@@ -191,9 +191,9 @@ app.get("/api/tasks", async (req, res) => {
   }
 });
 
-app.put(`/api/projects/:project_id/tasks/:task_id`, (req, res) => {
-  console.log(req.body);
-  console.log(req.param);
+app.put(`/api/projects/:project_id/tasks`, (req, res) => {
+  console.log("req.body", req.body);
+  console.log("req params", req.params);
 });
 
 app.put("/api/tasks/:id", async (req, res) => {

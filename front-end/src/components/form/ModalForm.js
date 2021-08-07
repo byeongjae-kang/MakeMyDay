@@ -27,7 +27,6 @@ import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
 import useApplicationData from "hooks/useApplicationData";
 import ProjectContext from "context/ProjectContext";
 export default function Form(props) {
-  const { state, setState } = useApplicationData();
   const classes = useStyles();
   const { openPopup, closePopup } = props;
   const { task } = useContext(ProjectContext);

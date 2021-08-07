@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-
+import ProjectContext from "../../context/ProjectContext";
 import axios from "axios";
 import {
   Button,
@@ -25,12 +25,12 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
 import useApplicationData from "hooks/useApplicationData";
-import ProjectContext from "context/ProjectContext";
 export default function Form(props) {
-  const { state, setState } = useApplicationData();
+  // const { state, setState } = useApplicationData();
+ 
   const classes = useStyles();
-  const { openPopup, closePopup } = props;
-  const { task } = useContext(ProjectContext);
+  const { openPopup, task, closePopup } = props;
+  const { setState } = useContext(ProjectContext);
   const [title, setTitle] = useState(task.name);
   const [avatar, setAvatar] = useState("");
   const [priority, setPriority] = useState(task.priority);
@@ -59,6 +59,7 @@ export default function Form(props) {
     e.preventDefault();
     console.log(projectId);
     const editTask = {
+      id: taskId,
       name: title,
       description: description,
       status: status,
@@ -69,9 +70,10 @@ export default function Form(props) {
 
     if (startDate < endDate) {
       axios
-        .post(`/api/projects/${projectId}/tasks/${taskId}`, editTask)
+        .put(`/api/projects/${projectId}/tasks`, editTask)
         .then((result) => {
           console.log(result.data);
+
           // axios.get(`/api/task`).then((result) => {
           //   console.log(result.data);
           // setState({
@@ -98,7 +100,7 @@ export default function Form(props) {
         </Grid>
       </Grid>
       {/*-----------------------------Start of Form--------------------------------------- */}
-      <form onSubmit={(e) => handleSubmit(e, task.id)}>
+      <form onSubmit={(e) => handleSubmit(e, task.id, task.project_id)}>
         <DialogTitle>
           <FormGroup>
             <FormLabel>Title</FormLabel>

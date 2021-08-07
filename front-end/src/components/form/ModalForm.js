@@ -1,4 +1,6 @@
 import { useState } from "react";
+
+import axios from "axios";
 import {
   Button,
   Container,
@@ -22,7 +24,10 @@ import CloseIcon from "@material-ui/icons/Close";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
+import useApplicationData from "hooks/useApplicationData";
+
 export default function Form(props) {
+  const { state, setState } = useApplicationData();
   const classes = useStyles();
   const { openPopup, closePopup, task } = props;
   const [title, setTitle] = useState(task.name);
@@ -37,7 +42,36 @@ export default function Form(props) {
     new Date(task.end).toISOString().split("T")[0]
   );
 
-  console.log(setEndDate);
+  console.log("state here", state);
+
+  const handleSubmit = (e, taskId) => {
+    e.preventDefault();
+
+    const newTask = {
+      name: title,
+      description: description,
+      status: status,
+      start: startDate.split("T")[0],
+      end: endDate.split("T")[0],
+    };
+
+    if (startDate < endDate) {
+      axios
+        .post(`/api/tasks`, newTask)
+        .then(() => {
+          axios.get(`/api/task`).then((result) => {
+            setState({
+              ...state,
+              projects: result.data,
+            });
+            // handleClose();
+          });
+        })
+        .catch((err) => console.log(err.message));
+    }
+  };
+
+  // console.log(setEndDate);
   return (
     <Dialog fullWidth onClose={closePopup} open={openPopup}>
       <Grid container>
@@ -49,48 +83,50 @@ export default function Form(props) {
           ></CloseIcon>
         </Grid>
       </Grid>
-      <DialogTitle>
-        <FormGroup>
-          <FormLabel>Title</FormLabel>
-          <TextField
-            className={classes.field}
-            multiline
-            fullWidth
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-          />
-        </FormGroup>
-      </DialogTitle>
+      {/*-----------------------------Start of Form--------------------------------------- */}
+      <form onSubmit={(e) => handleSubmit(e, task.id)}>
+        <DialogTitle>
+          <FormGroup>
+            <FormLabel>Title</FormLabel>
+            <TextField
+              className={classes.field}
+              multiline
+              fullWidth
+              value={title}
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+            />
+          </FormGroup>
+        </DialogTitle>
 
-      <DialogContent dividers>
-        {/*-----------------------------Enter Description Component---------------------------------------- */}
+        <DialogContent dividers>
+          {/*-----------------------------Enter Description Component---------------------------------------- */}
 
-        <FormGroup>
-          <FormLabel>Enter Description</FormLabel>
-          <TextField
-            className={classes.field}
-            multiline
-            variant="filled"
-            fullWidth
-            value={description}
-            onChange={(e) => {
-              setDescription(e.target.value);
-            }}
-          />
-        </FormGroup>
-        {/*-----------------------------Select Users Component---------------------------------------- */}
-        <br />
-        <FormGroup>
-          <FormLabel>Assign Member</FormLabel>
-          <Select fullWidth>
-            <MenuItem value="1">UserSelector</MenuItem>
-            {/* <UserSelector></UserSelector> */}
-          </Select>
-        </FormGroup>
+          <FormGroup>
+            <FormLabel>Enter Description</FormLabel>
+            <TextField
+              className={classes.field}
+              multiline
+              variant="filled"
+              fullWidth
+              value={description}
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
+            />
+          </FormGroup>
+          {/*-----------------------------Select Users Component---------------------------------------- */}
+          <br />
+          <FormGroup>
+            <FormLabel>Assign Member</FormLabel>
+            <Select fullWidth>
+              <MenuItem value="1">UserSelector</MenuItem>
+              {/* <UserSelector></UserSelector> */}
+            </Select>
+          </FormGroup>
 
-        {/* <div className={classes.root}>
+          {/* <div className={classes.root}>
           <Autocomplete
             onChange={(event, value) => getUserIds(value)}
             multiple
@@ -124,107 +160,108 @@ export default function Form(props) {
             )}
           />
         </div> */}
-        {/* --------------------------------Status Component-------------------------------------------------- */}
-        <br />
+          {/* --------------------------------Status Component-------------------------------------------------- */}
+          <br />
 
-        <div className={classes.divide}>
-          <FormGroup>
-            <FormControl>
-              <FormLabel>Project Status</FormLabel>
-              <RadioGroup
-                value={status}
-                onChange={(e) => {
-                  setStatus(e.target.value);
-                }}
-              >
-                <FormControlLabel
-                  value="In Progress"
-                  control={<Radio />}
-                  label="In Progress"
-                />
-                <FormControlLabel
-                  value="Backlog"
-                  control={<Radio />}
-                  label="Backlog"
-                />
-                <FormControlLabel
-                  value="On Hold"
-                  control={<Radio />}
-                  label="On Hold"
-                />
-                <FormControlLabel
-                  value="Completed"
-                  control={<Radio />}
-                  label="Completed"
-                />
-              </RadioGroup>
-            </FormControl>
-          </FormGroup>
-
-          <div>
-            {/* ----------------------------------Date Range Component----------------------------------------- */}
-
+          <div className={classes.divide}>
             <FormGroup>
-              <FormLabel>Select Start Date</FormLabel>
-              <form className={classes.container} noValidate>
-                <TextField
-                  id="date"
-                  type="date"
-                  value={startDate}
-                  className={classes.textField}
-                  onChange={(e) => setStartDate(e.target.value)}
-                />
-              </form>
-            </FormGroup>
-            <FormGroup>
-              <FormLabel>Select End Date</FormLabel>
-              <form className={classes.container} noValidate>
-                <TextField
-                  id="date"
-                  type="date"
-                  value={endDate}
-                  className={classes.textField}
-                  onChange={(e) => setEndDate(e.target.value)}
-                />
-              </form>
+              <FormControl>
+                <FormLabel>Project Status</FormLabel>
+                <RadioGroup
+                  value={status}
+                  onChange={(e) => {
+                    setStatus(e.target.value);
+                  }}
+                >
+                  <FormControlLabel
+                    value="In Progress"
+                    control={<Radio />}
+                    label="In Progress"
+                  />
+                  <FormControlLabel
+                    value="Backlog"
+                    control={<Radio />}
+                    label="Backlog"
+                  />
+                  <FormControlLabel
+                    value="On Hold"
+                    control={<Radio />}
+                    label="On Hold"
+                  />
+                  <FormControlLabel
+                    value="Completed"
+                    control={<Radio />}
+                    label="Completed"
+                  />
+                </RadioGroup>
+              </FormControl>
             </FormGroup>
 
-            {/* --------------------------------Priority Component------------------------------------------------- */}
-            <br />
-            <FormGroup>
-              <FormLabel>Priority</FormLabel>
-              <Select
-                className={classes.select}
-                value={priority}
-                onChange={(e) => {
-                  setPriority(e.target.value);
-                }}
-              >
-                <MenuItem value="1">High</MenuItem>
-                <MenuItem value="2">Medium</MenuItem>
-                <MenuItem value="3">Low</MenuItem>
-              </Select>
-            </FormGroup>
+            <div>
+              {/* ----------------------------------Date Range Component----------------------------------------- */}
+
+              <FormGroup>
+                <FormLabel>Select Start Date</FormLabel>
+                <div className={classes.container} noValidate>
+                  <TextField
+                    id="date"
+                    type="date"
+                    value={startDate}
+                    className={classes.textField}
+                    onChange={(e) => setStartDate(e.target.value)}
+                  />
+                </div>
+              </FormGroup>
+              <FormGroup>
+                <FormLabel>Select End Date</FormLabel>
+                <div className={classes.container} noValidate>
+                  <TextField
+                    id="date"
+                    type="date"
+                    value={endDate}
+                    className={classes.textField}
+                    onChange={(e) => setEndDate(e.target.value)}
+                  />
+                </div>
+              </FormGroup>
+
+              {/* --------------------------------Priority Component------------------------------------------------- */}
+              <br />
+              <FormGroup>
+                <FormLabel>Priority</FormLabel>
+                <Select
+                  className={classes.select}
+                  value={priority}
+                  onChange={(e) => {
+                    setPriority(e.target.value);
+                  }}
+                >
+                  <MenuItem value="1">High</MenuItem>
+                  <MenuItem value="2">Medium</MenuItem>
+                  <MenuItem value="3">Low</MenuItem>
+                </Select>
+              </FormGroup>
+            </div>
           </div>
-        </div>
 
-        {/* ---------------------------------Save Button -------------------------------------- */}
-        <Grid Group container className={classes.divide}>
-          <Grid />
-          <Grid>
-            <Button
-              className={classes.button}
-              type="submit"
-              color="secondary"
-              variant="contained"
-              endIcon={<KeyboardArrowRightIcon />}
-              onClick={closePopup}
-            >
-              Save
-            </Button>
+          {/* ---------------------------------Save Button -------------------------------------- */}
+          <Grid Group container className={classes.divide}>
+            <Grid />
+            <Grid>
+              <Button
+                className={classes.button}
+                type="submit"
+                color="secondary"
+                variant="contained"
+                endIcon={<KeyboardArrowRightIcon />}
+                onClick={closePopup}
+              >
+                Save
+              </Button>
+            </Grid>
           </Grid>
-        </Grid>
-      </DialogContent>
+        </DialogContent>
+      </form>
     </Dialog>
   );
 }

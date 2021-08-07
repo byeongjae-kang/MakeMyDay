@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core'
+import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles({
   field: {
@@ -14,4 +14,4 @@ const useStyles = makeStyles({
   }
 });
 
-export { useStyles }
+export { useStyles };

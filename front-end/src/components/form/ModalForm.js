@@ -90,6 +90,40 @@ export default function Form(props) {
           </Select>
         </FormGroup>
 
+        {/* <div className={classes.root}>
+          <Autocomplete
+            onChange={(event, value) => getUserIds(value)}
+            multiple
+            limitTags={2}
+            id="multiple-limit-tags"
+            options={users}
+            defaultValue={getDefaultUsers(userId, users)}
+            getOptionLabel={(user) => user.user_name}
+            renderOption={(user) => (
+              <div className={classes.members}>
+                <Avatar
+                  className={classes.avatar}
+                  alt={user.name}
+                  src={user.avatar}
+                />
+                <p>
+                  {user.user_name}
+                  <br />
+                  {user.email}
+                </p>
+              </div>
+            )}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant="outlined"
+                label="Team members"
+                placeholder="Add members"
+                color="secondary"
+              />
+            )}
+          />
+        </div> */}
         {/* --------------------------------Status Component-------------------------------------------------- */}
         <br />
 

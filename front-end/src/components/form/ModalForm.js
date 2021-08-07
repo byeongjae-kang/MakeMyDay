@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import axios from "axios";
 import {
@@ -25,11 +25,12 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
 import useApplicationData from "hooks/useApplicationData";
-
+import ProjectContext from "context/ProjectContext";
 export default function Form(props) {
   const { state, setState } = useApplicationData();
   const classes = useStyles();
-  const { openPopup, closePopup, task } = props;
+  const { openPopup, closePopup } = props;
+  const { task } = useContext(ProjectContext);
   const [title, setTitle] = useState(task.name);
   const [avatar, setAvatar] = useState("");
   const [priority, setPriority] = useState(task.priority);
@@ -42,30 +43,43 @@ export default function Form(props) {
     new Date(task.end).toISOString().split("T")[0]
   );
 
-  console.log("state here", state);
+  // console.log("state here", state);
+  console.log(task);
+  // description: null
+  // end: "2021-08-08T07:00:00.000Z"
+  // id: 11
+  // name: "create routes for back end"
+  // priority: "1"
+  // project_id: 1
+  // start: "2021-08-04T07:00:00.000Z"
+  // status: "Completed"
+  // user_id: 1
 
-  const handleSubmit = (e, taskId) => {
+  const handleSubmit = (e, taskId, projectId) => {
     e.preventDefault();
-
-    const newTask = {
+    console.log(projectId);
+    const editTask = {
       name: title,
       description: description,
       status: status,
       start: startDate.split("T")[0],
       end: endDate.split("T")[0],
+      priority: priority,
     };
 
     if (startDate < endDate) {
       axios
-        .post(`/api/tasks`, newTask)
-        .then(() => {
-          axios.get(`/api/task`).then((result) => {
-            setState({
-              ...state,
-              projects: result.data,
-            });
-            // handleClose();
-          });
+        .post(`/api/projects/${projectId}/tasks/${taskId}`, editTask)
+        .then((result) => {
+          console.log(result.data);
+          // axios.get(`/api/task`).then((result) => {
+          //   console.log(result.data);
+          // setState({
+          //   ...state,
+          //   tasks: result.data,
+          // });
+          // handleClose();
+          // });
         })
         .catch((err) => console.log(err.message));
     }

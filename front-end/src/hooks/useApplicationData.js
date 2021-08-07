@@ -113,6 +113,7 @@ export default function useApplicationData() {
         taskDetails["end"] = task.end;
         taskDetails["start"] = task.start;
         taskDetails["description"] = task.description;
+
         tasksForList.push(taskDetails);
       }
     }

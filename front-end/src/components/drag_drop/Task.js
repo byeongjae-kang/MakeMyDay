@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import ProjectContext from "../../context/ProjectContext";
 import {
   Card,
   FormHelperText,
@@ -84,7 +85,8 @@ const PriorityIcon = (props) => {
   }
 };
 
-export default function Task({ task, index, deleteTask, updateTask }) {
+export default function Task({ index, updateTask }) {
+  const { deleteTasks, projects, task } = useContext(ProjectContext);
   const classes = useStyle();
   // const { deleteTask } = useApplicationData();
   const [openPopup, setOpenPopup] = useState(false);
@@ -134,7 +136,7 @@ export default function Task({ task, index, deleteTask, updateTask }) {
                       Edit
                     </MenuItem>
                     <Divider />
-                    <MenuItem onClick={() => deleteTask(task.id)}>
+                    <MenuItem onClick={() => deleteTasks(task.id)}>
                       Delete
                     </MenuItem>
                   </Menu>
@@ -143,7 +145,7 @@ export default function Task({ task, index, deleteTask, updateTask }) {
             />
             <Divider />
             <CardContent>
-              <Grid container className={classes.divide}>
+              <Grid Container className={classes.divide}>
                 <Grid className={classes.rightModal}>
                   <ModalForm
                     closePopup={() => setOpenPopup(false)}

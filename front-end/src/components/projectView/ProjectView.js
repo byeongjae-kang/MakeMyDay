@@ -20,7 +20,10 @@ function ProjectView() {
     ])
       .then((result) => {
         console.log("result in useEfect", result);
-        setState((prev) => ({ ...prev, ...reformatState(result[2].data, result[1].data) }));
+        setState((prev) => ({
+          ...prev,
+          ...reformatState(result[2].data, result[1].data),
+        }));
         setUsers((prev) => ({
           ...prev,
           ...HaveProjectWithUsers(result[1].data, result[0].data),

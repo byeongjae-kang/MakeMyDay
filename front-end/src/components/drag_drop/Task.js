@@ -77,7 +77,8 @@ const PriorityIcon = (props) => {
 };
 
 export default function Task({ index, updateTask, task }) {
-  const { deleteTasks, users } = useContext(ProjectContext);
+  const { deleteTasks, users, selectedUsers, setSelectedUsers } =
+    useContext(ProjectContext);
 
   const classes = useStyle();
 

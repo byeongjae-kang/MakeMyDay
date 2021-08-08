@@ -72,7 +72,7 @@ export default function Form(props) {
       priority: priority,
     };
 
-    if (startDate < endDate)
+    if (startDate > endDate)
       //   alert("Start date cannot be greater than end date");
       // } else if (endDate < startDate) {
       // alert("End date cannot be less than start date") else {
@@ -88,6 +88,9 @@ export default function Form(props) {
           setState((prev) => ({ ...prev, [result.data.project_id]: project }));
           // axios.get(`/api/task`).then((result) => {
           //   console.log(result.data);
+          // setState({
+          //   ...state,
+          //   tasks: result.data,
         });
     // handleClose();
     // });
@@ -144,10 +147,10 @@ export default function Form(props) {
           <br />
           <FormGroup>
             <FormLabel>Assign Member</FormLabel>
-            {/* <Select fullWidth> */}
-            {/* <MenuItem value="1">UserSelector</MenuItem> */}
-            {/* <UserSelector></UserSelector> */}
-            {/* </Select> */}
+            <Select fullWidth>
+              <MenuItem value="1">UserSelector</MenuItem>
+              {/* <UserSelector></UserSelector> */}
+            </Select>
           </FormGroup>
 
           {/* <div className={classes.root}>

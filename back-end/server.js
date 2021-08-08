@@ -190,9 +190,6 @@ app.get("/api/tasks", async (req, res) => {
 });
 
 app.put(`/api/projects/:project_id/tasks/:task_id`, (req, res) => {
-  // param { project_id: '4', task_id: '26' }
-  console.log(req.body)
-  console.log(req.params)
   const { name, description, status, start, end, priority } = req.body;
   const taskId = req.params.task_id;
   const query = `

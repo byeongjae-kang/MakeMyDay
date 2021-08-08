@@ -39,7 +39,6 @@ export default function Form(props) {
     new Date(task.end).toISOString().split("T")[0]
   );
 
-  // console.log(task);
   const handleSubmit = (e, taskId, projectId) => {
     e.preventDefault();
 
@@ -66,20 +65,10 @@ export default function Form(props) {
           const newTask = [...tasks, result.data];
           project.tasks = newTask;
           setState((prev) => ({ ...prev, [result.data.project_id]: project }));
-          // axios.get(`/api/task`).then((result) => {
-          //   console.log(result.data);
-          // setState({
-          //   ...state,
-          //   tasks: result.data,
         });
-    // handleClose();
-    // });
-    //     })
-    //     .catch((err) => console.log(err.message));
     }
   };
 
-  // console.log(setEndDate);
   return (
     <Dialog fullWidth onClose={closePopup} open={openPopup}>
       <Grid container>

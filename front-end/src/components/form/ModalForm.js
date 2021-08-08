@@ -39,11 +39,11 @@ export default function Form(props) {
   const [endDate, setEndDate] = useState(
     new Date(task.end).toISOString().split("T")[0]
   );
-  const cleanUsers = _.pickBy(projectUsers, function (value) {
-    return value !== undefined || value !== null;
-  });
+  // const cleanUsers = _.pickBy(projectUsers, function (value) {
+  //   return !(value === undefined);
+  // });
   // console.log("ON modal, this is projectUsers:", projectUsers);
-  console.log("ON modal, this is users:", cleanUsers);
+  // console.log("ON modal, this is users:", cleanUsers);
 
   const handleSubmit = (e, taskId, projectId) => {
     e.preventDefault();
@@ -118,15 +118,41 @@ export default function Form(props) {
 
           <FormGroup>
             <FormLabel>Assign Member</FormLabel>
-            <Autocomplete
-              id="combo-box-demo"
-              options={cleanUsers}
-              getOptionLabel={(option) => option.users}
-              style={{ width: 300 }}
-              renderInput={(params) => (
-                <TextField {...params} label="Combo box" variant="outlined" />
-              )}
-            />
+            <div className={classes.root}>
+              <Autocomplete
+                // onChange={(event, value) => getUserIds(value)}
+                // multiple
+                limitTags={1}
+                id="multiple-limit-tags"
+                value={projectUsers}
+                // value={(option) => option.user_name}
+                // value={getDefaultUsers(userId, users)}
+                getOptionLabel={(user) => user.user_name}
+                renderOption={(user) => (
+                  <div className={classes.members}>
+                    <Avatar
+                      className={classes.avatar}
+                      alt={task.user_name}
+                      src={task.avatar}
+                    />
+                    <p>
+                      {task.user_name}
+                      <br />
+                      {/* {user.email} */}
+                    </p>
+                  </div>
+                )}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    variant="outlined"
+                    label="Team members"
+                    placeholder="Add members"
+                    color="secondary"
+                  />
+                )}
+              />
+            </div>
           </FormGroup>
           {/* --------------------------------Status Component-------------------------------------------------- */}
           <br />

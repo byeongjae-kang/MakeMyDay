@@ -30,7 +30,7 @@ export default function ProjectList() {
     breakpoints,
     HaveProjectWithUsers,
     handleEdit,
-    handleDelete
+    handleDelete,
   } = useProjectData();
 
   const sortedProjects = [...state.projects].reverse().map((project, index) => (

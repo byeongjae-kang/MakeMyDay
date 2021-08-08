@@ -89,9 +89,10 @@ function listForProject(tasks) {
     },
   ];
 
-  if (!tasks) {
+  if (!tasks.length) {
     return listSchema
   }
+
   for (let list of listSchema) {
     for (let task of tasks) {
       let taskDetails = {};
@@ -107,7 +108,7 @@ function listForProject(tasks) {
         taskDetails["user_name"] = task.user_name;
         taskDetails["description"] = task.description;
         taskDetails["project_id"] = task.project_id;
-        // list.tasks.push(taskDetails);
+        list.tasks.push(taskDetails);
       }
     }
   }

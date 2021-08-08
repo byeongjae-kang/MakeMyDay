@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
@@ -16,6 +17,27 @@ app.use(cors());
 //API Endpoints
 app.get("/", (req, res) => {
   res.status(200).send("connection is made");
+});
+
+app.post(`/login`, (req, res) => {
+  const { email, password } = req.body;
+  pool
+    .query("SELECT * FROM users WHERE email = $1 AND password = $2", [email, password])
+    .then(result => {
+      
+      const user = result.rows[0];
+      if (!user.email) {
+        return res.status(404).json("user not found");
+      }
+      if (!user.password) {
+        return res.status(400).json("wrong password");
+      }
+      res.status(200).json(user);
+    })
+    .catch(err => {
+      console.log("err", err.message);
+      res.status(500).json(err);
+    });
 });
 
 app.get("/api/users", (req, res) => {

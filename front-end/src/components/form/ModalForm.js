@@ -24,8 +24,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
 export default function Form(props) {
-  // const { state, setState } = useApplicationData();
-
   const classes = useStyles();
   const { openPopup, task, closePopup } = props;
   const { projects, setState } = useContext(ProjectContext);
@@ -41,27 +39,9 @@ export default function Form(props) {
     new Date(task.end).toISOString().split("T")[0]
   );
 
-  // console.log("state here", state);
-  // description: null
-  // end: "2021-08-08T07:00:00.000Z"
-  // id: 11
-  // name: "create routes for back end"
-  // priority: "1"
-  // project_id: 1
-  // start: "2021-08-04T07:00:00.000Z"
-  // status: "Completed"
-  // user_id: 1
-  console.log(task);
+  // console.log(task);
   const handleSubmit = (e, taskId, projectId) => {
     e.preventDefault();
-    console.log(projectId);
-    console.log(taskId);
-    console.log(title);
-    console.log(description);
-    console.log(status);
-    console.log(startDate);
-    console.log(endDate);
-    console.log(priority);
 
     const editTask = {
       name: title,
@@ -72,7 +52,7 @@ export default function Form(props) {
       priority: priority,
     };
 
-    if (startDate > endDate)
+    if (startDate < endDate) {
       //   alert("Start date cannot be greater than end date");
       // } else if (endDate < startDate) {
       // alert("End date cannot be less than start date") else {
@@ -96,6 +76,7 @@ export default function Form(props) {
     // });
     //     })
     //     .catch((err) => console.log(err.message));
+    }
   };
 
   // console.log(setEndDate);

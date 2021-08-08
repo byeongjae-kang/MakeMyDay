@@ -6,7 +6,7 @@ export default function DatePickers({ selectedDate, handleDateChange }) {
   const classes = useStyles();
 
   return (
-    <form className={classes.container} noValidate>
+    <div className={classes.container} noValidate>
       <TextField
         id="date"
         label="Due Date"
@@ -18,6 +18,6 @@ export default function DatePickers({ selectedDate, handleDateChange }) {
           shrink: true,
         }}
       />
-    </form>
+    </div>
   );
 }

@@ -8,12 +8,10 @@ import {
   DialogTitle,
   FormControl,
   FormControlLabel,
-  FormGroup,
   FormLabel,
   Radio,
   RadioGroup,
   TextField,
-  Typography
 } from "@material-ui/core";
 
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
@@ -51,15 +49,12 @@ export default function ProjectForm({
         aria-labelledby="customized-dialog-title"
         open={open}
       >
-        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          <Typography
-            variant="h6"
-            color="textSecondary"
-            component="h2"
-            gutterBottom
-          >
-            {param.id ? "Edit" : "Create a New"} Project
-          </Typography>
+        <DialogTitle
+          id="customized-dialog-title"
+          color="textSecondary"
+          onClose={handleClose}
+        >
+          {param.id ? "Edit" : "Create a New"} Project
         </DialogTitle>
         <DialogContent dividers>
           <Container size="sm">

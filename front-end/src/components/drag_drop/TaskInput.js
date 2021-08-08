@@ -17,7 +17,7 @@ export default function TaskInput(props) {
   let name;
   const classes = useStyle();
   function handleKeyPress(e) {
-    if (e.charCode == 13) {
+    if (e.charCode === 13) {
       e.preventDefault();
       createTask(name, projectId);
       props.setOpen(false);

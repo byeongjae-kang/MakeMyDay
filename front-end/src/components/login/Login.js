@@ -1,6 +1,5 @@
 import { Grid, Paper, TextField, FormControlLabel, Checkbox, Button, Typography, Link } from '@material-ui/core'
 import React from 'react'
-import GoogleButton from './GoogleButton'
 
 function Login(props) {
   const paperStyle = { padding: 20, height: '60vh', width: 450, margin: '150px auto' };

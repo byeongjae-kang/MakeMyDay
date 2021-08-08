@@ -138,6 +138,7 @@ function listForProject(tasks) {
 //   return listSchema
 // }
 
+// eslint-disable-next-line no-unused-vars
 const users = [
   {
     id: 1,
@@ -162,6 +163,7 @@ const users = [
   },
 ];
 
+// eslint-disable-next-line no-unused-vars
 const projects = [
   {
     id: 1,
@@ -228,7 +230,7 @@ const HaveProjectWithUsers = (projects, users) => {
 
   return projectWithUsers;
 };
-console.log(HaveProjectWithUsers(projects, users));
+// console.log(HaveProjectWithUsers(projects, users));
 
 module.exports = {
   reformatState,

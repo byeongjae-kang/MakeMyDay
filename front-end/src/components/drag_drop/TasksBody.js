@@ -1,13 +1,10 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import List from "./List";
-import { flexbox } from "@material-ui/system";
 import { Box } from "@material-ui/core";
 import { DragDropContext } from "react-beautiful-dnd";
-import { listForProject, HaveProjectWithUsers } from "hooks/helpers";
-import cloneDeep from "lodash/cloneDeep";
+import { listForProject } from "hooks/helpers";
 import { useParams } from "react-router-dom";
 import ProjectContext from "../../context/ProjectContext";
-import axios from "axios";
 export default function TasksBody(props) {
   // const [state, setState] = useState({
   //   users: [],

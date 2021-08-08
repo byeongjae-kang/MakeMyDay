@@ -6,7 +6,6 @@ import { deleteTask } from "../../hooks/helpers";
 
 import {
   Button,
-  Container,
   Dialog,
   DialogContent,
   DialogTitle,
@@ -17,25 +16,21 @@ import {
   Radio,
   RadioGroup,
   TextField,
-  Typography,
-  Grid,
-  Paper,
-  Card,
+  Grid
 } from "@material-ui/core";
 import useStyles from "./Styles";
 import CloseIcon from "@material-ui/icons/Close";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
-import useApplicationData from "hooks/useApplicationData";
 export default function Form(props) {
   // const { state, setState } = useApplicationData();
 
   const classes = useStyles();
-  const { openPopup, task, setTask, closePopup, projectUsers } = props;
+  const { openPopup, task, closePopup } = props;
   const { projects, setState } = useContext(ProjectContext);
   const [title, setTitle] = useState(task.name);
-  const [avatar, setAvatar] = useState("");
+  // const [avatar, setAvatar] = useState("");
   const [priority, setPriority] = useState(task.priority);
   const [status, setStatus] = useState(task.status);
   const [description, setDescription] = useState(task.description || "");

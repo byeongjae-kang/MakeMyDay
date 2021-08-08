@@ -2,14 +2,12 @@ import { useState, useContext } from "react";
 import ProjectContext from "../../context/ProjectContext";
 import {
   Card,
-  FormHelperText,
-  Paper,
   Typography,
   Grid,
 } from "@material-ui/core";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
-import { Avatar, CardActions, Divider, makeStyles } from "@material-ui/core";
+import { Avatar, Divider, makeStyles } from "@material-ui/core";
 import { Draggable } from "react-beautiful-dnd";
 import ModalForm from "../form/ModalForm";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
@@ -35,9 +33,6 @@ const useStyle = makeStyles((theme) => ({
   //   display: "flex",
   //   alignItems: "center",
   // },
-  listItem: {
-    minWidth: 275,
-  },
   listItem: {
     minWidth: 275,
   },

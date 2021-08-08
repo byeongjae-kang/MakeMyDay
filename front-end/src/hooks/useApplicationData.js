@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import cloneDeep from "lodash/cloneDeep";
 export default function useApplicationData() {
@@ -142,6 +142,7 @@ export default function useApplicationData() {
         }));
       })
       .catch((err) => console.log(err));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function updateDragDrop(destinationId, draggableId) {
@@ -158,6 +159,7 @@ export default function useApplicationData() {
   }
 
   function createTasks(name) {
+    // eslint-disable-next-line no-unused-vars
     const stateCopy = cloneDeep(state);
 
     axios

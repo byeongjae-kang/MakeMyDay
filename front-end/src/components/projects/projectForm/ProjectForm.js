@@ -13,7 +13,7 @@ import {
   Radio,
   RadioGroup,
   TextField,
-  Typography,
+  Typography
 } from "@material-ui/core";
 
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
@@ -21,13 +21,13 @@ import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
 import DatePickers from "../datePicker/DatePicker";
 import UserSelector from "../userSelector/UserSelector";
 import { useStyles } from "./ProjectFormStyle";
+import useProjectData from "hooks/useProjectData";
 
 export default function ProjectForm({
-  users,
   handleDateChange,
+  selectedDate,
   handleClose,
   handleSubmit,
-  selectedDate,
   open,
   titleError,
   descriptionError,
@@ -38,8 +38,9 @@ export default function ProjectForm({
   status,
   setStatus,
   getUserIds,
-  userId,
+  userId
 }) {
+  const { state } = useProjectData();
   const classes = useStyles();
   const param = useParams();
 
@@ -57,7 +58,7 @@ export default function ProjectForm({
             component="h2"
             gutterBottom
           >
-            {param ? "Edit" : "Create a New"} Project
+            {param.id ? "Edit" : "Create a New"} Project
           </Typography>
         </DialogTitle>
         <DialogContent dividers>
@@ -93,7 +94,7 @@ export default function ProjectForm({
               />
 
               <UserSelector
-                users={users}
+                users={state.users}
                 getUserIds={getUserIds}
                 userId={userId}
               />

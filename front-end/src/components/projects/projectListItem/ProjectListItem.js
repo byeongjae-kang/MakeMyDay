@@ -7,45 +7,9 @@ import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
-
-import { Avatar, CardActions, Divider, makeStyles } from "@material-ui/core";
+import { Avatar, CardActions, Divider } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { green, pink, yellow } from "@material-ui/core/colors";
-
-const useStyles = makeStyles((theme) => ({
-  listItem: {
-    minWidth: 275,
-  },
-  status: {
-    color: (project) => {
-      if (project.status === "On hold") {
-        return yellow[700];
-      }
-      if (project.status === "Cancelled") {
-        return pink[500];
-      }
-      return green[700];
-    },
-  },
-  content: {
-    marginBottom: 20,
-  },
-
-  person: {
-    height: 10,
-    padding: 0,
-    margin: theme.spacing(1),
-    width: theme.spacing(3),
-  },
-  footer: {
-    padding: 10,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-}));
-
-const ITEM_HEIGHT = 48;
+import { useStyles } from "./ProjectListItemStyle";
 
 const options = ["Edit", "Delete"];
 
@@ -53,7 +17,7 @@ export default function ProjectListItems({
   project,
   state,
   handleDelete,
-  handleClickOpen,
+  handleClickOpen
 }) {
   const classes = useStyles(project);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -67,7 +31,6 @@ export default function ProjectListItems({
 
   const handleClose = (e, projectId, state) => {
     const value = e.target.getAttribute("value");
-
     if (value === "Delete") {
       handleDelete(projectId);
     }
@@ -101,9 +64,9 @@ export default function ProjectListItems({
               onClose={handleClose}
               PaperProps={{
                 style: {
-                  maxHeight: ITEM_HEIGHT * 4.5,
-                  width: "20ch",
-                },
+                  maxHeight: 220,
+                  width: "20ch"
+                }
               }}
             >
               {options.map((option) => (

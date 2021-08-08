@@ -4,10 +4,10 @@ import { Avatar, TextField } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
 const getDefaultUsers = (userId, users) => {
-  return userId.map(id => {
-    return users.find(user => user.id === id)
-  })
-}
+  return userId.map((id) => {
+    return users.find((user) => user.id === id);
+  });
+};
 
 export default function UserSelector({ users, getUserIds, userId }) {
   const classes = useStyles();

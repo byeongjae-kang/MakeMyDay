@@ -1,27 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import Container from "@material-ui/core/Container";
-import Masonry from "react-masonry-css";
-import ProjectListItems from "./ProjectListItem";
 import axios from "axios";
-import "./ProjectList.css";
-import ProjectForm from "./projectForm/ProjectForm";
-import AddIcon from "@material-ui/icons/Add";
-import { Button } from "@material-ui/core";
+import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 
-export default function ProjectList() {
+export default function useProjectData() {
   const [state, setState] = useState({
     users: [],
-    projects: [],
+    projects: []
   });
 
   useEffect(() => {
-    Promise.all([axios.get("/api/users"), axios.get("api/projects")]).then(
+    Promise.all([axios.get("/api/users"), axios.get("/api/projects")]).then(
       (all) => {
         setState({
           ...state,
           users: all[0].data,
-          projects: all[1].data,
+          projects: all[1].data
         });
       }
     );
@@ -35,7 +28,7 @@ export default function ProjectList() {
         axios.get(`api/projects`).then((result) => {
           setState({
             ...state,
-            projects: [...result.data],
+            projects: [...result.data]
           });
         });
       })
@@ -49,14 +42,14 @@ export default function ProjectList() {
 
     return {
       ...project,
-      users: updatedProject,
+      users: updatedProject
     };
   };
 
   const breakpoints = {
     default: 3,
     1100: 2,
-    700: 1,
+    700: 1
   };
 
   const [open, setOpen] = useState(false);
@@ -133,8 +126,7 @@ export default function ProjectList() {
       description: description,
       status: status,
       users: userId,
-      start_date: new Date().toISOString().split("T")[0],
-      due_Date: selectedDate,
+      due_Date: selectedDate
     };
 
     if (param.id) {
@@ -170,53 +162,27 @@ export default function ProjectList() {
       }
     }
   };
-
-  return (
-    <Container>
-      <Button
-        variant="outlined"
-        value={"Create"}
-        color="secondary"
-        onClick={handleClickOpen}
-      >
-        <AddIcon />
-        CREATE NEW PROJECTS
-      </Button>
-      <ProjectForm
-        users={state.users}
-        handleDateChange={handleDateChange}
-        handleClose={handleClose}
-        handleSubmit={handleSubmit}
-        selectedDate={selectedDate}
-        open={open}
-        titleError={titleError}
-        descriptionError={descriptionError}
-        setdescription={setdescription}
-        description={description}
-        title={title}
-        setTitle={setTitle}
-        status={status}
-        setStatus={setStatus}
-        getUserIds={getUserIds}
-        userId={userId}
-      />
-      <br />
-      <Masonry
-        breakpointCols={breakpoints}
-        className="my-masonry-grid"
-        columnClassName="my-masonry-grid_column"
-      >
-        {[...state.projects].reverse().map((project, index) => (
-          <div key={index}>
-            <ProjectListItems
-              project={HaveProjectWithUsers(project, state.users)}
-              handleEdit={handleEdit}
-              handleDelete={handleDelete}
-              handleClickOpen={handleClickOpen}
-            />
-          </div>
-        ))}
-      </Masonry>
-    </Container>
-  );
+  return {
+    handleClickOpen,
+    state,
+    handleDateChange,
+    handleClose,
+    handleSubmit,
+    selectedDate,
+    open,
+    titleError,
+    descriptionError,
+    setdescription,
+    description,
+    title,
+    setTitle,
+    status,
+    setStatus,
+    getUserIds,
+    userId,
+    breakpoints,
+    HaveProjectWithUsers,
+    handleEdit,
+    handleDelete
+  };
 }

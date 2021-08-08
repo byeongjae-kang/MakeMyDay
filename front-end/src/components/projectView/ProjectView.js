@@ -20,7 +20,7 @@ function ProjectView() {
     ])
       .then((result) => {
         console.log("result in useEfect", result);
-        setState((prev) => ({ ...prev, ...reformatState(result[2].data) }));
+        setState((prev) => ({ ...prev, ...reformatState(result[2].data, result[1].data) }));
         setUsers((prev) => ({
           ...prev,
           ...HaveProjectWithUsers(result[1].data, result[0].data),
@@ -80,7 +80,7 @@ function ProjectView() {
     axios
       .put(`http://localhost:8080/api/tasks/${id}`, { status: newStatus })
       .then((result) => {
-        console.log("result in drag and drop---", result);
+        // console.log("result in drag and drop---", result);
         let project = cloneDeep(projects[result.data[0].project_id]);
         let tasks = project.tasks;
         tasks = deleteTask(result.data[0].id, tasks);
@@ -94,7 +94,7 @@ function ProjectView() {
     axios
       .post("http://localhost:8080/api/tasks", { name: name, project_id: id })
       .then((result) => {
-        console.log("result in createTask------", result);
+        // console.log("result in createTask------", result);
         let project = cloneDeep(projects[result.data[0].project_id]);
         project.tasks.push(result.data[0]);
         setState((prev) => ({ ...prev, [result.data[0].project_id]: project }));

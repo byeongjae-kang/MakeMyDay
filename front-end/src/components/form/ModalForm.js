@@ -2,8 +2,9 @@ import { useState, useContext } from "react";
 import ProjectContext from "../../context/ProjectContext";
 import axios from "axios";
 import cloneDeep from "lodash/cloneDeep";
-import { deleteTask } from "../../hooks/helpers";
-
+import { deleteTask, HaveProjectWithUsers } from "../../hooks/helpers";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import { Avatar } from "@material-ui/core";
 import {
   Button,
   Dialog,
@@ -24,13 +25,11 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
 export default function Form(props) {
-  // const { state, setState } = useApplicationData();
-
   const classes = useStyles();
-  const { openPopup, task, closePopup } = props;
+  const _ = require("lodash");
+  const { openPopup, task, closePopup, projectUsers, users } = props;
   const { projects, setState } = useContext(ProjectContext);
   const [title, setTitle] = useState(task.name);
-  // const [avatar, setAvatar] = useState("");
   const [priority, setPriority] = useState(task.priority);
   const [status, setStatus] = useState(task.status);
   const [description, setDescription] = useState(task.description || "");
@@ -40,28 +39,14 @@ export default function Form(props) {
   const [endDate, setEndDate] = useState(
     new Date(task.end).toISOString().split("T")[0]
   );
+  const cleanUsers = _.pickBy(projectUsers, function (value) {
+    return value !== undefined || value !== null;
+  });
+  // console.log("ON modal, this is projectUsers:", projectUsers);
+  console.log("ON modal, this is users:", cleanUsers);
 
-  // console.log("state here", state);
-  // description: null
-  // end: "2021-08-08T07:00:00.000Z"
-  // id: 11
-  // name: "create routes for back end"
-  // priority: "1"
-  // project_id: 1
-  // start: "2021-08-04T07:00:00.000Z"
-  // status: "Completed"
-  // user_id: 1
-  console.log(task);
   const handleSubmit = (e, taskId, projectId) => {
     e.preventDefault();
-    console.log(projectId);
-    console.log(taskId);
-    console.log(title);
-    console.log(description);
-    console.log(status);
-    console.log(startDate);
-    console.log(endDate);
-    console.log(priority);
 
     const editTask = {
       name: title,
@@ -72,33 +57,19 @@ export default function Form(props) {
       priority: priority,
     };
 
-    if (startDate > endDate)
-      //   alert("Start date cannot be greater than end date");
-      // } else if (endDate < startDate) {
-      // alert("End date cannot be less than start date") else {
-      axios
-        .put(`/api/projects/${projectId}/tasks/${taskId}`, editTask)
-        .then((result) => {
-          console.log("result in edit", result.data);
-          let project = cloneDeep(projects[result.data.project_id]);
-          let tasks = project.tasks;
-          tasks = deleteTask(result.data.id, tasks);
-          const newTask = [...tasks, result.data];
-          project.tasks = newTask;
-          setState((prev) => ({ ...prev, [result.data.project_id]: project }));
-          // axios.get(`/api/task`).then((result) => {
-          //   console.log(result.data);
-          // setState({
-          //   ...state,
-          //   tasks: result.data,
-        });
-    // handleClose();
-    // });
-    //     })
-    //     .catch((err) => console.log(err.message));
+    axios
+      .put(`/api/projects/${projectId}/tasks/${taskId}`, editTask)
+      .then((result) => {
+        console.log("result in edit", result.data);
+        let project = cloneDeep(projects[result.data.project_id]);
+        let tasks = project.tasks;
+        tasks = deleteTask(result.data.id, tasks);
+        const newTask = [...tasks, result.data];
+        project.tasks = newTask;
+        setState((prev) => ({ ...prev, [result.data.project_id]: project }));
+      });
   };
 
-  // console.log(setEndDate);
   return (
     <Dialog fullWidth onClose={closePopup} open={openPopup}>
       <Grid container>
@@ -129,7 +100,6 @@ export default function Form(props) {
 
         <DialogContent dividers>
           {/*-----------------------------Enter Description Component---------------------------------------- */}
-
           <FormGroup>
             <FormLabel>Enter Description</FormLabel>
             <TextField
@@ -145,51 +115,21 @@ export default function Form(props) {
           </FormGroup>
           {/*-----------------------------Select Users Component---------------------------------------- */}
           <br />
+
           <FormGroup>
             <FormLabel>Assign Member</FormLabel>
-            <Select fullWidth>
-              <MenuItem value="1">UserSelector</MenuItem>
-              {/* <UserSelector></UserSelector> */}
-            </Select>
+            <Autocomplete
+              id="combo-box-demo"
+              options={cleanUsers}
+              getOptionLabel={(option) => option.users}
+              style={{ width: 300 }}
+              renderInput={(params) => (
+                <TextField {...params} label="Combo box" variant="outlined" />
+              )}
+            />
           </FormGroup>
-
-          {/* <div className={classes.root}>
-          <Autocomplete
-            onChange={(event, value) => getUserIds(value)}
-            multiple
-            limitTags={2}
-            id="multiple-limit-tags"
-            options={users}
-            defaultValue={getDefaultUsers(userId, users)}
-            getOptionLabel={(user) => user.user_name}
-            renderOption={(user) => (
-              <div className={classes.members}>
-                <Avatar
-                  className={classes.avatar}
-                  alt={user.name}
-                  src={user.avatar}
-                />
-                <p>
-                  {user.user_name}
-                  <br />
-                  {user.email}
-                </p>
-              </div>
-            )}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                variant="outlined"
-                label="Team members"
-                placeholder="Add members"
-                color="secondary"
-              />
-            )}
-          />
-        </div> */}
           {/* --------------------------------Status Component-------------------------------------------------- */}
           <br />
-
           <div className={classes.divide}>
             <FormGroup>
               <FormControl>
@@ -270,9 +210,8 @@ export default function Form(props) {
               </FormGroup>
             </div>
           </div>
-
           {/* ---------------------------------Save Button -------------------------------------- */}
-          <Grid Group container className={classes.divide}>
+          <Grid group className={classes.divide}>
             <Grid />
             <Grid>
               <Button

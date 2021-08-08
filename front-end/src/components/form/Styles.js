@@ -43,6 +43,22 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(3),
     },
   },
+  root: {
+    width: 500,
+    color: "secondary",
+    "& > * + *": {
+      marginTop: theme.spacing(3),
+    },
+  },
+  members: {
+    display: "flex",
+    alignItems: "center",
+  },
+  avatar: {
+    width: 30,
+    height: 30,
+    marginRight: 20,
+  },
 }));
 
 export default useStyles;

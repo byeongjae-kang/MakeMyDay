@@ -1,8 +1,9 @@
-function reformatState(tasks) {
-  let projects = {};
+function reformatState(tasks, projects) {
+  let projectsInState = {};
+
   for (let each of tasks) {
-    if (!projects[each.project_id]) {
-      projects[each.project_id] = {
+    if (!projectsInState[each.project_id]) {
+      projectsInState[each.project_id] = {
         name: each.project_name,
         tasks: [
           {
@@ -34,13 +35,24 @@ function reformatState(tasks) {
         user_id: each.user_id,
         user_name: each.user_name,
       };
-      projects[each.project_id].tasks.push(task);
+      projectsInState[each.project_id].tasks.push(task);
     }
   }
-  return projects;
-}
 
+  for (let project of projects) {
+    if (!projectsInState[project.id]) {
+      projectsInState[project.id] = {
+        name: project.name,
+        tasks: [],
+      };
+    }
+
+  }
+  return projectsInState;
+}
 // --------------------------------------------------------------------------------
+
+
 
 function deleteTask(id, tasks) {
   let index;
@@ -76,6 +88,10 @@ function listForProject(tasks) {
       tasks: [],
     },
   ];
+
+  if (!tasks.length) {
+    return listSchema
+  }
 
   for (let list of listSchema) {
     for (let task of tasks) {

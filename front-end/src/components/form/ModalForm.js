@@ -2,8 +2,9 @@ import { useState, useContext } from "react";
 import ProjectContext from "../../context/ProjectContext";
 import axios from "axios";
 import cloneDeep from "lodash/cloneDeep";
-import { deleteTask } from "../../hooks/helpers";
-
+import { deleteTask, HaveProjectWithUsers } from "../../hooks/helpers";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import { Avatar } from "@material-ui/core";
 import {
   Button,
   Dialog,
@@ -16,7 +17,7 @@ import {
   Radio,
   RadioGroup,
   TextField,
-  Grid
+  Grid,
 } from "@material-ui/core";
 import useStyles from "./Styles";
 import CloseIcon from "@material-ui/icons/Close";
@@ -25,10 +26,10 @@ import Select from "@material-ui/core/Select";
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
 export default function Form(props) {
   const classes = useStyles();
-  const { openPopup, task, closePopup } = props;
+  const _ = require("lodash");
+  const { openPopup, task, closePopup, projectUsers, users } = props;
   const { projects, setState } = useContext(ProjectContext);
   const [title, setTitle] = useState(task.name);
-  // const [avatar, setAvatar] = useState("");
   const [priority, setPriority] = useState(task.priority);
   const [status, setStatus] = useState(task.status);
   const [description, setDescription] = useState(task.description || "");
@@ -38,6 +39,11 @@ export default function Form(props) {
   const [endDate, setEndDate] = useState(
     new Date(task.end).toISOString().split("T")[0]
   );
+  // const cleanUsers = _.pickBy(projectUsers, function (value) {
+  //   return !(value === undefined);
+  // });
+  // console.log("ON modal, this is projectUsers:", projectUsers);
+  // console.log("ON modal, this is users:", cleanUsers);
 
   const handleSubmit = (e, taskId, projectId) => {
     e.preventDefault();
@@ -51,22 +57,17 @@ export default function Form(props) {
       priority: priority,
     };
 
-    if (startDate < endDate) {
-      //   alert("Start date cannot be greater than end date");
-      // } else if (endDate < startDate) {
-      // alert("End date cannot be less than start date") else {
-      axios
-        .put(`/api/projects/${projectId}/tasks/${taskId}`, editTask)
-        .then((result) => {
-          console.log("result in edit", result.data);
-          let project = cloneDeep(projects[result.data.project_id]);
-          let tasks = project.tasks;
-          tasks = deleteTask(result.data.id, tasks);
-          const newTask = [...tasks, result.data];
-          project.tasks = newTask;
-          setState((prev) => ({ ...prev, [result.data.project_id]: project }));
-        });
-    }
+    axios
+      .put(`/api/projects/${projectId}/tasks/${taskId}`, editTask)
+      .then((result) => {
+        console.log("result in edit", result.data);
+        let project = cloneDeep(projects[result.data.project_id]);
+        let tasks = project.tasks;
+        tasks = deleteTask(result.data.id, tasks);
+        const newTask = [...tasks, result.data];
+        project.tasks = newTask;
+        setState((prev) => ({ ...prev, [result.data.project_id]: project }));
+      });
   };
 
   return (
@@ -99,7 +100,6 @@ export default function Form(props) {
 
         <DialogContent dividers>
           {/*-----------------------------Enter Description Component---------------------------------------- */}
-
           <FormGroup>
             <FormLabel>Enter Description</FormLabel>
             <TextField
@@ -115,51 +115,47 @@ export default function Form(props) {
           </FormGroup>
           {/*-----------------------------Select Users Component---------------------------------------- */}
           <br />
+
           <FormGroup>
             <FormLabel>Assign Member</FormLabel>
-            <Select fullWidth>
-              <MenuItem value="1">UserSelector</MenuItem>
-              {/* <UserSelector></UserSelector> */}
-            </Select>
-          </FormGroup>
-
-          {/* <div className={classes.root}>
-          <Autocomplete
-            onChange={(event, value) => getUserIds(value)}
-            multiple
-            limitTags={2}
-            id="multiple-limit-tags"
-            options={users}
-            defaultValue={getDefaultUsers(userId, users)}
-            getOptionLabel={(user) => user.user_name}
-            renderOption={(user) => (
-              <div className={classes.members}>
-                <Avatar
-                  className={classes.avatar}
-                  alt={user.name}
-                  src={user.avatar}
-                />
-                <p>
-                  {user.user_name}
-                  <br />
-                  {user.email}
-                </p>
-              </div>
-            )}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                variant="outlined"
-                label="Team members"
-                placeholder="Add members"
-                color="secondary"
+            <div className={classes.root}>
+              <Autocomplete
+                // onChange={(event, value) => getUserIds(value)}
+                // multiple
+                limitTags={1}
+                id="multiple-limit-tags"
+                value={projectUsers}
+                // value={(option) => option.user_name}
+                // value={getDefaultUsers(userId, users)}
+                getOptionLabel={(user) => user.user_name}
+                renderOption={(user) => (
+                  <div className={classes.members}>
+                    <Avatar
+                      className={classes.avatar}
+                      alt={task.user_name}
+                      src={task.avatar}
+                    />
+                    <p>
+                      {task.user_name}
+                      <br />
+                      {/* {user.email} */}
+                    </p>
+                  </div>
+                )}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    variant="outlined"
+                    label="Team members"
+                    placeholder="Add members"
+                    color="secondary"
+                  />
+                )}
               />
-            )}
-          />
-        </div> */}
+            </div>
+          </FormGroup>
           {/* --------------------------------Status Component-------------------------------------------------- */}
           <br />
-
           <div className={classes.divide}>
             <FormGroup>
               <FormControl>
@@ -240,9 +236,8 @@ export default function Form(props) {
               </FormGroup>
             </div>
           </div>
-
           {/* ---------------------------------Save Button -------------------------------------- */}
-          <Grid Group container className={classes.divide}>
+          <Grid group className={classes.divide}>
             <Grid />
             <Grid>
               <Button

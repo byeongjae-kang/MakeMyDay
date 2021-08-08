@@ -1,10 +1,6 @@
 import { useState, useContext } from "react";
 import ProjectContext from "../../context/ProjectContext";
-import {
-  Card,
-  Typography,
-  Grid,
-} from "@material-ui/core";
+import { Card, Typography, Grid } from "@material-ui/core";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import { Avatar, Divider, makeStyles } from "@material-ui/core";
@@ -81,16 +77,16 @@ const PriorityIcon = (props) => {
 };
 
 export default function Task({ index, updateTask, task }) {
-  const { deleteTasks, projects, users } = useContext(ProjectContext);
-  console.log("state", projects);
+  const { deleteTasks, users } = useContext(ProjectContext);
+
   const classes = useStyle();
-  // const { deleteTask } = useApplicationData();
+
   const [openPopup, setOpenPopup] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  console.log("avatar is here ==:", task.avatar);
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -141,7 +137,7 @@ export default function Task({ index, updateTask, task }) {
             />
             <Divider />
             <CardContent>
-              <Grid Container className={classes.divide}>
+              <Grid container className={classes.divide}>
                 <Grid className={classes.rightModal}>
                   <ModalForm
                     closePopup={() => setOpenPopup(false)}
@@ -150,6 +146,7 @@ export default function Task({ index, updateTask, task }) {
                     task={task}
                     updateTask={updateTask}
                     projectUsers={projectUsers}
+                    users={users}
                   />
                   <Grid group className={classes.divide}>
                     <Grid />
@@ -161,14 +158,6 @@ export default function Task({ index, updateTask, task }) {
                 <Grid>
                   <AvatarGroup max={1}>
                     <Avatar alt="Remy Sharp" src={task.avatar} />
-                    {/* <Avatar
-                      alt="Travis Howard"
-                      src="/static/images/avatar/2.jpg"
-                    />
-                    <Avatar
-                      alt="Cindy Baker"
-                      src="/static/images/avatar/3.jpg"
-                    /> */}
                   </AvatarGroup>
                 </Grid>
               </Grid>

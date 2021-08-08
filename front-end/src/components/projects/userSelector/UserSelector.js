@@ -20,7 +20,7 @@ export default function UserSelector({ users, getUserIds, userId }) {
         limitTags={2}
         id="multiple-limit-tags"
         options={users}
-        defaultValue={getDefaultUsers(userId, users)}
+        value={getDefaultUsers(userId, users)}
         getOptionLabel={(user) => user.user_name}
         renderOption={(user) => (
           <div className={classes.members}>

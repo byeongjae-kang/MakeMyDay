@@ -24,13 +24,6 @@ VALUES
   (4, 2),
   (4, 3);
 
-INSERT INTO tasks (name, description, status, priority, start, "end") VALUES('make template for pages', 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem', 'In Progress', 1, 'Aug 05 2021', 'Aug 15 2021');
-INSERT INTO tasks (name, description, status, priority, start, "end") VALUES('create components',  'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem', 'Backlog', 2, 'Aug 01 2021', 'Aug 03 2021');
-INSERT INTO tasks (name, description, status, priority, start, "end") VALUES('create routes for front end',  'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem', 'On Hold', 3,'Aug 15 2021', 'Aug 25 2021');
-INSERT INTO tasks (name, description, status, priority, start, "end") VALUES('create routes for back end',  'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem', 'Completed', 1, 'Aug 04 2021', 'Aug 08 2021');
-INSERT INTO tasks (name, description, status, priority, start, "end") VALUES('search for articles api',  'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem', 'In Progress', 2, 'Aug 02 2021', 'Aug 10 2021');
-INSERT INTO tasks (name, description, status, priority, start, "end") VALUES('connect websocket', 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem', 'Backlog', 3, 'Aug 25 2021', 'Aug 30 2021');
-INSERT INTO tasks (name, description, status, priority, start, "end") VALUES('create chat feature',  'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem', 'In Progress', 4, 'Aug 05 2021', 'Aug 15 2021');
 
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('make template for pages', 'In Progress', 1, 1, 1, 'Aug 05 2021', 'Aug 15 2021');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('create components', 'Backlog', 2, 2, 2, 'Aug 01 2021', 'Aug 03 2021');
@@ -38,18 +31,18 @@ INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VA
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('create routes for back end', 'Completed', 1, 1, 1, 'Aug 04 2021', 'Aug 08 2021');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('search for articles api', 'In Progress', 2, 2, 2, 'Aug 02 2021', 'Aug 10 2021');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('connect websocket', 'Backlog', 3, 3, 3, 'Aug 25 2021', 'Aug 30 2021');
-INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('create chat feature', 'In Progress',1, 4, 4, 'Aug 05 2021', 'Aug 15 2021');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('create chat feature', 'In Progress',1, 4, 3, 'Aug 05 2021', 'Aug 15 2021');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('make template for pages', 'In Progress', 2, 1, 1, 'Aug 05 2021', 'Aug 15 2021');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('create components', 'Backlog', 3, 2, 2, 'Aug 01 2021', 'Aug 03 2021');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('create routes for front end', 'On Hold', 1, 3, 3, 'Aug 15 2021', 'Aug 25 2021');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('create routes for back end', 'Completed', 2, 1, 1, 'Aug 04 2021', 'Aug 08 2021');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('search for articles api', 'In Progress', 3, 2, 2, 'Aug 02 2021', 'Aug 10 2021');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('connect websocket', 'Backlog', 1, 3, 3,  'Aug 25 2021', 'Aug 30 2021');
-INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('create chat feature', 'In Progress',2, 4, 4, 'Aug 05 2021', 'Aug 15 2021');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('create chat feature', 'In Progress',2, 4, 1, 'Aug 05 2021', 'Aug 15 2021');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('create routes for front end', 'On Hold', 3, 3, 3, 'Aug 15 2021', 'Aug 25 2021');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('create routes for back end', 'Completed', 1, 1, 1, 'Aug 04 2021', 'Aug 08 2021');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('search for articles api', 'In Progress', 2, 2, 2, 'Aug 02 2021', 'Aug 10 2021');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('connect websocket', 'Backlog', 3, 3, 3, 'Aug 25 2021', 'Aug 30 2021');
-INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('create chat feature', 'In Progress', 1, 4, 4, 'Aug 05 2021', 'Aug 15 2021');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('create chat feature', 'In Progress', 1, 4, 2, 'Aug 05 2021', 'Aug 15 2021');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('connect websocket', 'Backlog', 2, 3, 3, 'Aug 25 2021', 'Aug 30 2021');
-INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('create chat feature', 'In Progress', 3, 4, 4, 'Aug 05 2021', 'Aug 15 2021');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('create chat feature', 'In Progress', 3, 4, 1, 'Aug 05 2021', 'Aug 15 2021');

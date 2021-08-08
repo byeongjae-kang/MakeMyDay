@@ -29,7 +29,6 @@ export default function ProjectList() {
     userId,
     breakpoints,
     HaveProjectWithUsers,
-    handleEdit,
     handleDelete
   } = useProjectData();
 
@@ -37,7 +36,6 @@ export default function ProjectList() {
     <div key={index}>
       <ProjectListItems
         project={HaveProjectWithUsers(project, state.users)}
-        handleEdit={handleEdit}
         handleDelete={handleDelete}
         handleClickOpen={handleClickOpen}
       />

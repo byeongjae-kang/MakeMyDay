@@ -22,7 +22,6 @@ app.get("/api/users", (req, res) => {
   pool
     .query("SELECT * FROM users")
     .then((result) => {
-      console.log("users", result.rows);
       res.json(result.rows);
     })
     .catch((err) => {
@@ -50,7 +49,6 @@ app.get("/api/projects", (req, res) => {
   pool
     .query(query)
     .then((result) => {
-      console.log("projects", result.rows);
       res.json(result.rows);
     })
     .catch((err) => {
@@ -169,12 +167,10 @@ app.post("/api/users", async (req, res) => {
 app.post("/api/tasks", async (req, res) => {
   try {
     const { name, project_id } = req.body;
-    console.log("name and project_id", name, project_id);
     const result = await pool.query(
       `INSERT INTO tasks (name, project_id) VALUES ($1, $2) RETURNING *`,
       [name, project_id]
     );
-    console.log("tasks", result.rows);
     res.json(result.rows);
   } catch (err) {
     console.error(err.message);
@@ -204,7 +200,6 @@ app.put(`/api/projects/:project_id/tasks/:task_id`, (req, res) => {
   pool
     .query(query, [name, description, status, start, end, priority, taskId])
     .then((result) => {
-      console.log(result.rows[0]);
       res.json(result.rows[0]);
     })
     .catch((err) => console.log("could not edit", err.message));

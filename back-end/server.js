@@ -22,6 +22,7 @@ app.get("/api/users", (req, res) => {
   pool
     .query("SELECT * FROM users")
     .then((result) => {
+      console.log("users", result.rows);
       res.json(result.rows);
     })
     .catch((err) => {
@@ -49,6 +50,7 @@ app.get("/api/projects", (req, res) => {
   pool
     .query(query)
     .then((result) => {
+      console.log("projects", result.rows);
       res.json(result.rows);
     })
     .catch((err) => {
@@ -172,7 +174,7 @@ app.post("/api/tasks", async (req, res) => {
       `INSERT INTO tasks (name, project_id) VALUES ($1, $2) RETURNING *`,
       [name, project_id]
     );
-
+    console.log("tasks", result.rows);
     res.json(result.rows);
   } catch (err) {
     console.error(err.message);

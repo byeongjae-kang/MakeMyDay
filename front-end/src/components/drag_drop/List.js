@@ -21,6 +21,7 @@ export default function List({
   onSubmit,
   deleteTask,
   updateTask,
+  projectUsers,
 }) {
   const classes = useStyle();
   const sortedTasks = list.tasks.sort((a, b) => {
@@ -42,6 +43,7 @@ export default function List({
                 index={index}
                 deleteTask={deleteTask}
                 updateTask={updateTask}
+                projectUsers={projectUsers}
               />
             ))}
             {provided.placeholder}

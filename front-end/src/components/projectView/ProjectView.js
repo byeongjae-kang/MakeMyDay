@@ -6,17 +6,25 @@ import { reformatState, deleteTask } from "../../hooks/helpers";
 import Gantt from "components/gantt/Gantt";
 import TasksBody from "components/drag_drop/TasksBody";
 import cloneDeep from "lodash/cloneDeep";
-
+import { HaveProjectWithUsers } from "../../hooks/helpers";
 function ProjectView() {
   const [projects, setState] = useState({});
-
+  const [users, setUsers] = useState({});
   const [view, setView] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/tasks")
+    Promise.all([
+      axios.get("/api/users"),
+      axios.get("/api/projects"),
+      axios.get("/api/tasks"),
+    ])
       .then((result) => {
-        setState((prev) => ({ ...prev, ...reformatState(result.data) }));
+        console.log("result in useEfect", result);
+        setState((prev) => ({ ...prev, ...reformatState(result[2].data) }));
+        setUsers((prev) => ({
+          ...prev,
+          ...HaveProjectWithUsers(result[1].data, result[0].data),
+        }));
       })
       .catch((err) => console.log(err));
   }, []);
@@ -118,6 +126,7 @@ function ProjectView() {
     updateDragDrop,
     createTask,
     deleteTasks,
+    users,
   };
 
   return (

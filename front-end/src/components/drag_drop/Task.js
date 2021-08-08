@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import ProjectContext from "../../context/ProjectContext";
 import {
   Card,
   FormHelperText,
@@ -15,7 +16,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { green, pink, yellow } from "@material-ui/core/colors";
-
+import { useParams } from "react-router-dom";
 import AvatarGroup from "@material-ui/lab/AvatarGroup";
 const useStyle = makeStyles((theme) => ({
   // task: {
@@ -84,20 +85,22 @@ const PriorityIcon = (props) => {
   }
 };
 
-export default function Task({ task, index, deleteTask, updateTask }) {
+export default function Task({ index, updateTask, task }) {
+  const { deleteTasks, projects, users } = useContext(ProjectContext);
+  console.log("state", projects);
   const classes = useStyle();
   // const { deleteTask } = useApplicationData();
   const [openPopup, setOpenPopup] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
+  console.log("avatar is here ==:", task.avatar);
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const projectId = useParams().id;
+  let projectUsers = users[projectId];
   return (
     <Draggable draggableId={task.id.toString()} index={index}>
       {(provided) => (
@@ -134,7 +137,7 @@ export default function Task({ task, index, deleteTask, updateTask }) {
                       Edit
                     </MenuItem>
                     <Divider />
-                    <MenuItem onClick={() => deleteTask(task.id)}>
+                    <MenuItem onClick={() => deleteTasks(task.id)}>
                       Delete
                     </MenuItem>
                   </Menu>
@@ -151,6 +154,7 @@ export default function Task({ task, index, deleteTask, updateTask }) {
                     setOpenPopup={setOpenPopup}
                     task={task}
                     updateTask={updateTask}
+                    projectUsers={projectUsers}
                   />
                   <Grid group className={classes.divide}>
                     <Grid />
@@ -160,19 +164,16 @@ export default function Task({ task, index, deleteTask, updateTask }) {
                   </Grid>
                 </Grid>
                 <Grid>
-                  <AvatarGroup max={2}>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/1.jpg"
-                    />
-                    <Avatar
+                  <AvatarGroup max={1}>
+                    <Avatar alt="Remy Sharp" src={task.avatar} />
+                    {/* <Avatar
                       alt="Travis Howard"
                       src="/static/images/avatar/2.jpg"
                     />
                     <Avatar
                       alt="Cindy Baker"
                       src="/static/images/avatar/3.jpg"
-                    />
+                    /> */}
                   </AvatarGroup>
                 </Grid>
               </Grid>

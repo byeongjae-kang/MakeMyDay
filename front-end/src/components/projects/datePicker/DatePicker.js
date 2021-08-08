@@ -15,7 +15,7 @@ export default function DatePickers({ selectedDate, handleDateChange }) {
         onChange={(e) => handleDateChange(e.target.value)}
         className={classes.textField}
         InputLabelProps={{
-          shrink: true
+          shrink: true,
         }}
       />
     </form>

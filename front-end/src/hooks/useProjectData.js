@@ -82,7 +82,7 @@ export default function useProjectData() {
   const handleEdit = (projectId) => {
     Promise.all([
       axios.get(`/api/projects/${projectId}`),
-      axios.get(`/api/user_projects/${projectId}`)
+      axios.get(`/api/user_projects/${projectId}`),
     ]).then((result) => {
       const { name, description, status, due_date } = result[0].data[0];
       setTitle(name);
@@ -137,7 +137,7 @@ export default function useProjectData() {
           axios.get(`/api/projects`).then((result) => {
             setState({
               ...state,
-              projects: result.data
+              projects: result.data,
             });
             handleClose();
           });
@@ -153,7 +153,7 @@ export default function useProjectData() {
             axios.get(`/api/projects`).then((result) => {
               setState({
                 ...state,
-                projects: result.data
+                projects: result.data,
               });
               handleClose();
             });

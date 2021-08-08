@@ -1,12 +1,11 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { createTheme, ThemeProvider } from '@material-ui/core'
-import Layout from './Layout'
-import ProjectList from '../projects/ProjectList'
-import ProjectView from 'components/projectView/ProjectView'
-import Landing from '../landing_page/Landing'
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { createTheme, ThemeProvider } from "@material-ui/core";
+import Layout from "./Layout";
+import ProjectList from "../projects/ProjectList";
+import ProjectView from "components/projectView/ProjectView";
+import Landing from "../landing_page/Landing";
 
-const theme = createTheme({})
-
+const theme = createTheme({});
 
 export default function Application() {
   return (
@@ -29,4 +28,3 @@ export default function Application() {
     </ThemeProvider>
   );
 }
-

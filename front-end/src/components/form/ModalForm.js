@@ -32,7 +32,7 @@ export default function Form(props) {
   // const { state, setState } = useApplicationData();
 
   const classes = useStyles();
-  const { openPopup, task, setTask, closePopup } = props;
+  const { openPopup, task, setTask, closePopup, projectUsers } = props;
   const { projects, setState } = useContext(ProjectContext);
   const [title, setTitle] = useState(task.name);
   const [avatar, setAvatar] = useState("");
@@ -56,7 +56,7 @@ export default function Form(props) {
   // start: "2021-08-04T07:00:00.000Z"
   // status: "Completed"
   // user_id: 1
-
+  console.log(task);
   const handleSubmit = (e, taskId, projectId) => {
     e.preventDefault();
     console.log(projectId);
@@ -77,7 +77,10 @@ export default function Form(props) {
       priority: priority,
     };
 
-    if (startDate < endDate) {
+    if (startDate > endDate)
+      //   alert("Start date cannot be greater than end date");
+      // } else if (endDate < startDate) {
+      // alert("End date cannot be less than start date") else {
       axios
         .put(`/api/projects/${projectId}/tasks/${taskId}`, editTask)
         .then((result) => {
@@ -94,11 +97,10 @@ export default function Form(props) {
           //   ...state,
           //   tasks: result.data,
         });
-      // handleClose();
-      // });
-      //     })
-      //     .catch((err) => console.log(err.message));
-    }
+    // handleClose();
+    // });
+    //     })
+    //     .catch((err) => console.log(err.message));
   };
 
   // console.log(setEndDate);

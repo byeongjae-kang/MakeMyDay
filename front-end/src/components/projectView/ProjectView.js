@@ -172,7 +172,7 @@ function ProjectView() {
             variant="contained"
             onClick={toggleView}
           >
-            {view ? "Gantt Chart" : "Kanban View"}
+            {view ? "Gantt Chart" : "Kanban Board"}
           </Button>
         </Box>
       </Box>

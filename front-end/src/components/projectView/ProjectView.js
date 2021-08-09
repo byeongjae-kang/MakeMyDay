@@ -13,7 +13,7 @@ import Gantt from "components/gantt/Gantt";
 import TasksBody from "components/drag_drop/TasksBody";
 import cloneDeep from "lodash/cloneDeep";
 import BarChartIcon from "@material-ui/icons/BarChart";
-import CreateIcon from "@material-ui/icons/Create";
+import ListIcon from "@material-ui/icons/List";
 function ProjectView() {
   const [projects, setState] = useState({});
   const [users, setUsers] = useState({});
@@ -168,11 +168,11 @@ function ProjectView() {
             size="small"
             type="submit"
             color="primary"
-            startIcon={<BarChartIcon />}
+            startIcon={view ? <BarChartIcon /> : <ListIcon />}
             variant="contained"
             onClick={toggleView}
           >
-            {view ? "Gantt Chart" : "Project View"}
+            {view ? "Gantt Chart" : "Kanban View"}
           </Button>
         </Box>
       </Box>

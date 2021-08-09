@@ -10,8 +10,12 @@ const useStyle = makeStyles((theme) => ({
   list: {
     width: "300px",
     backgroundColor: "#EDECF0",
-    marginLeft: theme.spacing(1),
-    padding: theme.spacing(0.1),
+    marginRight: theme.spacing(4),
+    padding: theme.spacing(1),
+  },
+  divide: {
+    display: "flex",
+    justifyContent: "space-between",
   },
 }));
 
@@ -30,7 +34,6 @@ export default function List({
 
   return (
     <Paper className={classes.list}>
-      <CssBaseline />
       <ListTitle title={title} length={list.tasks.length} />
       {title === "In Progress" ? <NewTask /> : null}
       <Droppable droppableId={list.id.toString()}>

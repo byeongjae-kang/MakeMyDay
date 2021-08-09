@@ -7,7 +7,7 @@ import {
   Button,
   Typography,
   Link,
-  CircularProgress
+  CircularProgress,
 } from "@material-ui/core";
 import axios from "axios";
 import { AuthContext } from "context/AuthContext";
@@ -20,7 +20,7 @@ function Login(props) {
     padding: 20,
     height: "60vh",
     width: 450,
-    margin: "150px auto"
+    margin: "150px auto",
   };
   const btnStyle = { margin: "15px 0", height: "45px" };
   const textStyle = { margin: "0 0 10px 0" };
@@ -44,15 +44,13 @@ function Login(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(email.current.value)
-console.log(password.current.value)
+    console.log(email.current.value);
+    console.log(password.current.value);
     loginCall(
       { email: email.current.value, password: password.current.value },
       dispatch
     );
-
-  }
-
+  };
 
   return props.trigger ? (
     <Grid>
@@ -96,11 +94,11 @@ console.log(password.current.value)
             style={btnStyle}
             disabled={isFetching}
           >
-               {isFetching ? (
-                <CircularProgress color="primary" size="20px" />
-              ) : (
-                "Log In"
-              )}
+            {isFetching ? (
+              <CircularProgress color="primary" size="20px" />
+            ) : (
+              "Log In"
+            )}
           </Button>
         </form>
 

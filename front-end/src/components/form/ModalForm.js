@@ -103,7 +103,14 @@ export default function Form(props) {
   };
 
   return (
-    <Dialog fullWidth onClose={closePopup} open={openPopup}>
+    <Dialog
+      classes={{
+        paper: classes.radius,
+      }}
+      fullWidth
+      onClose={closePopup}
+      open={openPopup}
+    >
       <Grid container>
         <Grid container className={classes.divide}>
           <Grid />
@@ -119,7 +126,6 @@ export default function Form(props) {
           <FormGroup>
             <FormLabel>Title</FormLabel>
             <TextField
-              className={classes.field}
               multiline
               fullWidth
               value={title}
@@ -152,6 +158,7 @@ export default function Form(props) {
             <Autocomplete
               onChange={(e, value) => setSelectedUsers(value)}
               limitTags={1}
+              required
               id="multiple-limit-tags"
               value={() => selectedUsers}
               options={projectUsers?.users}

@@ -11,7 +11,7 @@ const useStyle = makeStyles((theme) => ({
   new_task: {
     padding: theme.spacing(1, 1, 1, 2),
     margin: theme.spacing(1),
-    color: "blue",
+    // color: "blue",
     "&:hover": {
       backgroundColor: "lightblue",
     },

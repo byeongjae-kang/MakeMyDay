@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ProjectContext from "../../context/ProjectContext";
+import { Button, Box, Typography } from "@material-ui/core";
 import axios from "axios";
-import { reformatState, deleteTask, HaveProjectWithUsers, findIndex } from "../../hooks/helpers";
+import {
+  reformatState,
+  deleteTask,
+  HaveProjectWithUsers,
+  findIndex,
+} from "../../hooks/helpers";
 import Gantt from "components/gantt/Gantt";
 import TasksBody from "components/drag_drop/TasksBody";
 import cloneDeep from "lodash/cloneDeep";
-
-
+import BarChartIcon from "@material-ui/icons/BarChart";
+import CreateIcon from "@material-ui/icons/Create";
 function ProjectView() {
   const [projects, setState] = useState({});
   const [users, setUsers] = useState({});
@@ -36,12 +42,15 @@ function ProjectView() {
   const projectId = useParams().id;
 
   const updateTask = function (id, start_date, end_date) {
-    axios.put(`http://localhost:8080/api/tasks/${id}`, {
+    axios
+      .put(`http://localhost:8080/api/tasks/${id}`, {
         start: start_date,
         end: end_date,
       })
       .then((result) => {
-        return axios.get(`http://localhost:8080/api/tasks/${result.data[0].id}`)
+        return axios.get(
+          `http://localhost:8080/api/tasks/${result.data[0].id}`
+        );
       })
       .then((response) => {
         let project = cloneDeep(projects[response.data[0].project_id]);
@@ -49,7 +58,10 @@ function ProjectView() {
         tasks = deleteTask(response.data[0].id, tasks);
         const newTask = [...tasks, response.data[0]];
         project.tasks = newTask;
-        setState((prev) => ({ ...prev, [response.data[0].project_id]: project }));
+        setState((prev) => ({
+          ...prev,
+          [response.data[0].project_id]: project,
+        }));
       })
       .catch((err) => console.log(err));
   };
@@ -94,16 +106,22 @@ function ProjectView() {
   };
 
   const createTask = function (name, id) {
-    axios.post("http://localhost:8080/api/tasks", { name: name, project_id: id })
+    axios
+      .post("http://localhost:8080/api/tasks", { name: name, project_id: id })
       .then((result) => {
-        console.log("result  after post req", result)
-        return axios.get(`http://localhost:8080/api/tasks/${result.data[0].id}`)
+        console.log("result  after post req", result);
+        return axios.get(
+          `http://localhost:8080/api/tasks/${result.data[0].id}`
+        );
       })
       .then((responce) => {
         console.log("response after get------", responce);
         let project = cloneDeep(projects[responce.data[0].project_id]);
         project.tasks.push(responce.data[0]);
-        setState((prev) => ({ ...prev, [responce.data[0].project_id]: project }));
+        setState((prev) => ({
+          ...prev,
+          [responce.data[0].project_id]: project,
+        }));
       })
       .catch((err) => console.log(err));
   };
@@ -141,13 +159,25 @@ function ProjectView() {
 
   return (
     <ProjectContext.Provider value={stateData}>
-      <h2>{projects[projectId].name}</h2>
-      <div>
-        <h4>{view ? "Project View" : "Gantt View"}</h4>
-        <button onClick={toggleView}>
-          {view ? "Gantt View" : "Project View"}
-        </button>
-      </div>
+      <Box display="flex" flexGrow={1}>
+        <Typography>{projects[projectId].name}</Typography>
+
+        {/* <h4>{view ? "Project View" : "Gantt View"}</h4> */}
+        <Box ml={1.5}>
+          <Button
+            size="small"
+            type="submit"
+            color="primary"
+            startIcon={<BarChartIcon />}
+            variant="contained"
+            onClick={toggleView}
+          >
+            {view ? "Gantt Chart" : "Project View"}
+          </Button>
+        </Box>
+      </Box>
+
+      <br />
       {view && <TasksBody />}
       {!view && <Gantt />}
     </ProjectContext.Provider>

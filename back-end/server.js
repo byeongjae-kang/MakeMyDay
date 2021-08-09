@@ -278,11 +278,12 @@ app.get("/api/tasks/:id", async (req, res) => {
 app.delete("/api/tasks/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    console.log("id", id)
-    const deleteTask = await pool.query(`DELETE FROM tasks WHERE id = $1 RETURNING *`, [
-      id,
-    ]);
-    console.log(deleteTask.rows)
+    console.log("id", id);
+    const deleteTask = await pool.query(
+      `DELETE FROM tasks WHERE id = $1 RETURNING *`,
+      [id]
+    );
+    console.log(deleteTask.rows);
     res.json(deleteTask.rows);
   } catch (err) {
     res.status(500).send(err);

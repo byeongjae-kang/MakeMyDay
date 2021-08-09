@@ -17,7 +17,7 @@ export default function ProjectListItems({
   project,
   state,
   handleDelete,
-  handleClickOpen
+  handleClickOpen,
 }) {
   const classes = useStyles(project);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -43,7 +43,7 @@ export default function ProjectListItems({
   };
 
   return (
-    <Card elevation={1} className={classes.root} variant="outlined">
+    <Card elevation={1} className={classes.listItem} variant="outlined">
       <CardHeader
         title={project.name}
         action={
@@ -62,12 +62,6 @@ export default function ProjectListItems({
               keepMounted
               open={open}
               onClose={handleClose}
-              PaperProps={{
-                style: {
-                  maxHeight: 220,
-                  width: "20ch"
-                }
-              }}
             >
               {options.map((option) => (
                 <MenuItem
@@ -86,6 +80,7 @@ export default function ProjectListItems({
       <Divider />
 
       <CardContent
+        style={{ cursor: "pointer" }}
         className={classes.content}
         onClick={() => history.push(`${currentRoute.url}/${project.id}/tasks`)}
       >

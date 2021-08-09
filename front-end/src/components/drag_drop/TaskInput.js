@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext, useState } from "react";
 import { InputBase, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import ProjectContext from "../../context/ProjectContext";
@@ -14,13 +14,19 @@ const useStyle = makeStyles((theme) => ({
 export default function TaskInput(props) {
   const { createTask } = useContext(ProjectContext)
   const projectId = useParams().id
-  let name;
+  const [name, setName] = useState('')
   const classes = useStyle();
+
   function handleKeyPress(e) {
-    if (e.charCode === 13) {
+    setName(e.target.value)
+  }
+
+  function handleSubmit(e) {
+    if (e.key === "Enter") {
       e.preventDefault();
       createTask(name, projectId);
       props.setOpen(false);
+      setName('')
     }
   }
 
@@ -31,8 +37,8 @@ export default function TaskInput(props) {
         fullWidth
         placeholder="Enter title for the task"
         value={name}
-        onChange={(event) => (name = event.target.value)}
-        onKeyPress={handleKeyPress}
+        onKeyDown={handleSubmit}
+        onChange={handleKeyPress}
       />
     </Paper>
   );

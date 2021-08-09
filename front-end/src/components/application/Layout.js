@@ -44,11 +44,6 @@ export default function MiniDrawer({ children }) {
       icon: <HomeIcon color="action" />,
       path: "/dashboard",
     },
-    // {
-    //   text: "GRANTT CHART",
-    //   icon: <InsertChartIcon color="action" />,
-    //   path: "/gantt",
-    // },
     {
       text: "Projects",
       icon: <AssignmentIcon color="action" />,
@@ -68,7 +63,7 @@ export default function MiniDrawer({ children }) {
 
   return (
     <>
-      {user ? (
+      {!user ? (
         <Landing />
       ) : (
         <div className={classes.root}>

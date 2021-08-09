@@ -30,15 +30,13 @@ export default function ProjectList() {
     userId,
     breakpoints,
     HaveProjectWithUsers,
-    handleEdit,
-    handleDelete,
+    handleDelete
   } = useProjectData();
 
   const sortedProjects = [...state.projects].reverse().map((project, index) => (
     <div key={index}>
       <ProjectListItems
         project={HaveProjectWithUsers(project, state.users)}
-        handleEdit={handleEdit}
         handleDelete={handleDelete}
         handleClickOpen={handleClickOpen}
       />

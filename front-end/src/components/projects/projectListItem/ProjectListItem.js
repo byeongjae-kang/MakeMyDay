@@ -10,12 +10,12 @@ import Typography from "@material-ui/core/Typography";
 import { Avatar, CardActions, Divider } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { useStyles } from "./ProjectListItemStyle";
+import Chat from "../chat/Chat";
 
 const options = ["Edit", "Delete"];
 
 export default function ProjectListItems({
   project,
-  state,
   handleDelete,
   handleClickOpen,
 }) {
@@ -29,7 +29,7 @@ export default function ProjectListItems({
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = (e, projectId, state) => {
+  const handleClose = (e, projectId) => {
     const value = e.target.getAttribute("value");
     if (value === "Delete") {
       handleDelete(projectId);
@@ -68,7 +68,7 @@ export default function ProjectListItems({
                 <MenuItem
                   key={option}
                   value={option}
-                  onClick={(e) => handleClose(e, project.id, state)}
+                  onClick={(e) => handleClose(e, project.id)}
                 >
                   {option}
                 </MenuItem>
@@ -106,6 +106,7 @@ export default function ProjectListItems({
               </IconButton>
             );
           })}
+          <Chat project={project} />
         </CardActions>
       </div>
     </Card>

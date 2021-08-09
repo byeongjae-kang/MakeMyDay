@@ -19,6 +19,25 @@ app.get("/", (req, res) => {
   res.status(200).send("connection is made");
 });
 
+app.get('/api/projects/:id/messages', (req, res) => {
+  const projectId = req.params.id;
+  pool.query(`SELECT * FROM messages WHERE project_id = $1`, [projectId])
+    .then(result => res.json(result.rows))
+    .catch(err => console.log('could not get messages', err.message));
+})
+
+app.post('/api/projects/:id/messages', (req, res) => {
+  const { userId, projectId, message } = req.body;
+  
+  pool.query(`INSERT INTO messages (user_id, project_id, message) VALUES ($1, $2, $3) RETURNING *`
+  , [userId, projectId, message])
+    .then(result => {
+      
+      res.json(result.rows)
+    })
+    .catch(err => console.log('could not get messages', err.message));
+})
+
 app.post(`/login`, (req, res) => {
   const { email, password } = req.body;
   pool

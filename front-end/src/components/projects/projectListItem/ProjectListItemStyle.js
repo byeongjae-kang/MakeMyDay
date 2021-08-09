@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   person: {
-    height: 10,
+    height: 0,
     padding: 0,
     margin: theme.spacing(1),
     width: theme.spacing(3),

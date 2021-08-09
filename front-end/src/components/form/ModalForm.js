@@ -129,9 +129,11 @@ export default function Form(props) {
             <FormLabel>Task</FormLabel>
             <TextField
               multiline
+              InputLabelProps={{ shrink: true }}
               placeholder="Enter a new task..."
               fullWidth
               value={title}
+              inputProps={{ maxLength: 45 }}
               onChange={(e) => {
                 setTitle(e.target.value);
               }}

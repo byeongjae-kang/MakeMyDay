@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   closeIcon: {
     "&:hover": {
-      color: "red",
+      color: "purple",
     },
     marginRight: 20,
     cursor: "pointer",
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
   paper: {
-    backgroundColor: "#EDECF0",
+    backgroundColor: "primary",
     padding: theme.spacing(1, 1),
   },
   container: {
@@ -57,6 +57,12 @@ const useStyles = makeStyles((theme) => ({
     width: 30,
     height: 30,
     marginRight: 20,
+  },
+  radius: {
+    borderRadius: 10,
+  },
+  typography: {
+    fontFamily: "",
   },
 }));
 

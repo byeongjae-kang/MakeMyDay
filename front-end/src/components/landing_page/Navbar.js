@@ -1,25 +1,30 @@
-
-import './Navbar.css'
-
+import { Typography } from "@material-ui/core";
+import { typography } from "@material-ui/system";
+import "./Navbar.css";
 
 function Navbar(props) {
   return (
     <>
       <nav className="navbar">
-        <p className="navbar-logo">MakeMyDay Logo</p>
+        <Typography className="navbar-logo">make.my.day</Typography>
         <ul className="navbar-list">
-          <li onClick={() => {
-            props.setTrigger(!props.trigger)}
-          }>
-            Log in
+          <li>
+            <Typography
+              className="navbar-logo"
+              onClick={() => {
+                props.setTrigger(!props.trigger);
+              }}
+            >
+              Log in
+            </Typography>
           </li>
           <li>
-            Register
+            <Typography className="navbar-logo">Register</Typography>
           </li>
         </ul>
       </nav>
     </>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

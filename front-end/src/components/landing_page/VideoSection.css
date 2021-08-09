@@ -3,7 +3,7 @@ video {
   width: 100%;
   height: 100%;
   position: fixed;
-  z-index: -1
+  z-index: -1;
 }
 .video-container {
   height: 100vh;
@@ -24,23 +24,20 @@ video {
   border-radius: 20px;
   position: relative;
   margin-top: 200px;
+  font-family: Montserrat;
 }
 
 .video-container .message h1 {
-  color:black;
+  color: black;
   font-size: 100px;
-  text-shadow: -1px -1px 0 white,
-               1px -1px 0 white,
-               -1px 1px 0 white,
-                1px 1px 0 white   
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
+    1px 1px 0 white;
 }
 
 .video-container .message p {
   font-size: 32px;
-  text-shadow: -1px -1px 0 white,
-                1px -1px 0 white,
-                -1px 1px 0 white,
-                1px 1px 0 white 
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
+    1px 1px 0 white;
 }
 
 .video-container .message button {

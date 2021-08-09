@@ -9,11 +9,13 @@ const useStyle = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
   },
   new_task: {
+    cursor: "pointer",
+    backgroundColor: "#482880",
     padding: theme.spacing(1, 1, 1, 2),
     margin: theme.spacing(1),
-    color: "blue",
+    // color: "blue",
     "&:hover": {
-      backgroundColor: "lightblue",
+      backgroundColor: "#8561c5",
     },
   },
 }));
@@ -32,7 +34,7 @@ export default function NewTask(props) {
           elevation={0}
           onClick={() => setOpen(!open)}
         >
-          <Typography>+ New task</Typography>
+          <Typography style={{ color: "#fff" }}>+ New task</Typography>
         </Paper>
       </Collapse>
     </div>

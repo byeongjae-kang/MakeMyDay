@@ -71,7 +71,7 @@ export default function Form(props) {
       priority: priority,
       user_id: selectedUsers.id,
     };
-    if (selectedUsers === "" || selectedUsers === null) {
+    if (selectedUsers.length < 1 || selectedUsers === null) {
       return setOpenPopup(true);
     } else {
       axios
@@ -159,7 +159,7 @@ export default function Form(props) {
           </FormGroup>
           {/*-----------------------------Select Users Component---------------------------------------- */}
           <br />
-
+          <FormLabel>Select Team Member</FormLabel>
           <div className={classes.root}>
             <Autocomplete
               onChange={(e, value) => setSelectedUsers(value)}
@@ -186,7 +186,7 @@ export default function Form(props) {
                 <TextField
                   {...params}
                   variant="outlined"
-                  label="Assign Team Member"
+                  // label="Assign Team Member"
                   placeholder="Add members"
                   color="secondary"
                 />

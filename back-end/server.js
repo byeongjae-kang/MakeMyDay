@@ -232,7 +232,7 @@ app.put(`/api/projects/:project_id/tasks/:task_id`, (req, res) => {
       taskId,
     ])
     .then((result) => {
-      console.log(result.rows[0]);
+      // console.log(result.rows[0]);
       res.json(result.rows[0]);
     })
     .catch((err) => console.log("could not edit", err.message));
@@ -268,7 +268,7 @@ app.get("/api/tasks/:id", async (req, res) => {
       "SELECT projects.name AS project_name, users.user_name, users.avatar, tasks.* FROM projects JOIN tasks ON tasks.project_id = projects.id LEFT JOIN users ON users.id = tasks.user_id WHERE tasks.id = $1",
       [id]
     );
-    console.log("newTask ", newTask.rows[0]);
+    // console.log("newTask ", newTask.rows[0]);
     res.json(newTask.rows);
   } catch (err) {
     console.error(err.message);
@@ -278,10 +278,12 @@ app.get("/api/tasks/:id", async (req, res) => {
 app.delete("/api/tasks/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const deleteTask = await pool.query(`DELETE FROM tasks WHERE id = $1`, [
+    console.log("id", id)
+    const deleteTask = await pool.query(`DELETE FROM tasks WHERE id = $1 RETURNING *`, [
       id,
     ]);
-    res.json(deleteTask);
+    console.log(deleteTask.rows)
+    res.json(deleteTask.rows);
   } catch (err) {
     res.status(500).send(err);
   }

@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ProjectContext from "../../context/ProjectContext";
 import axios from "axios";
-import { reformatState, deleteTask } from "../../hooks/helpers";
+import { reformatState, deleteTask, HaveProjectWithUsers, findIndex } from "../../hooks/helpers";
 import Gantt from "components/gantt/Gantt";
 import TasksBody from "components/drag_drop/TasksBody";
 import cloneDeep from "lodash/cloneDeep";
-import { HaveProjectWithUsers } from "../../hooks/helpers";
+
+
 function ProjectView() {
   const [projects, setState] = useState({});
   const [users, setUsers] = useState({});
@@ -19,7 +20,7 @@ function ProjectView() {
       axios.get("/api/tasks"),
     ])
       .then((result) => {
-        console.log("result in useEfect", result);
+        // console.log("result in useEfect", result);
         setState((prev) => ({
           ...prev,
           ...reformatState(result[2].data, result[1].data),
@@ -34,21 +35,21 @@ function ProjectView() {
 
   const projectId = useParams().id;
 
-  const updateTask = function (id, start_date, end_date, status, priority) {
-    axios
-      .put(`http://localhost:8080/api/tasks/${id}`, {
-        status: status,
+  const updateTask = function (id, start_date, end_date) {
+    axios.put(`http://localhost:8080/api/tasks/${id}`, {
         start: start_date,
         end: end_date,
-        priority: priority,
       })
       .then((result) => {
-        let project = cloneDeep(projects[result.data[0].project_id]);
+        return axios.get(`http://localhost:8080/api/tasks/${result.data[0].id}`)
+      })
+      .then((response) => {
+        let project = cloneDeep(projects[response.data[0].project_id]);
         let tasks = project.tasks;
-        tasks = deleteTask(result.data[0].id, tasks);
-        const newTask = [...tasks, result.data[0]];
+        tasks = deleteTask(response.data[0].id, tasks);
+        const newTask = [...tasks, response.data[0]];
         project.tasks = newTask;
-        setState((prev) => ({ ...prev, [result.data[0].project_id]: project }));
+        setState((prev) => ({ ...prev, [response.data[0].project_id]: project }));
       })
       .catch((err) => console.log(err));
   };
@@ -86,30 +87,36 @@ function ProjectView() {
         // console.log("result in drag and drop---", result);
         let project = cloneDeep(projects[result.data[0].project_id]);
         let tasks = project.tasks;
-        tasks = deleteTask(result.data[0].id, tasks);
-        const newTask = [...tasks, result.data[0]];
-        project.tasks = newTask;
+        let index = findIndex(result.data[0].id, tasks);
+        project.tasks[index].status = result.data[0].status;
         setState((prev) => ({ ...prev, [result.data[0].project_id]: project }));
       });
   };
 
   const createTask = function (name, id) {
-    axios
-      .post("http://localhost:8080/api/tasks", { name: name, project_id: id })
+    axios.post("http://localhost:8080/api/tasks", { name: name, project_id: id })
       .then((result) => {
-        // console.log("result in createTask------", result);
-        let project = cloneDeep(projects[result.data[0].project_id]);
-        project.tasks.push(result.data[0]);
-        setState((prev) => ({ ...prev, [result.data[0].project_id]: project }));
+        console.log("result  after post req", result)
+        return axios.get(`http://localhost:8080/api/tasks/${result.data[0].id}`)
+      })
+      .then((responce) => {
+        console.log("response after get------", responce);
+        let project = cloneDeep(projects[responce.data[0].project_id]);
+        project.tasks.push(responce.data[0]);
+        setState((prev) => ({ ...prev, [responce.data[0].project_id]: project }));
       })
       .catch((err) => console.log(err));
   };
 
   const deleteTasks = function (id) {
     axios.delete(`http://localhost:8080/api/tasks/${id}`).then((result) => {
+      // console.log("result in delete", result)
       let project = cloneDeep(projects[result.data[0].project_id]);
+      // console.log("project before", project)
       let newTask = deleteTask(result.data[0].id, project.tasks);
+      // console.log("updated tasks", newTask)
       project.tasks = newTask;
+      // console.log("project after", project)
       setState((prev) => ({ ...prev, [result.data[0].project_id]: project }));
     });
   };

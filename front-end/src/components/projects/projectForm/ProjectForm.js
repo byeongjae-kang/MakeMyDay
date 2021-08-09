@@ -62,7 +62,7 @@ export default function ProjectForm({
               onClose={handleClose}
             >
               {param.id ? "Edit" : "Create a New"} Project
-            </DialogTitle>{" "}
+            </DialogTitle>
           </Grid>
           <Grid item>
             <CloseIcon

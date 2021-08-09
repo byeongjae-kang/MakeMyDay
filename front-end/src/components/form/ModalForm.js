@@ -39,7 +39,7 @@ const findUser = (userId, projectUsers) => {
 export default function Form(props) {
   const classes = useStyles();
 
-  const { openPopup, task, closePopup, projectUsers } = props;
+  const { openPopup, task, closePopup, projectUsers, setOpenPopup } = props;
   const { projects, setState } = useContext(ProjectContext);
   const [title, setTitle] = useState(task.name);
   const [priority, setPriority] = useState(task.priority);
@@ -51,8 +51,8 @@ export default function Form(props) {
   const [endDate, setEndDate] = useState(
     new Date(task.end).toISOString().split("T")[0]
   );
-  const [selectedUsers, setSelectedUsers] = useState(() =>
-    findUser(task.user_id, projectUsers)
+  const [selectedUsers, setSelectedUsers] = useState(
+    findUser(task.user_id, projectUsers) || ""
   );
 
   // console.log("user:", selectedUsers);
@@ -71,37 +71,39 @@ export default function Form(props) {
       priority: priority,
       user_id: selectedUsers.id,
     };
+    if (selectedUsers === "" || selectedUsers === null) {
+      return setOpenPopup(true);
+    } else {
+      axios
+        .put(`/api/projects/${projectId}/tasks/${taskId}`, editTask)
+        .then((result) => {
+          console.log("result in edit", result.data);
+          return axios.get(`http://localhost:8080/api/tasks/${result.data.id}`);
 
-    axios
-      .put(`/api/projects/${projectId}/tasks/${taskId}`, editTask)
-      .then((result) => {
-        console.log("result in edit", result.data);
-        return axios.get(`http://localhost:8080/api/tasks/${result.data.id}`);
-
-        // let user = findUser(result.data.user_id, projectUsers);
-        // setSelectedUsers(user);
-        // let project = cloneDeep(projects[result.data.project_id]);
-        // let tasks = project.tasks;
-        // tasks = deleteTask(result.data.id, tasks);
-        // const newTask = [...tasks, result.data];
-        // project.tasks = newTask;
-        // setState((prev) => ({ ...prev, [result.data.project_id]: project }));
-      })
-      .then((responce) => {
-        console.log("response after get------", responce);
-        let project = cloneDeep(projects[responce.data[0].project_id]);
-        console.log("project before", project);
-        let tasks = project.tasks;
-        tasks = deleteTask(responce.data[0].id, tasks);
-        const newTask = [...tasks, responce.data[0]];
-        project.tasks = newTask;
-        setState((prev) => ({
-          ...prev,
-          [responce.data[0].project_id]: project,
-        }));
-      });
+          // let user = findUser(result.data.user_id, projectUsers);
+          // setSelectedUsers(user);
+          // let project = cloneDeep(projects[result.data.project_id]);
+          // let tasks = project.tasks;
+          // tasks = deleteTask(result.data.id, tasks);
+          // const newTask = [...tasks, result.data];
+          // project.tasks = newTask;
+          // setState((prev) => ({ ...prev, [result.data.project_id]: project }));
+        })
+        .then((responce) => {
+          console.log("response after get------", responce);
+          let project = cloneDeep(projects[responce.data[0].project_id]);
+          console.log("project before", project);
+          let tasks = project.tasks;
+          tasks = deleteTask(responce.data[0].id, tasks);
+          const newTask = [...tasks, responce.data[0]];
+          project.tasks = newTask;
+          setState((prev) => ({
+            ...prev,
+            [responce.data[0].project_id]: project,
+          }));
+        });
+    }
   };
-
   return (
     <Dialog
       classes={{
@@ -124,9 +126,10 @@ export default function Form(props) {
       <form onSubmit={(e) => handleSubmit(e, task.id, task.project_id)}>
         <DialogTitle>
           <FormGroup>
-            <FormLabel>Title</FormLabel>
+            <FormLabel>Task</FormLabel>
             <TextField
               multiline
+              placeholder="Enter a new task..."
               fullWidth
               value={title}
               onChange={(e) => {
@@ -142,6 +145,7 @@ export default function Form(props) {
             <FormLabel>Enter Description</FormLabel>
             <TextField
               className={classes.field}
+              placeholder="Enter a new description..."
               multiline
               variant="filled"
               fullWidth
@@ -158,9 +162,8 @@ export default function Form(props) {
             <Autocomplete
               onChange={(e, value) => setSelectedUsers(value)}
               limitTags={1}
-              required
               id="multiple-limit-tags"
-              value={() => selectedUsers}
+              value={selectedUsers}
               options={projectUsers?.users}
               getOptionLabel={(option) => option.user_name}
               renderOption={(user) => (

@@ -34,6 +34,10 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "space-between",
   },
+  title: {
+    fontWeight: "500",
+    fontSize: "0.9rem",
+  },
 }));
 
 export { useStyles };

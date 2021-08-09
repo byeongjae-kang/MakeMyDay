@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import ProjectContext from "../../context/ProjectContext";
-import { Card, Typography, Grid } from "@material-ui/core";
+import { Card, Typography, Grid, Tooltip } from "@material-ui/core";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import { Avatar, Divider, makeStyles } from "@material-ui/core";
@@ -15,6 +15,7 @@ import AvatarGroup from "@material-ui/lab/AvatarGroup";
 import NaturalDragAnimation from "natural-drag-animation-rbdnd";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 const useStyle = makeStyles((theme) => ({
   // task: {
   //   padding: theme.spacing(1, 1, 1, 2),
@@ -47,7 +48,7 @@ const useStyle = makeStyles((theme) => ({
     },
   },
   priority: {
-    marginTop: 10,
+    // marginTop: 10,
   },
 
   person: {
@@ -61,9 +62,25 @@ const useStyle = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
   },
+  align: {
+    display: "flex",
+    alignContent: "row",
+    justifyContent: "space-between",
+  },
   card: {
     borderRadius: 8,
     marginBottom: 5,
+  },
+  priority: {
+    paddingRight: 5,
+  },
+  avatar: {
+    height: "30px",
+    width: "30px",
+  },
+  tooltip: {
+    cursor: "pointer",
+    backgroundColor: "#406f7f",
   },
 }));
 
@@ -82,10 +99,19 @@ export default function Task({ index, updateTask, task }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const projectId = useParams().id;
   let projectUsers = users[projectId];
+
   const PriorityIcon = (props) => {
-    if (props.priority === "1") {
+    if (task.status === "Completed") {
+      return (
+        <CheckCircleIcon
+          className={classes.priority}
+          style={{ fill: "purple" }}
+        />
+      );
+    } else if (props.priority === "1") {
       return (
         <ArrowUpwardIcon className={classes.priority} style={{ fill: "red" }} />
       );
@@ -105,6 +131,12 @@ export default function Task({ index, updateTask, task }) {
       );
     }
   };
+
+  const endDate = new Date(task.end).toLocaleString("en-US", {
+    month: "long",
+    day: "2-digit",
+  });
+
   return (
     <Draggable draggableId={task.id.toString()} index={index}>
       {(provided, snapshot) => (
@@ -162,24 +194,35 @@ export default function Task({ index, updateTask, task }) {
                 />
                 <Divider />
                 <CardContent>
-                  <Grid container className={classes.divide}>
-                    <ModalForm
-                      closePopup={() => setOpenPopup(false)}
-                      openPopup={openPopup}
-                      setOpenPopup={setOpenPopup}
-                      task={task}
-                      updateTask={updateTask}
-                      projectUsers={projectUsers}
-                      users={users}
-                    />
+                  <Grid container className={classes.align}>
+                    <div className={classes.divide}>
+                      <ModalForm
+                        closePopup={() => setOpenPopup(false)}
+                        openPopup={openPopup}
+                        setOpenPopup={setOpenPopup}
+                        task={task}
+                        updateTask={updateTask}
+                        projectUsers={projectUsers}
+                        users={users}
+                      />
 
-                    <PriorityIcon priority={task.priority} />
-
-                    <Avatar
-                      style={{ height: "30px", width: "30px" }}
-                      alt="Remy Sharp"
-                      src={task.avatar}
-                    />
+                      <PriorityIcon
+                        priority={task.priority}
+                        className={classes.priority}
+                      />
+                      <Typography color="primary">{endDate}</Typography>
+                    </div>
+                    <Tooltip
+                      title={task.user_name}
+                      className={classes.tooltip}
+                      aria-label="add"
+                    >
+                      <Avatar
+                        className={classes.avatar}
+                        alt={task.name}
+                        src={task.avatar}
+                      />
+                    </Tooltip>
                   </Grid>
                 </CardContent>
               </Card>

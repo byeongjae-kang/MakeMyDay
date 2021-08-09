@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   menuButton: {
-    color: "white",
+    color: "#FFF",
     marginRight: 36,
   },
   hide: {
@@ -68,9 +68,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
   active: {
-    background: "primary",
+    color: "#673ab7",
     // borderRadius: 10,
-    opacity: "0.9",
+    // opacity: "0.9",
     // padding: "5px",
     // color: "black",
   },

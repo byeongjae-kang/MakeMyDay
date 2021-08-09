@@ -160,7 +160,7 @@ function ProjectView() {
   return (
     <ProjectContext.Provider value={stateData}>
       <Box display="flex" flexGrow={1}>
-        <Typography>{projects[projectId].name}</Typography>
+        <Typography>Projects / {projects[projectId].name}</Typography>
 
         {/* <h4>{view ? "Project View" : "Gantt View"}</h4> */}
         <Box ml={1.5}>

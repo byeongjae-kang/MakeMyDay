@@ -45,6 +45,7 @@ export default function ProjectListItems({
   return (
     <Card elevation={1} className={classes.listItem} variant="outlined">
       <CardHeader
+        className={classes.title}
         title={project.name}
         action={
           <div>

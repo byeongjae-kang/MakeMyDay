@@ -3,7 +3,9 @@ import { green, pink, yellow } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
-    minWidth: 275
+    // minWidth: 275,
+    maxWidth: 400,
+    borderRadius: 5,
   },
   status: {
     color: (project) => {
@@ -14,24 +16,28 @@ const useStyles = makeStyles((theme) => ({
         return pink[500];
       }
       return green[700];
-    }
+    },
   },
   content: {
-    marginBottom: 20
+    marginBottom: 20,
   },
 
   person: {
     height: 0,
     padding: 0,
     margin: theme.spacing(1),
-    width: theme.spacing(3)
+    width: theme.spacing(3),
   },
   footer: {
-    padding: 10,
+    padding: 15,
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between"
-  }
+    justifyContent: "space-between",
+  },
+  title: {
+    fontWeight: "500",
+    fontSize: "0.9rem",
+  },
 }));
 
 export { useStyles };

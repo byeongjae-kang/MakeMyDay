@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 export default function useProjectData() {
   const [state, setState] = useState({
     users: [],
-    projects: []
+    projects: [],
   });
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export default function useProjectData() {
         setState({
           ...state,
           users: all[0].data,
-          projects: all[1].data
+          projects: all[1].data,
         });
       }
     );
@@ -28,7 +28,7 @@ export default function useProjectData() {
         axios.get(`api/projects`).then((result) => {
           setState({
             ...state,
-            projects: [...result.data]
+            projects: [...result.data],
           });
         });
       })
@@ -42,14 +42,14 @@ export default function useProjectData() {
 
     return {
       ...project,
-      users: updatedProject
+      users: updatedProject,
     };
   };
 
   const breakpoints = {
     default: 3,
     1100: 2,
-    700: 1
+    700: 1,
   };
 
   const [open, setOpen] = useState(false);
@@ -126,7 +126,7 @@ export default function useProjectData() {
       description: description,
       status: status,
       users: userId,
-      due_Date: selectedDate
+      due_Date: selectedDate,
     };
 
     if (param.id) {
@@ -183,6 +183,6 @@ export default function useProjectData() {
     breakpoints,
     HaveProjectWithUsers,
     handleEdit,
-    handleDelete
+    handleDelete,
   };
 }

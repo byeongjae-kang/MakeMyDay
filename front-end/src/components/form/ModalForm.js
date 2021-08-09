@@ -2,7 +2,11 @@ import { useState, useContext } from "react";
 import ProjectContext from "../../context/ProjectContext";
 import axios from "axios";
 import cloneDeep from "lodash/cloneDeep";
-import { deleteTask, HaveProjectWithUsers } from "../../hooks/helpers";
+import {
+  deleteTask,
+  HaveProjectWithUsers,
+  findIndex,
+} from "../../hooks/helpers";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Avatar } from "@material-ui/core";
 import {
@@ -24,10 +28,18 @@ import CloseIcon from "@material-ui/icons/Close";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
+
+const findUser = (userId, projectUsers) => {
+  if (projectUsers?.users) {
+    return projectUsers.users.find((x) => x.id === userId);
+  }
+  return null;
+};
+
 export default function Form(props) {
   const classes = useStyles();
-  const _ = require("lodash");
-  const { openPopup, task, closePopup, projectUsers, users } = props;
+
+  const { openPopup, task, closePopup, projectUsers, setOpenPopup } = props;
   const { projects, setState } = useContext(ProjectContext);
   const [title, setTitle] = useState(task.name);
   const [priority, setPriority] = useState(task.priority);
@@ -39,12 +51,14 @@ export default function Form(props) {
   const [endDate, setEndDate] = useState(
     new Date(task.end).toISOString().split("T")[0]
   );
-  // const cleanUsers = _.pickBy(projectUsers, function (value) {
-  //   return !(value === undefined);
-  // });
-  // console.log("ON modal, this is projectUsers:", projectUsers);
-  // console.log("ON modal, this is users:", cleanUsers);
+  const [selectedUsers, setSelectedUsers] = useState(
+    findUser(task.user_id, projectUsers) || ""
+  );
 
+  // console.log("user:", selectedUsers);
+  // console.log("task.user_id:", task.user_id);
+  // console.log("projectUsers:", projectUsers?.users);
+  // console.log("foundUser:", findUser(task.user_id, projectUsers));
   const handleSubmit = (e, taskId, projectId) => {
     e.preventDefault();
 
@@ -55,23 +69,50 @@ export default function Form(props) {
       start: startDate.split("T")[0],
       end: endDate.split("T")[0],
       priority: priority,
+      user_id: selectedUsers.id,
     };
+    if (selectedUsers.length < 1 || selectedUsers === null) {
+      return setOpenPopup(true);
+    } else {
+      axios
+        .put(`/api/projects/${projectId}/tasks/${taskId}`, editTask)
+        .then((result) => {
+          console.log("result in edit", result.data);
+          return axios.get(`http://localhost:8080/api/tasks/${result.data.id}`);
 
-    axios
-      .put(`/api/projects/${projectId}/tasks/${taskId}`, editTask)
-      .then((result) => {
-        console.log("result in edit", result.data);
-        let project = cloneDeep(projects[result.data.project_id]);
-        let tasks = project.tasks;
-        tasks = deleteTask(result.data.id, tasks);
-        const newTask = [...tasks, result.data];
-        project.tasks = newTask;
-        setState((prev) => ({ ...prev, [result.data.project_id]: project }));
-      });
+          // let user = findUser(result.data.user_id, projectUsers);
+          // setSelectedUsers(user);
+          // let project = cloneDeep(projects[result.data.project_id]);
+          // let tasks = project.tasks;
+          // tasks = deleteTask(result.data.id, tasks);
+          // const newTask = [...tasks, result.data];
+          // project.tasks = newTask;
+          // setState((prev) => ({ ...prev, [result.data.project_id]: project }));
+        })
+        .then((responce) => {
+          console.log("response after get------", responce);
+          let project = cloneDeep(projects[responce.data[0].project_id]);
+          console.log("project before", project);
+          let tasks = project.tasks;
+          tasks = deleteTask(responce.data[0].id, tasks);
+          const newTask = [...tasks, responce.data[0]];
+          project.tasks = newTask;
+          setState((prev) => ({
+            ...prev,
+            [responce.data[0].project_id]: project,
+          }));
+        });
+    }
   };
-
   return (
-    <Dialog fullWidth onClose={closePopup} open={openPopup}>
+    <Dialog
+      classes={{
+        paper: classes.radius,
+      }}
+      fullWidth
+      onClose={closePopup}
+      open={openPopup}
+    >
       <Grid container>
         <Grid container className={classes.divide}>
           <Grid />
@@ -85,12 +126,14 @@ export default function Form(props) {
       <form onSubmit={(e) => handleSubmit(e, task.id, task.project_id)}>
         <DialogTitle>
           <FormGroup>
-            <FormLabel>Title</FormLabel>
+            <FormLabel>Task</FormLabel>
             <TextField
-              className={classes.field}
               multiline
+              InputLabelProps={{ shrink: true }}
+              placeholder="Enter a new task..."
               fullWidth
               value={title}
+              inputProps={{ maxLength: 45 }}
               onChange={(e) => {
                 setTitle(e.target.value);
               }}
@@ -104,6 +147,7 @@ export default function Form(props) {
             <FormLabel>Enter Description</FormLabel>
             <TextField
               className={classes.field}
+              placeholder="Enter a new description..."
               multiline
               variant="filled"
               fullWidth
@@ -115,45 +159,41 @@ export default function Form(props) {
           </FormGroup>
           {/*-----------------------------Select Users Component---------------------------------------- */}
           <br />
-
-          <FormGroup>
-            <FormLabel>Assign Member</FormLabel>
-            <div className={classes.root}>
-              <Autocomplete
-                // onChange={(event, value) => getUserIds(value)}
-                // multiple
-                limitTags={1}
-                id="multiple-limit-tags"
-                value={projectUsers}
-                // value={(option) => option.user_name}
-                // value={getDefaultUsers(userId, users)}
-                getOptionLabel={(user) => user.user_name}
-                renderOption={(user) => (
-                  <div className={classes.members}>
-                    <Avatar
-                      className={classes.avatar}
-                      alt={task.user_name}
-                      src={task.avatar}
-                    />
-                    <p>
-                      {task.user_name}
-                      <br />
-                      {/* {user.email} */}
-                    </p>
-                  </div>
-                )}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    variant="outlined"
-                    label="Team members"
-                    placeholder="Add members"
-                    color="secondary"
+          <FormLabel>Select Team Member</FormLabel>
+          <div className={classes.root}>
+            <Autocomplete
+              onChange={(e, value) => setSelectedUsers(value)}
+              limitTags={1}
+              id="multiple-limit-tags"
+              value={selectedUsers}
+              options={projectUsers?.users}
+              getOptionLabel={(option) => option.user_name}
+              renderOption={(user) => (
+                <div className={classes.members}>
+                  <Avatar
+                    className={classes.avatar}
+                    alt={user.user_name}
+                    src={user.avatar}
                   />
-                )}
-              />
-            </div>
-          </FormGroup>
+                  <p>
+                    {user.user_name}
+                    <br />
+                    {user.email}
+                  </p>
+                </div>
+              )}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  // label="Assign Team Member"
+                  placeholder="Add members"
+                  color="secondary"
+                />
+              )}
+            />
+          </div>
+
           {/* --------------------------------Status Component-------------------------------------------------- */}
           <br />
           <div className={classes.divide}>

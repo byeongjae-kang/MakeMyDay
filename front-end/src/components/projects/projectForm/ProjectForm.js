@@ -12,10 +12,11 @@ import {
   Radio,
   RadioGroup,
   TextField,
+  Grid,
 } from "@material-ui/core";
 
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
-
+import CloseIcon from "@material-ui/icons/Close";
 import DatePickers from "../datePicker/DatePicker";
 import UserSelector from "../userSelector/UserSelector";
 import { useStyles } from "./ProjectFormStyle";
@@ -36,7 +37,7 @@ export default function ProjectForm({
   status,
   setStatus,
   getUserIds,
-  userId
+  userId,
 }) {
   const { state } = useProjectData();
   const classes = useStyles();
@@ -45,17 +46,31 @@ export default function ProjectForm({
   return (
     <div>
       <Dialog
+        classes={{
+          paper: classes.radius,
+        }}
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
       >
-        <DialogTitle
-          id="customized-dialog-title"
-          color="textSecondary"
-          onClose={handleClose}
-        >
-          {param.id ? "Edit" : "Create a New"} Project
-        </DialogTitle>
+        <Grid container className={classes.divide}>
+          <Grid item>
+            <DialogTitle
+              className={classes.title}
+              id="customized-dialog-title"
+              color="textSecondary"
+              onClose={handleClose}
+            >
+              {param.id ? "Edit" : "Create a New"} Project
+            </DialogTitle>
+          </Grid>
+          <Grid item>
+            <CloseIcon
+              onClick={handleClose}
+              className={classes.closeIcon}
+            ></CloseIcon>
+          </Grid>
+        </Grid>
         <DialogContent dividers>
           <Container size="sm">
             <form
@@ -129,14 +144,19 @@ export default function ProjectForm({
                   handleDateChange={handleDateChange}
                 />
               </div>
-              <Button
-                type="submit"
-                color="secondary"
-                variant="contained"
-                endIcon={<KeyboardArrowRightIcon />}
-              >
-                Save
-              </Button>
+              <Grid group className={classes.divide}>
+                <Grid />
+                <Grid>
+                  <Button
+                    type="submit"
+                    color="secondary"
+                    variant="contained"
+                    endIcon={<KeyboardArrowRightIcon />}
+                  >
+                    Save
+                  </Button>
+                </Grid>
+              </Grid>
             </form>
           </Container>
         </DialogContent>

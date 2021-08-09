@@ -1,5 +1,6 @@
 import React from "react";
 import Masonry from "react-masonry-css";
+import { Grid } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
@@ -43,16 +44,17 @@ export default function ProjectList() {
   ));
 
   return (
-    <Container>
+    <div>
       <Button
-        variant="outlined"
+        variant="contained"
         value={"Create"}
-        color="secondary"
+        color="primary"
         onClick={handleClickOpen}
+        startIcon={<AddIcon />}
       >
-        <AddIcon />
         CREATE NEW PROJECTS
       </Button>
+
       <ProjectForm
         handleDateChange={handleDateChange}
         selectedDate={selectedDate}
@@ -78,6 +80,6 @@ export default function ProjectList() {
       >
         {sortedProjects}
       </Masonry>
-    </Container>
+    </div>
   );
 }

@@ -41,9 +41,11 @@ app.post('/api/projects/:id/messages', (req, res) => {
 app.post(`/login`, (req, res) => {
   const { email, password } = req.body;
   pool
-    .query("SELECT * FROM users WHERE email = $1 AND password = $2", [email, password])
-    .then(result => {
-      
+    .query("SELECT * FROM users WHERE email = $1 AND password = $2", [
+      email,
+      password,
+    ])
+    .then((result) => {
       const user = result.rows[0];
       if (!user.email) {
         return res.status(404).json("user not found");
@@ -53,7 +55,7 @@ app.post(`/login`, (req, res) => {
       }
       res.status(200).json(user);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log("err", err.message);
       res.status(500).json(err);
     });
@@ -231,15 +233,25 @@ app.get("/api/tasks", async (req, res) => {
 });
 
 app.put(`/api/projects/:project_id/tasks/:task_id`, (req, res) => {
-  const { name, description, status, start, end, priority } = req.body;
+  const { name, description, status, start, end, priority, user_id } = req.body;
   const taskId = req.params.task_id;
   const query = `
-    UPDATE  tasks SET name = $1, description = $2, status = $3, start = $4, "end" = $5, priority = $6
-    WHERE id = $7 RETURNING *
+    UPDATE  tasks SET name = $1, description = $2, status = $3, start = $4, "end" = $5, priority = $6, user_id = $7
+    WHERE id = $8 RETURNING *
   `;
   pool
-    .query(query, [name, description, status, start, end, priority, taskId])
+    .query(query, [
+      name,
+      description,
+      status,
+      start,
+      end,
+      priority,
+      user_id,
+      taskId,
+    ])
     .then((result) => {
+      // console.log(result.rows[0]);
       res.json(result.rows[0]);
     })
     .catch((err) => console.log("could not edit", err.message));
@@ -267,13 +279,31 @@ app.put("/api/tasks/:id", async (req, res) => {
   }
 });
 
+app.get("/api/tasks/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    //  console.log("id", id)
+    const newTask = await pool.query(
+      "SELECT projects.name AS project_name, users.user_name, users.avatar, tasks.* FROM projects JOIN tasks ON tasks.project_id = projects.id LEFT JOIN users ON users.id = tasks.user_id WHERE tasks.id = $1",
+      [id]
+    );
+    // console.log("newTask ", newTask.rows[0]);
+    res.json(newTask.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
 app.delete("/api/tasks/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const deleteTask = await pool.query(`DELETE FROM tasks WHERE id = $1`, [
-      id,
-    ]);
-    res.json(deleteTask);
+    console.log("id", id);
+    const deleteTask = await pool.query(
+      `DELETE FROM tasks WHERE id = $1 RETURNING *`,
+      [id]
+    );
+    console.log(deleteTask.rows);
+    res.json(deleteTask.rows);
   } catch (err) {
     res.status(500).send(err);
   }

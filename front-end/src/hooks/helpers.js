@@ -141,10 +141,46 @@ const HaveProjectWithUsers = (projects, users) => {
 };
 
 
+
+const getIncompleteTasks = function(tasks, id) {
+  let incompleteTasks = [];
+
+  for (let task of tasks) {
+    if (task.user_id===id && task.status !== "Completed") {
+      incompleteTasks.push(task)
+    } 
+  }
+  
+ return incompleteTasks;
+}
+
+const getProjectNames = function(tasks) {
+  const projectNames =[];
+  for (let task of tasks) {
+    if (!projectNames.includes(task.project_name)){
+projectNames.push(task.project_name)
+    }
+  }
+  return projectNames;
+}
+
+const getTaskForProject = function(tasks, project) {
+  let projects = []
+  for (let task of tasks) {
+    if (task.project_name === project) {
+      projects.push(task)
+    }
+  }
+  return projects
+}
+
 module.exports = {
   reformatState,
   listForProject,
   deleteTask,
   HaveProjectWithUsers,
-  findIndex
+  findIndex,
+  getIncompleteTasks,
+  getProjectNames,
+  getTaskForProject
 };

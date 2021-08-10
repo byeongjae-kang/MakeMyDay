@@ -12,13 +12,13 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 export default function TaskInput(props) {
-  const { createTask } = useContext(ProjectContext)
-  const projectId = useParams().id
-  const [name, setName] = useState('')
+  const { createTask } = useContext(ProjectContext);
+  const projectId = useParams().id;
+  const [name, setName] = useState("");
   const classes = useStyle();
 
   function handleKeyPress(e) {
-    setName(e.target.value)
+    setName(e.target.value);
   }
 
   function handleSubmit(e) {
@@ -26,7 +26,7 @@ export default function TaskInput(props) {
       e.preventDefault();
       createTask(name, projectId);
       props.setOpen(false);
-      setName('')
+      setName("");
     }
   }
 
@@ -35,7 +35,7 @@ export default function TaskInput(props) {
       <InputBase
         multiline
         fullWidth
-        placeholder="Enter title for the task"
+        placeholder="Enter a title..."
         value={name}
         onKeyDown={handleSubmit}
         onChange={handleKeyPress}

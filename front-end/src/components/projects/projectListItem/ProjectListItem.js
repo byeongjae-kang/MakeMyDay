@@ -12,7 +12,7 @@ import { Avatar, CardActions, Divider, Tooltip } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { useStyles } from "./ProjectListItemStyle";
 import Chat from "../chat/Chat";
-
+import "../projectList/ProjectList.css";
 const options = ["Edit", "Delete"];
 
 export default function ProjectListItems({
@@ -106,7 +106,8 @@ export default function ProjectListItems({
                 aria-label="add"
               >
                 <IconButton key={user.id} className={classes.person}>
-                  <Avatar alt={user.name} src={user.avatar} />
+                  <img className="avatar" src={user.avatar} />
+                  {/* <Avatar alt={user.name} src={user.avatar} /> */}
                 </IconButton>
               </Tooltip>
             );

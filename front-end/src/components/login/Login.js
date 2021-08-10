@@ -1,6 +1,7 @@
 import {
   Grid,
-  Paper,
+  Box,
+  makeStyles,
   TextField,
   FormControlLabel,
   Checkbox,
@@ -8,26 +9,16 @@ import {
   Typography,
   Link,
   CircularProgress,
+  Grow,
+  Paper,
 } from "@material-ui/core";
 import axios from "axios";
 import { AuthContext } from "context/AuthContext";
 import React from "react";
 import { useContext } from "react";
 import { useRef } from "react";
-
+import GoogleButton from "./GoogleButton";
 function Login(props) {
-  const paperStyle = {
-    padding: 20,
-    height: "60vh",
-    width: 450,
-    margin: "150px auto",
-  };
-  const btnStyle = { margin: "15px 0", height: "45px" };
-  const textStyle = { margin: "0 0 10px 0" };
-  const linkStyle = { fontSize: "13px", margin: "15px 0" };
-  const googleStyle = { margin: "30px 0" };
-  const orStyle = { fontSize: "13px" };
-
   const email = useRef();
   const password = useRef();
   const { isFetching, dispatch } = useContext(AuthContext);
@@ -53,60 +44,62 @@ function Login(props) {
   };
 
   return props.trigger ? (
-    <Grid>
-      <Paper style={paperStyle}>
-        {/* elevation={10} */}
-        <Grid align="center" style={googleStyle}>
-          {/* <GoogleButton/> */}
-        </Grid>
-        <Typography align="center" style={linkStyle}>
-          Or
-        </Typography>
-        <form onSubmit={submitHandler}>
-          <TextField
-            label="email"
-            placeholder="enter email"
-            fullWidth
-            required
-            type="email"
-            inputRef={email}
-          />
-          <TextField
-            label="password"
-            type="password"
-            placeholder="enter password"
-            fullWidth
-            required
-            inputRef={password}
-            style={textStyle}
-          />
-          <Link style={linkStyle}>Forgot password?</Link>
-          <br />
-          <FormControlLabel
-            control={<Checkbox name="checkedB" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            variant="contained"
-            type="submit"
-            color="primary"
-            fullWidth
-            style={btnStyle}
-            disabled={isFetching}
-          >
-            {isFetching ? (
-              <CircularProgress color="primary" size="20px" />
-            ) : (
-              "Log In"
-            )}
-          </Button>
-        </form>
+    <Box className="card">
+      <Grid align="center">{/* <GoogleButton /> */}</Grid>
+      <br />
+      <form onSubmit={submitHandler}>
+        <TextField
+          fullWidth
+          variant="outlined"
+          color="secondary"
+          label="email"
+          placeholder="Enter Email Address"
+          required
+          type="email"
+          inputRef={email}
+        />
+        <br />
+        <br />
+        <TextField
+          variant="outlined"
+          color="secondary"
+          label="password"
+          type="password"
+          placeholder="enter password"
+          fullWidth
+          required
+          inputRef={password}
+        />
+        <br />
+        <br />
 
-        <Typography style={orStyle} align="center">
-          Don't have an account? <Link>Sign up</Link>
-        </Typography>
-      </Paper>
-    </Grid>
+        <div className="divide">
+          {/* <Typography>Forgot password?</Typography> */}
+
+          {/* <FormControlLabel
+            control={<Checkbox name="checkedB" />}
+            label="Remember me"
+          /> */}
+        </div>
+        <Button
+          variant="contained"
+          type="submit"
+          color="primary"
+          fullWidth
+          disabled={isFetching}
+        >
+          {isFetching ? (
+            <CircularProgress color="primary" size="16px" />
+          ) : (
+            "Sign In"
+          )}
+        </Button>
+      </form>
+      <br />
+      {/* <Typography align="center">
+        Don't have an account? <Link>Sign up</Link>
+      </Typography> */}
+    </Box>
   ) : (
     ""
   );

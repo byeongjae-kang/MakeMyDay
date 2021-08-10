@@ -34,7 +34,7 @@ export default function NewTask(props) {
           elevation={0}
           onClick={() => setOpen(!open)}
         >
-          <Typography style={{ color: "#fff" }}>+ New task</Typography>
+          <Typography style={{ color: "#fff" }}>+ Create a task</Typography>
         </Paper>
       </Collapse>
     </div>

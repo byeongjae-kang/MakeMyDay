@@ -5,9 +5,9 @@ import VideoSection from "./VideoSection";
 export default function Landing() {
   const [trigger, setTrigger] = useState(false);
   return (
-    <Fragment>
+    <div>
       <Navbar setTrigger={setTrigger} trigger={trigger} />
       <VideoSection trigger={trigger} setTrigger={setTrigger} />
-    </Fragment>
+    </div>
   );
 }

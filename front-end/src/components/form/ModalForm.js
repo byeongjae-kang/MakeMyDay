@@ -23,6 +23,7 @@ import {
   TextField,
   Grid,
 } from "@material-ui/core";
+import "../drag_drop/avatar.css";
 import useStyles from "./Styles";
 import CloseIcon from "@material-ui/icons/Close";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -128,7 +129,7 @@ export default function Form(props) {
           <TextField
             required
             color="secondary"
-            label="Edit Task"
+            label="Edit this task"
             multiline
             InputLabelProps={{ shrink: true }}
             placeholder="Enter new task..."
@@ -172,11 +173,16 @@ export default function Form(props) {
               getOptionLabel={(option) => option.user_name}
               renderOption={(user) => (
                 <div className={classes.members}>
-                  <Avatar
-                    className={classes.avatar}
+                  <img
+                    className="avatar"
                     alt={user.user_name}
                     src={user.avatar}
                   />
+                  {/* <Avatar
+                    className={classes.avatar}
+                    alt={user.user_name}
+                    src={user.avatar}
+                  /> */}
                   <p>
                     {user.user_name}
                     <br />
@@ -261,7 +267,7 @@ export default function Form(props) {
               {/* --------------------------------Priority Component------------------------------------------------- */}
               <br />
               <FormControl>
-                <FormLabel color="secondary">Priority</FormLabel>
+                <FormLabel color="secondary">Set Priority</FormLabel>
                 <Select
                   className={classes.select}
                   value={priority}

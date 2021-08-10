@@ -1,31 +1,39 @@
-.navbar {
-  /* background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%); */
+/* .navbar {
+  backgroundImage: `linear-gradient(to bottom right, ${color(c)
   height: 80px;
-  font-family: Montserrat;
-  font-weight: 600;
-  color: #fff;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  font-size: 1.2rem;
   position: fixed;
   top: 0;
   z-index: 999;
-}
+} */
 
-.navbar-logo {
+/* .divide {
+  display: flex;
+  justify-content: space-between;
+}
+.left {
+  color: #0b3442;
+  margin-left: 2.5em;
+}
+.right {
+  color: #0b3442;
+  margin-right: 2.5em;
+} */
+/* .navbar-logo {
   padding-left: 30px;
   margin-left: 20px;
   color: #0b3442;
-}
+} */
 
-.navbar-list {
+/* .navbar-list {
   margin-right: 20px;
   display: flex;
   flex-direction: row;
   cursor: pointer;
   list-style: none;
-}
+} */
 
 .navbar li {
   /* padding-right: 10px; */

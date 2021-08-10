@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import TimeLine from "react-gantt-timeline";
 import ProjectContext from "../../context/ProjectContext";
 import { useParams } from "react-router-dom";
-import { Container, Box } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 
 function Gantt() {
   const { projects, updateTask } = useContext(ProjectContext);

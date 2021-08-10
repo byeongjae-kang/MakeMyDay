@@ -38,13 +38,8 @@ const useStyles = makeStyles((theme) => ({
     width: 260,
   },
   root: {
-    width: 500,
-    "& > * + *": {
-      marginTop: theme.spacing(3),
-    },
-  },
-  root: {
     color: "secondary",
+    width: 500,
     "& > * + *": {
       marginTop: theme.spacing(3),
     },

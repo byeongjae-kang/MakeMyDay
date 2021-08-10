@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
   listItem: {
     // minWidth: 275,
     maxWidth: 400,
-    borderRadius: 5,
+    borderRadius: 10,
   },
   status: {
     color: (project) => {
@@ -34,9 +34,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "space-between",
   },
-  title: {
-    fontWeight: "500",
-    fontSize: "0.9rem",
+  tooltip: {
+    cursor: "pointer",
+    backgroundColor: "#406f7f",
   },
 }));
 

@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-const drawerWidth = 200;
+const drawerWidth = 180;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,20 +69,29 @@ const useStyles = makeStyles((theme) => ({
   },
   active: {
     color: "#673ab7",
-    // borderRadius: 10,
-    // opacity: "0.9",
+
     // padding: "5px",
     // color: "black",
   },
-  avatar: {
-    marginLeft: theme.spacing(2),
+  icons: {
+    marginLeft: "5px",
   },
+  avatar: { backgroundColor: "#406f7f", color: "#FFF" },
   app: {
     flexGrow: 1,
   },
   // sidebar: {
   //   background: "blue",
   // },
+  btnbtn: {
+    marginRight: "25px",
+    color: "#FFF",
+    backgroundColor: "#406f7f",
+    "&:hover": {
+      backgroundColor: "#406f7f",
+      boxShadow: "none",
+    },
+  },
 }));
 
 export { useStyles };

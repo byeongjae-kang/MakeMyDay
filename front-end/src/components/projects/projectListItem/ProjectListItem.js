@@ -7,8 +7,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
-
-import { Avatar, CardActions, Divider, Tooltip } from "@material-ui/core";
+import { Avatar, CardActions, Divider } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { useStyles } from "./ProjectListItemStyle";
 import Chat from "../chat/Chat";
@@ -46,8 +45,8 @@ export default function ProjectListItems({
   return (
     <Card elevation={1} className={classes.listItem} variant="outlined">
       <CardHeader
+        className={classes.title}
         title={project.name}
-        style={{ color: "#406f7f" }}
         action={
           <div>
             <IconButton
@@ -86,7 +85,9 @@ export default function ProjectListItems({
         className={classes.content}
         onClick={() => history.push(`${currentRoute.url}/${project.id}/tasks`)}
       >
-        <Typography variant="body3">{project.description}</Typography>
+        <Typography variant="body2" color="textSecondary">
+          {project.description}
+        </Typography>
       </CardContent>
 
       <div className={classes.footer}>
@@ -100,15 +101,9 @@ export default function ProjectListItems({
         <CardActions>
           {project.users.map((user) => {
             return (
-              <Tooltip
-                title={user.user_name}
-                className={classes.tooltip}
-                aria-label="add"
-              >
-                <IconButton key={user.id} className={classes.person}>
-                  <Avatar alt={user.name} src={user.avatar} />
-                </IconButton>
-              </Tooltip>
+              <IconButton key={user.id} className={classes.person}>
+                <Avatar alt={user.name} src={user.avatar} />
+              </IconButton>
             );
           })}
           <Chat project={project} />

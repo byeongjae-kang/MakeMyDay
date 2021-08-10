@@ -3,9 +3,9 @@ import { green, pink, yellow } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
-    minWidth: 275,
+    // minWidth: 275,
     maxWidth: 400,
-    borderRadius: 10,
+    borderRadius: 5,
   },
   status: {
     color: (project) => {
@@ -34,9 +34,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "space-between",
   },
-  tooltip: {
-    cursor: "pointer",
-    backgroundColor: "#406f7f",
+  title: {
+    fontWeight: "500",
+    fontSize: "0.9rem",
   },
 }));
 

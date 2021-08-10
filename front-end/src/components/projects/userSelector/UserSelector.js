@@ -17,7 +17,7 @@ export default function UserSelector({ users, getUserIds, userId }) {
       <Autocomplete
         onChange={(event, value) => getUserIds(value)}
         multiple
-        limitTags={4}
+        limitTags={2}
         id="multiple-limit-tags"
         options={users}
         value={getDefaultUsers(userId, users)}
@@ -40,7 +40,7 @@ export default function UserSelector({ users, getUserIds, userId }) {
           <TextField
             {...params}
             variant="outlined"
-            label="Select Team Members"
+            label="Team members"
             placeholder="Add members"
             color="secondary"
           />

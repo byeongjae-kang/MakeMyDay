@@ -7,7 +7,7 @@ import ProjectView from "components/projectView/ProjectView";
 const theme = createTheme({
   typography: {
     fontFamily: "Montserrat",
-    fontSize: 13,
+    fontSize: 12,
     fontWeightLight: 400,
     fontWeightRegular: 600,
     fontWeightMedium: 600,

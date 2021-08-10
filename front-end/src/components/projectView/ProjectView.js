@@ -12,7 +12,7 @@ import {
 import Gantt from "components/gantt/Gantt";
 import TasksBody from "components/drag_drop/TasksBody";
 import cloneDeep from "lodash/cloneDeep";
-import EventAvailableIcon from "@material-ui/icons/EventAvailable";
+import BarChartIcon from "@material-ui/icons/BarChart";
 import ListIcon from "@material-ui/icons/List";
 function ProjectView() {
   const [projects, setState] = useState({});
@@ -160,21 +160,19 @@ function ProjectView() {
   return (
     <ProjectContext.Provider value={stateData}>
       <Box display="flex" flexGrow={1}>
-        <Typography style={{ marginTop: "5px" }} variant="body2">
-          Project / {projects[projectId].name}
-        </Typography>
+        <Typography>Projects / {projects[projectId].name}</Typography>
 
         {/* <h4>{view ? "Project View" : "Gantt View"}</h4> */}
         <Box ml={1.5}>
           <Button
             size="small"
             type="submit"
-            color={view ? "primary" : "secondary"}
-            startIcon={view ? <EventAvailableIcon /> : <ListIcon />}
+            color="primary"
+            startIcon={view ? <BarChartIcon /> : <ListIcon />}
             variant="contained"
             onClick={toggleView}
           >
-            {view ? "Kanban Board" : "Gantt Chart"}
+            {view ? "Gantt Chart" : "Kanban Board"}
           </Button>
         </Box>
       </Box>

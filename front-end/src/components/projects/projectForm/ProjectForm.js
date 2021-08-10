@@ -56,7 +56,6 @@ export default function ProjectForm({
         <Grid container className={classes.divide}>
           <Grid item>
             <DialogTitle
-              style={{ color: "#673ab7" }}
               className={classes.title}
               id="customized-dialog-title"
               color="textSecondary"
@@ -94,7 +93,7 @@ export default function ProjectForm({
                 className={classes.field}
                 onChange={(e) => setdescription(e.target.value)}
                 value={description}
-                label="Enter a Description"
+                label="description"
                 variant="outlined"
                 color="secondary"
                 multiline
@@ -105,7 +104,6 @@ export default function ProjectForm({
               />
 
               <UserSelector
-                color="secondary"
                 users={state.users}
                 getUserIds={getUserIds}
                 userId={userId}
@@ -113,7 +111,7 @@ export default function ProjectForm({
 
               <div className={classes.divide}>
                 <FormControl className={classes.field}>
-                  <FormLabel color="secondary">Project Status</FormLabel>
+                  <FormLabel>Project Status</FormLabel>
                   <RadioGroup
                     value={status}
                     onChange={(e) => setStatus(e.target.value)}
@@ -142,7 +140,6 @@ export default function ProjectForm({
                 </FormControl>
 
                 <DatePickers
-                  color="secondary"
                   selectedDate={selectedDate}
                   handleDateChange={handleDateChange}
                 />
@@ -151,7 +148,6 @@ export default function ProjectForm({
                 <Grid />
                 <Grid>
                   <Button
-                    className={classes.save}
                     type="submit"
                     color="secondary"
                     variant="contained"

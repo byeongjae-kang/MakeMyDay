@@ -41,7 +41,7 @@ export default function Message({ project }) {
     const newMessage = {
       userId: user.id,
       projectId: project.id,
-      message: message,
+      message: message
     };
 
     axios

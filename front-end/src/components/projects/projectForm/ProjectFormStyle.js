@@ -26,9 +26,6 @@ const useStyles = makeStyles({
   title: {
     marginLeft: 25,
   },
-  save: {
-    marginBottom: 25,
-  },
 });
 
 export { useStyles };

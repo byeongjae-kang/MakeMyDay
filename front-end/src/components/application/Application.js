@@ -3,6 +3,7 @@ import { createTheme, ThemeProvider } from "@material-ui/core";
 import Layout from "./Layout";
 import ProjectList from "../projects/projectList/ProjectList";
 import ProjectView from "components/projectView/ProjectView";
+import Dashboard from "components/dashboard/Dashboard";
 
 const theme = createTheme({
   typography: {
@@ -35,6 +36,9 @@ export default function Application() {
       <Router>
         <Layout>
           <Switch>
+          <Route exact path="/dashboard">
+              <Dashboard />
+            </Route>
             <Route exact path="/projects">
               <ProjectList />
             </Route>

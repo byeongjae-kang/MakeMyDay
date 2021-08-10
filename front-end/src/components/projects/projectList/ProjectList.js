@@ -74,15 +74,15 @@ export default function ProjectList() {
         userId={userId}
       />
       <br />
-      <Masonry
-        breakpointCols={breakpoints}
-        className="my-masonry-grid"
-        columnClassName="my-masonry-grid_column"
-      >
-        <MessageContextProvider>
+      <MessageContextProvider>
+        <Masonry
+          breakpointCols={breakpoints}
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column"
+        >
           {sortedProjects}
-        </MessageContextProvider>
-      </Masonry>
+        </Masonry>
+      </MessageContextProvider>
     </div>
   );
 }

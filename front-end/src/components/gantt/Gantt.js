@@ -13,17 +13,17 @@ function Gantt() {
       //Targert the time header containing the information month/day of the week, day and time.
       top: {
         //Tartget the month elements
-        style: { backgroundColor: "#406f7f", fontSize: "16px" }, //The style applied to the month elements
+        style: { backgroundColor: "#406f7f", fontSize: "15px" }, //The style applied to the month elements
       },
       middle: {
         //Tartget elements displaying the day of week info
         style: { backgroundColor: "#114B5F" }, //The style applied to the day of week elements
-        selectedStyle: { backgroundColor: "#b13525" }, //The style applied to the day of week elements when is selected
+        selectedStyle: { backgroundColor: "#b13525", fontSize: 13 }, //The style applied to the day of week elements when is selected
       },
       bottom: {
         //Tartget elements displaying the day number or time
-        style: { background: "grey", fontSize: 9 }, //the style tp be applied
-        selectedStyle: { backgroundColor: "#b13525", fontWeight: "bold" }, //the style tp be applied  when selected
+        style: { background: "#406f7f", fontSize: 13 }, //the style tp be applied
+        selectedStyle: { backgroundColor: "#FFFF" }, //the style tp be applied  when selected
       },
     },
     taskList: {
@@ -32,7 +32,7 @@ function Gantt() {
         //The title od the task list
         label: "Tasks", //The caption to display as title
         style: {
-          backgroundColor: "#406f7f",
+          backgroundColor: "#114B5F",
           borderBottom: "solid 1px silver",
           color: "white",
           textAlign: "center",
@@ -41,11 +41,16 @@ function Gantt() {
       },
       task: {
         // The items inside the list diplaying the task
-        style: { backgroundColor: "#fbf9f9" }, // the style to be applied
+        style: {
+          backgroundColor: "#fbf9f9",
+          textAlign: "left",
+          fontSize: 12.5,
+          color: "#114B5F",
+        }, // the style to be applied
       },
       verticalSeparator: {
         //the vertical seperator use to resize he width of the task list
-        style: { backgroundColor: "#555555" }, //the style
+        style: { backgroundColor: "#0b3442" }, //the style
         grip: {
           //the four square grip inside the vertical separator
           style: { backgroundColor: "#cfcfcd" }, //the style to be applied
@@ -68,7 +73,7 @@ function Gantt() {
           borderRadius: 14,
           color: "white",
           textAlign: "center",
-          backgroundColor: "grey",
+          backgroundColor: "#114B5F",
         },
         selectedStyle: {}, //the style tp be applied  when selected
       },

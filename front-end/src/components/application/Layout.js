@@ -18,9 +18,11 @@ import {
   ListItemText,
   Toolbar,
   Typography,
+  Tooltip,
+  Button,
 } from "@material-ui/core";
-
-
+import GitHubIcon from "@material-ui/icons/GitHub";
+import SubjectOutlined from "@material-ui/icons/SubjectOutlined";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
@@ -40,13 +42,13 @@ export default function MiniDrawer({ children }) {
 
   const menuItems = [
     {
-      text: "Dashboard",
-      icon: <HomeIcon color="action" />,
+      text: <Typography variant="body2">Dashboard</Typography>,
+      icon: <HomeIcon className={classes.icons} />,
       path: "/dashboard",
     },
     {
-      text: "Projects",
-      icon: <AssignmentIcon color="action" />,
+      text: <Typography variant="body2">Projects</Typography>,
+      icon: <AssignmentIcon className={classes.icons} />,
       path: "/projects",
     },
   ];
@@ -79,7 +81,7 @@ export default function MiniDrawer({ children }) {
               <IconButton
                 // color="inherit"
                 aria-label="open drawer"
-                onClick={handleDrawerOpen}
+                // onClick={handleDrawerOpen}
                 edge="start"
                 className={clsx(classes.menuButton, {
                   [classes.hide]: open,
@@ -87,13 +89,33 @@ export default function MiniDrawer({ children }) {
               >
                 <MenuIcon />
               </IconButton>
+
               <Typography variant="h6" noWrap className={classes.app}>
                 {/* <strong>MAKE MY DAY</strong> */}
               </Typography>
               <div>
+                <Button
+                  variant="outlined"
+                  size="small"
+                  title="https://github.com/byeongjae-kang/MakeMyDay"
+                  className={classes.btnbtn}
+                  onClick={() =>
+                    window.open("https://github.com/byeongjae-kang/MakeMyDay")
+                  }
+                  startIcon={<GitHubIcon />}
+                >
+                  Github Link
+                </Button>
                 {/* <Typography>WELCOME!! {user && user.user_name}</Typography> */}
               </div>
-              <Avatar src={user && user.avatar} className={classes.avatar} />
+              <Tooltip
+                style={{ cursor: "pointer" }}
+                title={`Hi ${user.user_name}`}
+              >
+                <Avatar className={classes.avatar}>
+                  {user.user_name.charAt(0)}
+                </Avatar>
+              </Tooltip>
             </Toolbar>
           </AppBar>
           <Drawer
@@ -119,7 +141,7 @@ export default function MiniDrawer({ children }) {
               </IconButton>
             </div>
 
-            <Divider />
+            {/* <Divider /> */}
             <br />
             <List>
               {menuItems.map((item) => (
@@ -131,12 +153,18 @@ export default function MiniDrawer({ children }) {
                     location.pathname === item.path ? classes.active : null
                   }
                 >
-                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemIcon
+                    className={
+                      location.pathname === item.path ? classes.active : null
+                    }
+                  >
+                    {item.icon}
+                  </ListItemIcon>
                   <ListItemText>{item.text}</ListItemText>
                 </ListItem>
               ))}
             </List>
-            <Divider />
+            {/* <Divider /> */}
           </Drawer>
           <div className={classes.content}>
             <div className={classes.toolbar}></div>

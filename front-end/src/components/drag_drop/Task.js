@@ -71,8 +71,8 @@ const useStyle = makeStyles((theme) => ({
     paddingRight: 5,
   },
   avatar: {
-    height: "30px",
-    width: "30px",
+    height: "24px",
+    width: "24px",
   },
   tooltip: {
     cursor: "pointer",
@@ -149,7 +149,11 @@ export default function Task({ index, updateTask, task }) {
             >
               <Card className={classes.card} elevation={1} variant="outlined">
                 <CardHeader
-                  title={<Typography fontSize="16">{task.name}</Typography>}
+                  title={
+                    <Typography variant="body3" fontSize="16">
+                      {task.name}
+                    </Typography>
+                  }
                   action={
                     <div>
                       <MoreVertIcon
@@ -206,7 +210,9 @@ export default function Task({ index, updateTask, task }) {
                         priority={task.priority}
                         className={classes.priority}
                       />
-                      <Typography color="primary">{endDate}</Typography>
+                      <Typography variant="body3" color="primary">
+                        {endDate}
+                      </Typography>
                     </div>
                     <Tooltip
                       title={task.user_name}

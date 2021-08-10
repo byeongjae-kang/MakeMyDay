@@ -69,7 +69,7 @@ export default function Form(props) {
       priority: priority,
       user_id: selectedUsers.id,
     };
-    if (selectedUsers.length < 1 || selectedUsers === null) {
+    if (selectedUsers === "" || selectedUsers === null) {
       return setOpenPopup(true);
     } else {
       axios
@@ -123,43 +123,45 @@ export default function Form(props) {
       {/*-----------------------------Start of Form--------------------------------------- */}
       <form onSubmit={(e) => handleSubmit(e, task.id, task.project_id)}>
         <DialogTitle>
-          <FormGroup>
-            <FormLabel>Task</FormLabel>
-            <TextField
-              multiline
-              InputLabelProps={{ shrink: true }}
-              placeholder="Enter a new task..."
-              fullWidth
-              value={title}
-              inputProps={{ maxLength: 45 }}
-              onChange={(e) => {
-                setTitle(e.target.value);
-              }}
-            />
-          </FormGroup>
+          <TextField
+            required
+            color="secondary"
+            label="Edit Task"
+            multiline
+            InputLabelProps={{ shrink: true }}
+            placeholder="Enter new task..."
+            fullWidth
+            value={title}
+            inputProps={{ maxLength: 45 }}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+          />
         </DialogTitle>
 
         <DialogContent dividers>
           {/*-----------------------------Enter Description Component---------------------------------------- */}
-          <FormGroup>
-            <FormLabel>Enter Description</FormLabel>
-            <TextField
-              className={classes.field}
-              placeholder="Enter a new description..."
-              multiline
-              variant="filled"
-              fullWidth
-              value={description}
-              onChange={(e) => {
-                setDescription(e.target.value);
-              }}
-            />
-          </FormGroup>
+
+          <TextField
+            color="secondary"
+            label="Enter new description..."
+            className={classes.field}
+            multiline
+            variant="outlined"
+            fullWidth
+            value={description}
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
+          />
+          <br />
           {/*-----------------------------Select Users Component---------------------------------------- */}
           <br />
-          <FormLabel>Select Team Member</FormLabel>
+
           <div className={classes.root}>
             <Autocomplete
+              color="secondary"
+              label="Select Team Members"
               onChange={(e, value) => setSelectedUsers(value)}
               limitTags={1}
               id="multiple-limit-tags"
@@ -184,8 +186,7 @@ export default function Form(props) {
                 <TextField
                   {...params}
                   variant="outlined"
-                  // label="Assign Team Member"
-                  placeholder="Add members"
+                  label="Assign a team member"
                   color="secondary"
                 />
               )}
@@ -193,73 +194,72 @@ export default function Form(props) {
           </div>
 
           {/* --------------------------------Status Component-------------------------------------------------- */}
+
           <br />
           <div className={classes.divide}>
-            <FormGroup>
-              <FormControl>
-                <FormLabel>Project Status</FormLabel>
-                <RadioGroup
-                  value={status}
-                  onChange={(e) => {
-                    setStatus(e.target.value);
-                  }}
-                >
-                  <FormControlLabel
-                    value="In Progress"
-                    control={<Radio />}
-                    label="In Progress"
-                  />
-                  <FormControlLabel
-                    value="Backlog"
-                    control={<Radio />}
-                    label="Backlog"
-                  />
-                  <FormControlLabel
-                    value="On Hold"
-                    control={<Radio />}
-                    label="On Hold"
-                  />
-                  <FormControlLabel
-                    value="Completed"
-                    control={<Radio />}
-                    label="Completed"
-                  />
-                </RadioGroup>
-              </FormControl>
-            </FormGroup>
-
+            <FormControl>
+              <FormLabel color="secondary">Task Status</FormLabel>
+              <RadioGroup
+                label="Project Status"
+                color="secondary"
+                value={status}
+                onChange={(e) => {
+                  setStatus(e.target.value);
+                }}
+              >
+                <FormControlLabel
+                  value="In Progress"
+                  control={<Radio />}
+                  label="In Progress"
+                />
+                <FormControlLabel
+                  value="Backlog"
+                  control={<Radio />}
+                  label="Backlog"
+                />
+                <FormControlLabel
+                  value="On Hold"
+                  control={<Radio />}
+                  label="On Hold"
+                />
+                <FormControlLabel
+                  value="Completed"
+                  control={<Radio />}
+                  label="Completed"
+                />
+              </RadioGroup>
+            </FormControl>
             <div>
               {/* ----------------------------------Date Range Component----------------------------------------- */}
 
-              <FormGroup>
-                <FormLabel>Select Start Date</FormLabel>
-                <div className={classes.container} noValidate>
-                  <TextField
-                    id="date"
-                    type="date"
-                    value={startDate}
-                    className={classes.textField}
-                    onChange={(e) => setStartDate(e.target.value)}
-                  />
-                </div>
-              </FormGroup>
-              <FormGroup>
-                <FormLabel>Select End Date</FormLabel>
-                <div className={classes.container} noValidate>
-                  <TextField
-                    id="date"
-                    type="date"
-                    value={endDate}
-                    className={classes.textField}
-                    onChange={(e) => setEndDate(e.target.value)}
-                  />
-                </div>
-              </FormGroup>
+              <div className={classes.container} noValidate>
+                <TextField
+                  color="secondary"
+                  label="Select Start Date"
+                  id="date"
+                  type="date"
+                  value={startDate}
+                  className={classes.textField}
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
+              </div>
+
+              <div className={classes.container} noValidate>
+                <TextField
+                  color="secondary"
+                  label="Select End Date"
+                  id="date"
+                  type="date"
+                  value={endDate}
+                  className={classes.textField}
+                  onChange={(e) => setEndDate(e.target.value)}
+                />
+              </div>
 
               {/* --------------------------------Priority Component------------------------------------------------- */}
               <br />
-              <FormGroup>
-                <FormLabel>Priority</FormLabel>
+              <FormControl>
+                <FormLabel color="secondary">Priority</FormLabel>
                 <Select
                   className={classes.select}
                   value={priority}
@@ -271,7 +271,7 @@ export default function Form(props) {
                   <MenuItem value="2">Medium</MenuItem>
                   <MenuItem value="3">Low</MenuItem>
                 </Select>
-              </FormGroup>
+              </FormControl>
             </div>
           </div>
           {/* ---------------------------------Save Button -------------------------------------- */}

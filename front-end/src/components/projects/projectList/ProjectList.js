@@ -1,13 +1,14 @@
 import React from "react";
 import Masonry from "react-masonry-css";
-import { Grid } from "@material-ui/core";
+
 import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
+
 import ProjectForm from "../projectForm/ProjectForm";
 import ProjectListItems from "../projectListItem/ProjectListItem";
 import useProjectData from "hooks/useProjectData";
 import "./ProjectList.css";
+import { MessageContextProvider } from "context/MessageContext";
 
 export default function ProjectList() {
   const {
@@ -78,7 +79,9 @@ export default function ProjectList() {
         className="my-masonry-grid"
         columnClassName="my-masonry-grid_column"
       >
-        {sortedProjects}
+        <MessageContextProvider>
+          {sortedProjects}
+        </MessageContextProvider>
       </Masonry>
     </div>
   );

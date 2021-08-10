@@ -3,9 +3,7 @@ import ProjectContext from "../../context/ProjectContext";
 import axios from "axios";
 import cloneDeep from "lodash/cloneDeep";
 import {
-  deleteTask,
-  HaveProjectWithUsers,
-  findIndex,
+  deleteTask
 } from "../../hooks/helpers";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Avatar } from "@material-ui/core";

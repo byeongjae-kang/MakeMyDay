@@ -1,5 +1,5 @@
 import { Typography } from "@material-ui/core";
-import { typography } from "@material-ui/system";
+
 import "./Navbar.css";
 
 function Navbar(props) {

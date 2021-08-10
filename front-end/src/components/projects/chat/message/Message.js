@@ -3,9 +3,10 @@ import { AuthContext } from "context/AuthContext";
 import { useContext, useEffect, useRef, useState } from "react";
 import { format } from "timeago.js";
 import "./message.css";
+import { MessageContext } from "context/MessageContext";
 
 const getMessagesWithUsers = (messages, usersInProject) => {
-  return messages.map((message) => {
+  return messages?.map((message) => {
     message["user"] = usersInProject.find(
       (user) => user.id === message.user_id
     );
@@ -17,9 +18,18 @@ const getMessagesWithUsers = (messages, usersInProject) => {
 export default function Message({ project }) {
   const [inputMessage, setInputMessage] = useState("");
   const [allMessages, setAllMessages] = useState([]);
-  const scrollRef = useRef();
   const { user } = useContext(AuthContext);
+  const scrollRef = useRef();
 
+  const { setSocketMessage, receivedMessage } = useContext(MessageContext)
+  
+  useEffect(() => {
+    if (receivedMessage?.project_id === project.id) {
+      setAllMessages([...allMessages, receivedMessage])
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [receivedMessage])
+  
   useEffect(() => {
     axios
       .get(`/api/projects/${project.id}/messages`)
@@ -39,9 +49,9 @@ export default function Message({ project }) {
     setInputMessage("");
 
     const newMessage = {
-      userId: user.id,
-      projectId: project.id,
-      message: message,
+      user_id: user.id,
+      project_id: project.id,
+      message: message
     };
 
     axios
@@ -50,7 +60,7 @@ export default function Message({ project }) {
         const receivedMessage = result.data[0];
         receivedMessage["user"] = user;
         delete receivedMessage.user_id;
-        setAllMessages([...allMessages, receivedMessage]);
+        setSocketMessage(receivedMessage)
       })
       .catch((err) =>
         console.log("could not add message to database", err.message)

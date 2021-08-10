@@ -44,8 +44,6 @@ function Login(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(email.current.value);
-    console.log(password.current.value);
     loginCall(
       { email: email.current.value, password: password.current.value },
       dispatch

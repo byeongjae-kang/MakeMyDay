@@ -25,7 +25,7 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import SubjectOutlined from "@material-ui/icons/SubjectOutlined";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import DashboardIcon from "@material-ui/icons/Dashboard";
+
 import HomeIcon from "@material-ui/icons/Home";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import MenuIcon from "@material-ui/icons/Menu";

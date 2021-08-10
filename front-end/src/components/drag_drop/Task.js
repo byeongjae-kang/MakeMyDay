@@ -11,7 +11,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { yellow, pink, green } from "@material-ui/core/colors";
 import { useParams } from "react-router-dom";
-import AvatarGroup from "@material-ui/lab/AvatarGroup";
+
 import NaturalDragAnimation from "natural-drag-animation-rbdnd";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
@@ -48,10 +48,6 @@ const useStyle = makeStyles((theme) => ({
       return green[700];
     },
   },
-  priority: {
-    // marginTop: 10,
-  },
-
   person: {
     height: 10,
     padding: 0,
@@ -82,7 +78,7 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 export default function Task({ index, updateTask, task }) {
-  const { deleteTasks, users, selectedUsers, setSelectedUsers } =
+  const { deleteTasks, users } =
     useContext(ProjectContext);
 
   const classes = useStyle();

@@ -27,10 +27,10 @@ app.get('/api/projects/:id/messages', (req, res) => {
 })
 
 app.post('/api/projects/:id/messages', (req, res) => {
-  const { userId, projectId, message } = req.body;
+  const { user_id, project_id, message } = req.body;
   
   pool.query(`INSERT INTO messages (user_id, project_id, message) VALUES ($1, $2, $3) RETURNING *`
-  , [userId, projectId, message])
+  , [user_id, project_id, message])
     .then(result => {
       
       res.json(result.rows)

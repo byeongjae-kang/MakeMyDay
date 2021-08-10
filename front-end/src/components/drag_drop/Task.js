@@ -16,6 +16,7 @@ import NaturalDragAnimation from "natural-drag-animation-rbdnd";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import "./avatar.css";
 const useStyle = makeStyles((theme) => ({
   // task: {
   //   padding: theme.spacing(1, 1, 1, 2),
@@ -69,10 +70,6 @@ const useStyle = makeStyles((theme) => ({
   },
   priority: {
     paddingRight: 5,
-  },
-  avatar: {
-    height: "24px",
-    width: "24px",
   },
   tooltip: {
     cursor: "pointer",
@@ -219,11 +216,16 @@ export default function Task({ index, updateTask, task }) {
                       className={classes.tooltip}
                       aria-label="add"
                     >
-                      <Avatar
+                      <img
+                        className="avatar1"
+                        alt={task.user_name}
+                        src={task.avatar}
+                      />
+                      {/* <Avatar
                         className={classes.avatar}
                         alt={task.name}
                         src={task.avatar}
-                      />
+                      /> */}
                     </Tooltip>
                   </Grid>
                 </CardContent>

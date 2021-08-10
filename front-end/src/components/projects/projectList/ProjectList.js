@@ -31,7 +31,7 @@ export default function ProjectList() {
     userId,
     breakpoints,
     HaveProjectWithUsers,
-    handleDelete
+    handleDelete,
   } = useProjectData();
 
   const sortedProjects = [...state.projects].reverse().map((project, index) => (
@@ -53,7 +53,7 @@ export default function ProjectList() {
         onClick={handleClickOpen}
         startIcon={<AddIcon />}
       >
-        CREATE NEW PROJECTS
+        CREATE NEW PROJECT
       </Button>
 
       <ProjectForm

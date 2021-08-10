@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     marginTop: 100,
+    marginBottom: 25,
   },
   card: {
     padding: theme.spacing(1, 1, 1, 2),
@@ -30,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     flexWrap: "wrap",
-    marginTop: 20,
   },
   textField: {
     marginRight: theme.spacing(1),
@@ -60,9 +60,6 @@ const useStyles = makeStyles((theme) => ({
   },
   radius: {
     borderRadius: 10,
-  },
-  typography: {
-    fontFamily: "",
   },
 }));
 

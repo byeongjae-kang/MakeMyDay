@@ -39,19 +39,13 @@ app.post('/api/projects/:id/messages', (req, res) => {
 })
 
 app.post(`/login`, (req, res) => {
-  const { email, password } = req.body;
+  const { email } = req.body;
   pool
-    .query("SELECT * FROM users WHERE email = $1 AND password = $2", [
-      email,
-      password,
-    ])
+    .query("SELECT * FROM users WHERE email = $1", [email])
     .then((result) => {
       const user = result.rows[0];
       if (!user.email) {
         return res.status(404).json("user not found");
-      }
-      if (!user.password) {
-        return res.status(400).json("wrong password");
       }
       res.status(200).json(user);
     })

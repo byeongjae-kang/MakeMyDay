@@ -3,7 +3,7 @@ import { green, pink, yellow } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
-    // minWidth: 275,
+    minWidth: 275,
     maxWidth: 400,
     borderRadius: 10,
   },

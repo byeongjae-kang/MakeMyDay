@@ -149,7 +149,19 @@ export default function Message({ project }) {
             onChange={(e) => {
               setInputMessage(e.target.value);
             }}
-          ></TextField>
+          ></TextField>{" "}
+          <Box
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginTop: "6px",
+            }}
+          >
+            <div />
+            <Typography style={{ marginRight: "20px" }}>
+              #{project.name}
+            </Typography>
+          </Box>
           {/* d<button type="submit">Send</button> */}
         </form>
       </div>

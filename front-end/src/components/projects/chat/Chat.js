@@ -1,6 +1,7 @@
 import React from "react";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import { DialogContent } from "@material-ui/core";
 import Slide from "@material-ui/core/Slide";
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import Message from "./message/Message";
@@ -45,21 +46,28 @@ export default function Chat({ project }) {
         />
       </LightTooltip>
       <Dialog
+        BackdropProps={{ style: { backgroundColor: "transparent" } }}
+        PaperProps={{
+          style: {
+            backgroundColor: "rgba(0, 0, 0 , 0.44)",
+            border: "rgba(255, 255, 255, 0.25)",
+            borderRadius: "10px",
+            boxShadow: "none",
+            backdropFilter: "blur(15px)",
+          },
+        }}
         open={open}
         TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
       >
-        <DialogTitle id="alert-dialog-slide-title">
+        {/* <DialogTitle id="alert-dialog-slide-title">
           Chat Room: {project.name}
-        </DialogTitle>
-
-        <div className="divider">
-          <div className="project_chat_content">
-            <Members usersInProject={project.users} />
-            <Message project={project} />
-          </div>
-        </div>
+        </DialogTitle> */}
+        <DialogContent>
+          {/* <Members usersInProject={project.users} /> */}
+          <Message project={project} />
+        </DialogContent>
       </Dialog>
     </div>
   );

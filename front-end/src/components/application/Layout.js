@@ -61,14 +61,22 @@ export default function MiniDrawer({ children }) {
   const location = useLocation();
 
   const menuItems = [
-    {
-      text: <Typography variant="body2">Dashboard</Typography>,
-      icon: <HomeIcon className={classes.icons} />,
-      path: "/dashboard",
-    },
+    // {
+    //   text: (
+    //     <LightTooltip style={{ cursor: "pointer" }} title={"Dashboard"}>
+    //       <Typography variant="body2">Dashboard</Typography>
+    //     </LightTooltip>
+    //   ),
+    //   icon: <HomeIcon className={classes.icons} />,
+    //   path: "/dashboard",
+    // },
     {
       text: <Typography variant="body2">Projects</Typography>,
-      icon: <AssignmentIcon className={classes.icons} />,
+      icon: (
+        <LightTooltip style={{ cursor: "pointer" }} title={"Projects"}>
+          <AssignmentIcon className={classes.icons} />
+        </LightTooltip>
+      ),
       path: "/projects",
     },
   ];
@@ -187,6 +195,7 @@ export default function MiniDrawer({ children }) {
 
             {/* <Divider /> */}
             <br />
+
             <List>
               {menuItems.map((item) => (
                 <ListItem

@@ -85,7 +85,11 @@ export default function ProjectForm({
                 inputProps={{ maxLength: 50 }}
                 onChange={(e) => setTitle(e.target.value)}
                 value={title}
-                label="Project Title (50 character limit)"
+                label={
+                  param.id
+                    ? "Change Project Title (50 character limit)"
+                    : "Enter a New Project Title (50 character limit)"
+                }
                 variant="outlined"
                 color="secondary"
                 fullWidth

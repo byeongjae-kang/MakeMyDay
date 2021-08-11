@@ -133,6 +133,7 @@ export default function ProjectListItems({
               >
                 <IconButton key={user.id} className={classes.person}>
                   <img className="avatar" src={user.avatar} />
+
                   {/* <Avatar alt={user.name} src={user.avatar} /> */}
                 </IconButton>
               </LightTooltip>

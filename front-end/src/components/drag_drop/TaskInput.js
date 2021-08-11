@@ -32,7 +32,7 @@ export default function TaskInput(props) {
         setName("");
       }
 
-      setError(name.length ? "" : "Title Required");
+      setError(name.length ? "" : props.setOpen(false));
     }
   }
 

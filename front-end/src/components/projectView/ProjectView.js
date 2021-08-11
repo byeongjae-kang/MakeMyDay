@@ -181,13 +181,15 @@ function ProjectView() {
   const projectUsers = users[projectId].users;
 
   const avatars = projectUsers.map((each, index) => (
-    <img
-      key={index}
-      className="avatar1"
-      alt={each.user_name}
-      src={each.avatar}
-      onClick={() => toggleFilter(each.id)}
-    />
+    <LightTooltip style={{ cursor: "pointer" }} title={each.user_name}>
+      <img
+        key={index}
+        className="avatar1"
+        alt={each.user_name}
+        src={each.avatar}
+        onClick={() => toggleFilter(each.id)}
+      />
+    </LightTooltip>
   ));
 
   return (
@@ -217,6 +219,8 @@ function ProjectView() {
             </Button>
           </LightTooltip>
         </Box>
+
+        <Box>{avatars}</Box>
       </Box>
 
       <br />

@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
   active: {
-    color: "#114B5F",
+    color: "#673ab7",
 
     // padding: "5px",
     // color: "black",

@@ -10,7 +10,7 @@ import {
   Link,
   CircularProgress,
   Grow,
-  Paper,
+  Paper
 } from "@material-ui/core";
 import axios from "axios";
 import { AuthContext } from "context/AuthContext";
@@ -44,7 +44,7 @@ function Login(props) {
 
   const responseGoogle = (response) => {
     response.profileObj?.email &&
-      loginCall({ email: response.profileObj.email }, dispatch);
+    loginCall({email: response.profileObj.email}, dispatch)
   };
 
   return props.trigger ? (
@@ -55,7 +55,7 @@ function Login(props) {
           variant="outlined"
           color="secondary"
           label="email"
-          // placeholder="Enter Email Address"
+          placeholder="Enter Email Address"
           required
           type="email"
           inputRef={email}

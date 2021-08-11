@@ -42,3 +42,33 @@
   -webkit-transform: translateY(-4px);
   transform: translateY(-4px);
 }
+
+
+.filter_by_users > label> h4 {
+  margin-bottom: 0.2em;
+}
+
+
+.filter_by_users_Info {
+  width: fit-content;
+  display: flex;
+  flex-direction: row wrap;
+  padding: 0.3em;
+  background-color: lightsteelblue;
+  border-radius: 20px;
+}
+
+.filter_by_users_avatar {
+  margin: 0;
+  border: solid 1px lightcyan;
+}
+
+.filter_by_status > h4 {
+  margin-bottom: 0.2em;
+}
+
+.filter_by_status_radio {
+  
+  display: flex;
+  flex-direction: row;
+}

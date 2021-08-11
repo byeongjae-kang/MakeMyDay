@@ -77,12 +77,7 @@ INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VA
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('start testing with storybook', 'On Hold', 3, 8, 2,'2021-06-04', '2021-08-07');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('come up with more fake data', 'On Hold', 3, 8, 1,'2021-07-27', '2021-08-06');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('finish all stretch exercises on compass', 'Completed' , 1, 8, 2,'2021-05-26', '2021-08-07');
-INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('implement file sharing feature', 'Backlog' , 3, 8, 2,'2021-07-12', 
-
-
-
-
-'2021-08-12');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('implement file sharing feature', 'Backlog' , 3, 8, 2,'2021-07-12', '2021-08-12');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('merge current branch to main', 'On Hold' , 4, 7, 1,'2021-06-10', '2021-08-04');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('implement websocket', 'Backlog' , 4, 7, 1,'2021-05-27', '2021-08-09');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('deploy on heroku', 'Completed', 4, 7, 2,'2021-05-27', '2021-08-07');
@@ -168,3 +163,14 @@ INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VA
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('come up with a project idea', 'On Hold', 24, 1, 1,'2021-06-26', '2021-08-04');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('meet with group', 'Backlog', 24, 1, 2,'2021-07-13', '2021-08-05');
 
+-- seeds by Korlan
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('research stack trends', 'Completed', 1, 8, 2,'2021-07-13', '2021-08-05');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('research npm packages', 'Completed', 1, 8, 2,'2021-07-13', '2021-08-05');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('google login feature', 'Completed', 1, 8, 2,'2021-07-13', '2021-08-05');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('gantt chart feature', 'Completed', 2, 8, 2,'2021-07-13', '2021-08-05');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('erd schema', 'Completed', 1, 8, 2,'2021-07-13', '2021-08-05');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('wireframe mocks', 'Completed', 3, 8, 2,'2021-07-13', '2021-08-05');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('components styling', 'Completed', 3, 8, 2,'2021-07-13', '2021-08-05');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('landing page design', 'Completed', 3, 8, 2,'2021-07-13', '2021-08-05');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('drag and drop feature', 'Completed', 1, 8, 2,'2021-07-13', '2021-08-05');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('logo design', 'Completed', 1, 8, 2,'2021-07-13', '2021-08-05');

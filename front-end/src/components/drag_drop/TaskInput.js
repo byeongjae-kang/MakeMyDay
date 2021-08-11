@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { InputBase, Paper } from "@material-ui/core";
+import { InputBase, Paper, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import ProjectContext from "../../context/ProjectContext";
 import { useParams } from "react-router";
@@ -16,6 +16,7 @@ export default function TaskInput(props) {
   const projectId = useParams().id;
   const [name, setName] = useState("");
   const classes = useStyle();
+  const [error, setError] = useState("");
 
   function handleKeyPress(e) {
     setName(e.target.value);
@@ -24,9 +25,14 @@ export default function TaskInput(props) {
   function handleSubmit(e) {
     if (e.key === "Enter") {
       e.preventDefault();
-      createTask(name, projectId);
-      props.setOpen(false);
-      setName("");
+
+      if (name.length > 1) {
+        createTask(name, projectId);
+        props.setOpen(false);
+        setName("");
+      }
+      
+      setError(name.length ? "" : "Please type task title")
     }
   }
 
@@ -35,7 +41,7 @@ export default function TaskInput(props) {
       <InputBase
         multiline
         fullWidth
-        placeholder="Enter a title..."
+        placeholder={error ? error : "Enter a title..."}
         value={name}
         onKeyDown={handleSubmit}
         onChange={handleKeyPress}

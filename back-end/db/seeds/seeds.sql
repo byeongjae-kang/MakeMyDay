@@ -66,15 +66,16 @@ VALUES
 (1,	23),
 (1,	24);
 
-INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('discuss project idea with group', 'In Progress', 1, 8, 3,'2021-07-17', '2021-08-07');
-INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('team meeting with mentor', 'Backlog', 1, 8, 1,'2021-06-03', '2021-08-12');
-INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('look for initial investors', 'In Progress' , 1, 8, 2,'2021-07-24', '2021-08-09');
-INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('implement chat feature', 'Completed' , 1, 8, 3,'2021-06-06', '2021-08-07');
-INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('create routes on backend', 'Completed', 2, 8, 2,'2021-06-21', '2021-08-01');
-INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('update dashboard view', 'Backlog' , 2, 8, 3,'2021-07-14', '2021-08-12');
-INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('fix bug in drag and drop', 'Completed', 2, 8, 2,'2021-06-21', '2021-08-03');
-INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('implement responsive web design on task level', 'On Hold' , 2, 8, 1,'2021-07-22', '2021-08-06');
-INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('start testing with storybook', 'On Hold', 3, 8, 2,'2021-06-04', '2021-08-07');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('research Mongodb', 'On Hold', 3, 8, 3,'2021-07-16', '2021-07-31');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('discuss project idea with group', 'In Progress', 1, 8, 3,'2021-07-17', '2021-07-31');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('team meeting with mentor', 'Backlog', 1, 8, 1,'2021-08-05', '2021-08-12');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('look for initial investors', 'In Progress' , 1, 8, 2,'2021-07-30', '2021-08-09');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('implement chat feature', 'Completed' , 1, 8, 3,'2021-06-26', '2021-08-05');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('create routes on backend', 'Completed', 2, 8, 2,'2021-07-02', '2021-08-01');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('update dashboard view', 'Backlog' , 2, 8, 3,'2021-06-01', '2021-08-12');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('fix bug in drag and drop', 'Completed', 2, 8, 2,'2021-06-04', '2021-08-03');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('implement responsive web design on task level', 'On Hold' , 2, 8, 1,'2021-06-23', '2021-08-06');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('start testing with storybook', 'On Hold', 3, 8, 2,'2021-05-28', '2021-08-07');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('come up with more fake data', 'On Hold', 3, 8, 1,'2021-07-27', '2021-08-06');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('finish all stretch exercises on compass', 'Completed' , 1, 8, 2,'2021-05-26', '2021-08-07');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('implement file sharing feature', 'Backlog' , 3, 8, 2,'2021-07-12', '2021-08-12');
@@ -164,13 +165,13 @@ INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VA
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('meet with group', 'Backlog', 24, 1, 2,'2021-07-13', '2021-08-05');
 
 -- seeds by Korlan
-INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('research stack trends', 'Completed', 1, 8, 2,'2021-07-13', '2021-08-05');
-INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('research npm packages', 'Completed', 1, 8, 2,'2021-07-13', '2021-08-05');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('research stack trends', 'On Hold', 1, 8, 2,'2021-07-13', '2021-08-05');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('research npm packages', 'On Hold', 1, 8, 2,'2021-07-13', '2021-08-05');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('google login feature', 'Completed', 1, 8, 2,'2021-07-13', '2021-08-05');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('gantt chart feature', 'Completed', 2, 8, 2,'2021-07-13', '2021-08-05');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('erd schema', 'Completed', 1, 8, 2,'2021-07-13', '2021-08-05');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('wireframe mocks', 'Completed', 3, 8, 2,'2021-07-13', '2021-08-05');
-INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('components styling', 'Completed', 3, 8, 2,'2021-07-13', '2021-08-05');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('components styling', 'Backlog', 3, 8, 2,'2021-07-13', '2021-08-05');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('landing page design', 'Completed', 3, 8, 2,'2021-07-13', '2021-08-05');
 INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('drag and drop feature', 'Completed', 1, 8, 2,'2021-07-13', '2021-08-05');
-INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('logo design', 'Completed', 1, 8, 2,'2021-07-13', '2021-08-05');
+INSERT INTO tasks (name, status, user_id, project_id, priority, start, "end") VALUES('logo design', 'On Hold', 1, 8, 2,'2021-07-13', '2021-08-05');

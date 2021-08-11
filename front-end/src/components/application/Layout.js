@@ -159,14 +159,12 @@ export default function MiniDrawer({ children }) {
               <LightTooltip
                 style={{ cursor: "pointer" }}
                 title={
-                  !user.user_name
-                    ? "Login Feature Not Enabled"
-                    : `Hi ${user.user_name}`
+                  // user.user_name === null ?
+                  "Login Feature Not Enabled"
+                  // : `Hi ${user.user_name}`
                 }
               >
-                <Avatar className={classes.avatar}>
-                  {user.user_name.charAt(0)}
-                </Avatar>
+                <Avatar className={classes.avatar}></Avatar>
               </LightTooltip>
             </Toolbar>
           </AppBar>

@@ -118,8 +118,8 @@ export default function Message({ project }) {
                   /> */}
                   {/* <Typography>{user?.user_name}</Typography> */}
                   <Avatar style={{ backgroundColor: "#673ab7" }}>
-                    {user?.user_name.charAt(0)}
-                  </Avatar>{" "}
+                    {message.user?.user_name.charAt(0)}
+                  </Avatar>
                   <Typography
                     variant="h6"
                     style={{
@@ -128,7 +128,7 @@ export default function Message({ project }) {
                       color: "#482880",
                     }}
                   >
-                    {user?.user_name}
+                    {message.user?.user_name}
                   </Typography>
                 </Box>
 

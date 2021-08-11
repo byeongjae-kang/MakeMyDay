@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ProjectContext from "../../context/ProjectContext";
-import { Button, Box, Typography } from "@material-ui/core";
+import { Button, Box, Typography, Tooltip } from "@material-ui/core";
 import axios from "axios";
 import {
   reformatState,
@@ -14,6 +14,16 @@ import TasksBody from "components/drag_drop/TasksBody";
 import cloneDeep from "lodash/cloneDeep";
 import EventAvailableIcon from "@material-ui/icons/EventAvailable";
 import ListIcon from "@material-ui/icons/List";
+import { withStyles } from "@material-ui/core/styles";
+const options = ["Edit", "Delete"];
+const LightTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: theme.palette.common.white,
+    color: "rgba(0, 0, 0, 0.87)",
+    boxShadow: theme.shadows[1],
+    fontSize: 14,
+  },
+}))(Tooltip);
 function ProjectView() {
   const [projects, setState] = useState({});
   const [users, setUsers] = useState({});
@@ -166,16 +176,20 @@ function ProjectView() {
 
         {/* <h4>{view ? "Project View" : "Gantt View"}</h4> */}
         <Box ml={1.5}>
-          <Button
-            size="small"
-            type="submit"
-            color={view ? "primary" : "secondary"}
-            startIcon={view ? <EventAvailableIcon /> : <ListIcon />}
-            variant="contained"
-            onClick={toggleView}
+          <LightTooltip
+            title={view ? "Switch to Gantt Chart" : "Switch to Kanban Board"}
           >
-            {view ? "Kanban Board" : "Gantt Chart"}
-          </Button>
+            <Button
+              size="small"
+              type="submit"
+              color={view ? "primary" : "secondary"}
+              startIcon={view ? <EventAvailableIcon /> : <ListIcon />}
+              variant="contained"
+              onClick={toggleView}
+            >
+              {view ? "Kanban Board" : "Gantt Chart"}
+            </Button>
+          </LightTooltip>
         </Box>
       </Box>
 

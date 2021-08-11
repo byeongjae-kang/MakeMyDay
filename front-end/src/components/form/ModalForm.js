@@ -2,11 +2,9 @@ import { useState, useContext } from "react";
 import ProjectContext from "../../context/ProjectContext";
 import axios from "axios";
 import cloneDeep from "lodash/cloneDeep";
-import {
-  deleteTask
-} from "../../hooks/helpers";
+import { deleteTask } from "../../hooks/helpers";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import { Avatar } from "@material-ui/core";
+import { Avatar, Typography } from "@material-ui/core";
 import {
   Button,
   Dialog,
@@ -104,14 +102,7 @@ export default function Form(props) {
     }
   };
   return (
-    <Dialog
-      classes={{
-        paper: classes.radius,
-      }}
-      fullWidth
-      onClose={closePopup}
-      open={openPopup}
-    >
+    <Dialog fullWidth onClose={closePopup} open={openPopup}>
       <Grid container>
         <Grid container className={classes.divide}>
           <Grid />
@@ -124,30 +115,36 @@ export default function Form(props) {
       {/*-----------------------------Start of Form--------------------------------------- */}
       <form onSubmit={(e) => handleSubmit(e, task.id, task.project_id)}>
         <DialogTitle>
-          <TextField
-            required
-            color="secondary"
-            label="Edit this task"
-            multiline
-            InputLabelProps={{ shrink: true }}
-            placeholder="Enter new task..."
-            fullWidth
-            value={title}
-            inputProps={{ maxLength: 45 }}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-          />
+          <Typography style={{}} color="secondary">
+            {title[0].toUpperCase() + title.substring(1)}
+          </Typography>
         </DialogTitle>
 
         <DialogContent dividers>
           {/*-----------------------------Enter Description Component---------------------------------------- */}
-
+          <TextField
+            required
+            color="secondary"
+            label="Edit this task (50 character limit)"
+            variant="outlined"
+            multiline
+            InputLabelProps={{ shrink: true }}
+            placeholder="Enter a new task..."
+            fullWidth
+            value={title}
+            inputProps={{ maxLength: 50 }}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+          />
+          <br />
+          <br />
           <TextField
             color="secondary"
-            label="Enter new description..."
+            label="Enter a new description... (500 character limit)"
             className={classes.field}
             multiline
+            inputProps={{ maxLength: 500 }}
             variant="outlined"
             fullWidth
             value={description}
@@ -159,7 +156,12 @@ export default function Form(props) {
           {/*-----------------------------Select Users Component---------------------------------------- */}
           <br />
 
-          <div className={classes.root}>
+          <div>
+            {!selectedUsers ? (
+              <Typography style={{ color: "red", marginBottom: "0.3em" }}>
+                Please select a team member
+              </Typography>
+            ) : null}
             <Autocomplete
               color="secondary"
               label="Select Team Members"

@@ -7,6 +7,15 @@ import Message from "./message/Message";
 import Members from "./members/Members";
 import { Tooltip } from "@material-ui/core";
 import "./Chat.css";
+import { withStyles } from "@material-ui/core/styles";
+const LightTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: theme.palette.common.white,
+    color: "rgba(0, 0, 0, 0.87)",
+    boxShadow: theme.shadows[1],
+    fontSize: 14,
+  },
+}))(Tooltip);
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -24,7 +33,7 @@ export default function Chat({ project }) {
 
   return (
     <div>
-      <Tooltip title="Chat with team members">
+      <LightTooltip title="Chat with team members">
         <QuestionAnswerIcon
           style={{
             cursor: "pointer",
@@ -34,7 +43,7 @@ export default function Chat({ project }) {
           }}
           onClick={handleClickOpen}
         />
-      </Tooltip>
+      </LightTooltip>
       <Dialog
         open={open}
         TransitionComponent={Transition}

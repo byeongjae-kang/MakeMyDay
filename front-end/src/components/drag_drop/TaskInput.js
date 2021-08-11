@@ -31,8 +31,8 @@ export default function TaskInput(props) {
         props.setOpen(false);
         setName("");
       }
-      
-      setError(name.length ? "" : "Please type task title")
+
+      setError(name.length ? "" : "Title Required");
     }
   }
 

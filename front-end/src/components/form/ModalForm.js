@@ -103,7 +103,9 @@ export default function Form(props) {
   };
   return (
     <Dialog
-      className={classes.radius}
+      classes={{
+        paper: classes.radius,
+      }}
       fullWidth
       onClose={closePopup}
       open={openPopup}

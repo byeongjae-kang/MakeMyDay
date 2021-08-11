@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ProjectContext from "../../context/ProjectContext";
-<<<<<<< HEAD
-import { Button, Box, Typography, Tooltip } from "@material-ui/core";
-=======
-import { Button, Box, Typography, Icon } from "@material-ui/core";
->>>>>>> 09f0a3ca3de5ae46bb426845d4b4d2708cc1a5ec
+import { Button, Box, Typography, Tooltip, Icon } from "@material-ui/core";
 import axios from "axios";
 // import FilterIcon from '@material-ui/icons/Filter';
 // import Filter1Icon from '@material-ui/icons/Filter1';
@@ -35,7 +31,7 @@ function ProjectView() {
   const [users, setUsers] = useState({});
   const [view, setView] = useState(true);
   const [filter, setFilter] = useState(false);
-  const [userId, setUserId] = useState()
+  const [userId, setUserId] = useState();
 
   useEffect(() => {
     Promise.all([
@@ -162,8 +158,8 @@ function ProjectView() {
   }
 
   function toggleFilter(id) {
-    setFilter(!filter)
-    setUserId(id)
+    setFilter(!filter);
+    setUserId(id);
   }
 
   const stateData = {
@@ -175,7 +171,7 @@ function ProjectView() {
     deleteTasks,
     users,
     userId,
-    filter
+    filter,
   };
 
   if (!Object.keys(users).length) {
@@ -183,7 +179,6 @@ function ProjectView() {
   }
 
   const projectUsers = users[projectId].users;
-
 
   const avatars = projectUsers.map((each, index) => (
     <img
@@ -193,20 +188,23 @@ function ProjectView() {
       src={each.avatar}
       onClick={() => toggleFilter(each.id)}
     />
-  ))
+  ));
 
   return (
     <ProjectContext.Provider value={stateData}>
-
       <Box display="flex" onclick={() => setFilter(false)}>
-
         <Box display="flex" flexGrow={1}>
-          <Typography style={{ marginTop: "5px" }} variant="body2">
+          <Typography
+            style={{ marginTop: "5px", marginRight: "10px" }}
+            variant="body2"
+          >
             Project / {projects[projectId].name}
           </Typography>
 
           {/* <h4>{view ? "Project View" : "Gantt View"}</h4> */}
-          <LightTooltip>
+          <LightTooltip
+            title={view ? "Switch to Gantt Chart" : "Switch to Kanban Board"}
+          >
             <Button
               size="small"
               type="submit"
@@ -220,7 +218,6 @@ function ProjectView() {
           </LightTooltip>
         </Box>
       </Box>
-
 
       <br />
       {view && <TasksBody />}

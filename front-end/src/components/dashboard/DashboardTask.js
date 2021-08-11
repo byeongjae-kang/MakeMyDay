@@ -1,5 +1,13 @@
-import React from 'react'
-import { Card, CardHeader, CardContent, Divider, makeStyles, Typography, Grid } from "@material-ui/core";
+import React from "react";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  Divider,
+  makeStyles,
+  Typography,
+  Grid,
+} from "@material-ui/core";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 const useStyle = makeStyles((theme) => ({
@@ -11,7 +19,7 @@ const useStyle = makeStyles((theme) => ({
     display: "flex",
     alignContent: "row",
     justifyContent: "space-between",
-  }
+  },
 }));
 
 function DashboardTask({ task }) {
@@ -43,22 +51,17 @@ function DashboardTask({ task }) {
   });
 
   return (
-
     <Card className={classes.card}>
-      <CardHeader
-        title={<Typography fontSize="16">{task.name}</Typography>} />
+      <CardHeader title={<Typography fontSize="16">{task.name}</Typography>} />
       <Divider />
       <CardContent>
         <Grid container className={classes.align}>
           <Typography color="primary">{endDate}</Typography>
-          <PriorityIcon
-            priority={task.priority}
-            className={classes.priority}
-          />
+          <PriorityIcon priority={task.priority} className={classes.priority} />
         </Grid>
       </CardContent>
     </Card>
-  )
+  );
 }
 
-export default DashboardTask
+export default DashboardTask;

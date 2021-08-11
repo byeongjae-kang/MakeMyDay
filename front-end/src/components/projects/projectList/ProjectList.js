@@ -127,7 +127,8 @@ export default function ProjectList() {
           <FormControl className='filter_by_status'>
             <h4>Filter by Status</h4>
             <RadioGroup
-              className="filter_by_status_radio"
+              className="filter_by_status_radio_row"
+              style={{flexDirection: "row" }}
               value={filteredProcess}
               onChange={(e) => setFilteredProcess(e.target.value)}
               onClick={filterByStatus}

@@ -9,6 +9,7 @@ export default function DatePickers({ selectedDate, handleDateChange }) {
     <div className={classes.container} noValidate>
       <TextField
         id="date"
+        color="secondary"
         label="Due Date"
         type="date"
         value={selectedDate}

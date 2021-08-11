@@ -1,4 +1,4 @@
-INSERT INTO users (user_name, email, password, avatar)
+INSERT INTO users (user_name, email, password, avatar) 
 VALUES
   ('Byeongjae K', 'bk123@gmail.com', '123', 'https://avatars.githubusercontent.com/u/82554049?v=4'),			
   ('Korlan K', 'kk123@gmail.com', '123', 'https://avatars.githubusercontent.com/u/81987244?v=4'),			
@@ -23,7 +23,7 @@ VALUES
   ('Lun J', 'lj123@gmail.com', '123', 'https://avatars.githubusercontent.com/u/83457211?v=4'),			
   ('Megan V', 'mv123@gmail.com', '123', 'https://avatars.githubusercontent.com/u/76022369?v=4'),			
   ('Rossanne C', 'rc123@gmail.com', '123', 'https://avatars.githubusercontent.com/u/81119910?v=4'),			
-  ('Cynthia C', 'cc123@gmail.com', '123', 'https://avatars.githubusercontent.com/u/51090676?v=4');			
+  ('Cynthia C', 'cc123@gmail.com', '123', 'https://avatars.githubusercontent.com/u/51090676?v=4');
 
 INSERT INTO projects (name, description, due_date)
 VALUES

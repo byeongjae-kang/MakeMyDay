@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Masonry from "react-masonry-css";
+
 import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
-import RotateLeftIcon from "@material-ui/icons/RotateLeft";
+
 import ProjectForm from "../projectForm/ProjectForm";
 import ProjectListItems from "../projectListItem/ProjectListItem";
 import useProjectData from "hooks/useProjectData";
@@ -14,7 +15,7 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
-  TextField,
+  TextField
 } from "@material-ui/core";
 import UserSelector from "../userSelector/UserSelector";
 import Autocomplete from "@material-ui/lab/Autocomplete";
@@ -41,7 +42,7 @@ export default function ProjectList() {
     userId,
     breakpoints,
     HaveProjectWithUsers,
-    handleDelete,
+    handleDelete
   } = useProjectData();
 
   const [filteredProjects, setFilteredProjects] = useState(null);
@@ -49,17 +50,17 @@ export default function ProjectList() {
   const [filteredUser, setFilteredUser] = useState(null);
 
   const resetAllFilter = () => {
-    setFilteredProjects(null);
-    setFilteredProcess(null);
-    setFilteredUser(null);
-  };
+    setFilteredProjects(null)
+    setFilteredProcess(null)
+    setFilteredUser(null)
+  }
 
   const filterByUser = (value) => {
     setFilteredProjects(null);
-    setFilteredProcess(null);
-    setFilteredUser(value);
-
-    const userId = value?.id;
+    setFilteredProcess(null)
+    setFilteredUser(value)
+    
+    const userId = value?.id
     const newProjects = [...state.projects].reverse().filter((project) => {
       const foundId = project.users.find((id) => id === parseInt(userId));
       return foundId === parseInt(userId);
@@ -69,8 +70,8 @@ export default function ProjectList() {
 
   const filterByStatus = (status) => {
     setFilteredProjects(null);
-    setFilteredUser(null);
-    setFilteredProcess(status);
+    setFilteredUser(null)
+    setFilteredProcess(status)
     console.log(status);
     const newProjects = [...state.projects].reverse().filter((project) => {
       return status && project.status.toLowerCase() === status.toLowerCase();
@@ -96,7 +97,7 @@ export default function ProjectList() {
     <div>
       <div className="project_top_section">
         <Button
-          style={{ minWidth: "220px" }}
+          style={{minWidth: "220px"}}
           variant="contained"
           value={"Create"}
           color="primary"
@@ -123,7 +124,7 @@ export default function ProjectList() {
           getUserIds={getUserIds}
           userId={userId}
         />
-        {/* <RadioGroup
+        <RadioGroup
           className="filter_by_status_radio_row"
           style={{flexDirection: 'row', flexWrap: 'none' }}
           value={filteredProcess}
@@ -149,8 +150,11 @@ export default function ProjectList() {
             control={<Radio />}
             label="Cancelled"
           />
-        </RadioGroup> */}
+        </RadioGroup>
         <div className="filter_by_users">
+          <label>
+            <h4>Filter By User</h4>
+          </label>
           <div className="filter_by_users_Info">
             <Autocomplete
               onChange={(event, value) => filterByUser(value)}
@@ -160,7 +164,7 @@ export default function ProjectList() {
               value={filteredUser}
               getOptionLabel={(user) => user.user_name}
               renderOption={(user) => (
-                <div className="filter_by_users_options">
+                <div className='filter_by_users_options'>
                   <img className="avatar" alt={user.name} src={user.avatar} />
                   <p>
                     {user.user_name}
@@ -172,26 +176,16 @@ export default function ProjectList() {
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  size="small"
                   variant="outlined"
-                  label="Filter Project by User"
-                  // placeholder="Find Project by Team Member"
+                  label="Search members"
+                  placeholder="Search members"
                   color="secondary"
                 />
               )}
             />
           </div>
         </div>
-        <Button
-          startIcon={<RotateLeftIcon />}
-          onClick={resetAllFilter}
-          variant="outlined"
-          size="small"
-          color="primary"
-          style={{ marginLeft: "7px" }}
-        >
-          RESET
-        </Button>
+        <Button onClick={resetAllFilter} variant='outlined' color='primary' style={{marginLeft: '5px'}}>RESET</Button>
       </div>
 
       <br />

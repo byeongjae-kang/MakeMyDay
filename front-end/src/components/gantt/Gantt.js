@@ -43,8 +43,7 @@ function Gantt() {
         // The items inside the list diplaying the task
         style: {
           backgroundColor: "#fbf9f9",
-          textAlign: "right",
-          paddingRight: "0.7em",
+          textAlign: "left",
           fontSize: 12.5,
           color: "#114B5F",
         }, // the style to be applied
@@ -72,7 +71,7 @@ function Gantt() {
         style: {
           position: "absolute",
           borderRadius: 14,
-          color: "#FFF",
+          color: "white",
           textAlign: "center",
           backgroundColor: "#114B5F",
         },

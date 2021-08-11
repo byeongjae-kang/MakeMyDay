@@ -11,21 +11,12 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { yellow, pink, green } from "@material-ui/core/colors";
 import { useParams } from "react-router-dom";
+
 import NaturalDragAnimation from "natural-drag-animation-rbdnd";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import "./avatar.css";
-import { withStyles } from "@material-ui/core/styles";
-const options = ["Edit", "Delete"];
-const LightTooltip = withStyles((theme) => ({
-  tooltip: {
-    backgroundColor: theme.palette.common.white,
-    color: "rgba(0, 0, 0, 0.87)",
-    boxShadow: theme.shadows[1],
-    fontSize: 14,
-  },
-}))(Tooltip);
 const useStyle = makeStyles((theme) => ({
   // task: {
   //   padding: theme.spacing(1, 1, 1, 2),
@@ -84,17 +75,11 @@ const useStyle = makeStyles((theme) => ({
     cursor: "pointer",
     backgroundColor: "#406f7f",
   },
-  avatar: {
-    width: "30px",
-    height: "30px",
-    color: "#FFF",
-    backgroundColor: "#406f7f",
-    marginRight: "15px",
-  },
 }));
 
 export default function Task({ index, updateTask, task }) {
-  const { deleteTasks, users } = useContext(ProjectContext);
+  const { deleteTasks, users } =
+    useContext(ProjectContext);
 
   const classes = useStyle();
 
@@ -161,21 +146,8 @@ export default function Task({ index, updateTask, task }) {
             >
               <Card className={classes.card} elevation={1} variant="outlined">
                 <CardHeader
-                  PaperProps={{
-                    style: {
-                      backgroundColor: "rgba(255, 255, 255, 0.44)",
-                      border: "rgba(255, 255, 255, 0.25)",
-                      borderRadius: "10px",
-                      boxShadow: "none",
-                      backdropFilter: "blur(16px)",
-                    },
-                  }}
                   title={
-                    <Typography
-                      variant="body3"
-                      fontSize="16"
-                      style={{ wordBreak: "break-word", paddingRight: "5px" }}
-                    >
+                    <Typography variant="body3" fontSize="16">
                       {task.name}
                     </Typography>
                   }
@@ -183,11 +155,7 @@ export default function Task({ index, updateTask, task }) {
                     <div>
                       <MoreVertIcon
                         aria-controls="simple-menu"
-                        style={{
-                          cursor: "pointer",
-                          display: "flex",
-                          justifyContent: "",
-                        }}
+                        style={{ cursor: "pointer" }}
                         aria-haspopup="true"
                         onClick={handleClick}
                       >
@@ -243,22 +211,22 @@ export default function Task({ index, updateTask, task }) {
                         {endDate}
                       </Typography>
                     </div>
-
-                    <LightTooltip
-                      title={!task.user_name ? "Unassigned" : task.user_name}
+                    <Tooltip
+                      title={task.user_name}
                       className={classes.tooltip}
                       aria-label="add"
                     >
-                      {!task.user_name ? (
-                        <Avatar className={classes.avatar} />
-                      ) : (
-                        <img
-                          className="avatar1"
-                          alt={task.user_name}
-                          src={task.avatar}
-                        />
-                      )}
-                    </LightTooltip>
+                      <img
+                        className="avatar1"
+                        alt={task.user_name}
+                        src={task.avatar}
+                      />
+                      {/* <Avatar
+                        className={classes.avatar}
+                        alt={task.name}
+                        src={task.avatar}
+                      /> */}
+                    </Tooltip>
                   </Grid>
                 </CardContent>
               </Card>

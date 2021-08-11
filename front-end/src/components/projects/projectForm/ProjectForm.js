@@ -13,7 +13,6 @@ import {
   RadioGroup,
   TextField,
   Grid,
-  Typography,
 } from "@material-ui/core";
 
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
@@ -82,14 +81,9 @@ export default function ProjectForm({
             >
               <TextField
                 className={classes.field}
-                inputProps={{ maxLength: 50 }}
                 onChange={(e) => setTitle(e.target.value)}
                 value={title}
-                label={
-                  param.id
-                    ? "Change Project Title (50 character limit)"
-                    : "Enter a New Project Title (50 character limit)"
-                }
+                label="Project Title"
                 variant="outlined"
                 color="secondary"
                 fullWidth
@@ -100,8 +94,7 @@ export default function ProjectForm({
                 className={classes.field}
                 onChange={(e) => setdescription(e.target.value)}
                 value={description}
-                inputProps={{ maxLength: 500 }}
-                label="Enter a Description (500 character limit)"
+                label="Enter a Description"
                 variant="outlined"
                 color="secondary"
                 multiline
@@ -109,7 +102,6 @@ export default function ProjectForm({
                 fullWidth
                 required
                 error={descriptionError}
-                s
               />
 
               <UserSelector

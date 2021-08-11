@@ -4,7 +4,15 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { format } from "timeago.js";
 import "./message.css";
 import { MessageContext } from "context/MessageContext";
-
+import {
+  TextField,
+  Typography,
+  Avatar,
+  Divider,
+  Box,
+  Container,
+} from "@material-ui/core";
+import DoneAllIcon from "@material-ui/icons/DoneAll";
 const getMessagesWithUsers = (messages, usersInProject) => {
   return messages?.map((message) => {
     message["user"] = usersInProject.find(
@@ -74,23 +82,66 @@ export default function Message({ project }) {
           <div key={index} ref={scrollRef}>
             <div className="each_project_message">
               <div>
-                <img src={message.user?.avatar} alt={message.user?.user_name} />
-              </div>
-              <div className="project_message_user">
-                <p>{message.user?.user_name}</p>
-                <p>{message.message}</p>
+                <Box
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginTop: "1em",
+                    marginBottom: "1em",
+                  }}
+                >
+                  {/* This img avatar does not work sometimes */}
+                  {/* <img
+                    src={message.user?.avatar}
+                    alt={message.user?.user_name}
+                  /> */}
+                  {/* <Typography>{user?.user_name}</Typography> */}
+                  <Avatar style={{ backgroundColor: "#673ab7" }}>
+                    {user?.user_name.charAt(0)}
+                  </Avatar>{" "}
+                  <Typography
+                    style={{
+                      marginLeft: "10px",
+                      marginTop: "5px",
+                      color: "#482880",
+                    }}
+                  >
+                    {user?.user_name}
+                  </Typography>
+                </Box>
+
+                {/* <img src={message.user?.avatar} alt={message.user?.user_name} /> */}
               </div>
             </div>
-            <p className="project_message_time">
-              Sent: {format(message.sent_time)}
-            </p>
+            {/* <p className="project_message_time"> */}
+            <Box
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                marginTop: "6px",
+              }}
+            >
+              <Typography>{message.message}</Typography>
+              <Typography>
+                {format(message.sent_time)}
+                <DoneAllIcon style={{ color: "#673ab7", padding: "3px" }} />
+              </Typography>
+            </Box>
+            <Divider style={{ backgroundColor: "#673ab7", marginTop: "3px" }} />
+
+            {/* </p> */}
           </div>
         ))}
       </div>
 
       <div>
+        <br />
         <form onSubmit={(e) => submitHandler(e, user, project, inputMessage)}>
-          <textarea
+          <TextField
+            variant="outlined"
+            size="small"
+            placeholder="Enter Message..."
+            color="secondary"
             className="chat_message_input"
             type="text"
             // placeholder="write something..."
@@ -98,8 +149,8 @@ export default function Message({ project }) {
             onChange={(e) => {
               setInputMessage(e.target.value);
             }}
-          />
-          <button type="submit">Send</button>
+          ></TextField>
+          {/* d<button type="submit">Send</button> */}
         </form>
       </div>
     </div>

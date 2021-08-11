@@ -176,9 +176,7 @@ function ProjectView() {
 
         {/* <h4>{view ? "Project View" : "Gantt View"}</h4> */}
         <Box ml={1.5}>
-          <LightTooltip
-            title={view ? "Switch to Gantt Chart" : "Switch to Kanban Board"}
-          >
+          <LightTooltip>
             <Button
               size="small"
               type="submit"

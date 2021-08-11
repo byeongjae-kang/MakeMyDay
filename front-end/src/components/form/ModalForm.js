@@ -102,7 +102,12 @@ export default function Form(props) {
     }
   };
   return (
-    <Dialog fullWidth onClose={closePopup} open={openPopup}>
+    <Dialog
+      className={classes.radius}
+      fullWidth
+      onClose={closePopup}
+      open={openPopup}
+    >
       <Grid container>
         <Grid container className={classes.divide}>
           <Grid />
@@ -116,7 +121,7 @@ export default function Form(props) {
       <form onSubmit={(e) => handleSubmit(e, task.id, task.project_id)}>
         <DialogTitle>
           <Typography style={{}} color="secondary">
-            {title[0].toUpperCase() + title.substring(1)}
+            {title === "" ? title : title[0].toUpperCase() + title.substring(1)}
           </Typography>
         </DialogTitle>
 

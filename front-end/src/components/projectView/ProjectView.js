@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ProjectContext from "../../context/ProjectContext";
+<<<<<<< HEAD
 import { Button, Box, Typography, Tooltip } from "@material-ui/core";
+=======
+import { Button, Box, Typography, Icon } from "@material-ui/core";
+>>>>>>> 09f0a3ca3de5ae46bb426845d4b4d2708cc1a5ec
 import axios from "axios";
+// import FilterIcon from '@material-ui/icons/Filter';
+// import Filter1Icon from '@material-ui/icons/Filter1';
 import {
   reformatState,
   deleteTask,
@@ -28,6 +34,8 @@ function ProjectView() {
   const [projects, setState] = useState({});
   const [users, setUsers] = useState({});
   const [view, setView] = useState(true);
+  const [filter, setFilter] = useState(false);
+  const [userId, setUserId] = useState()
 
   useEffect(() => {
     Promise.all([
@@ -50,7 +58,7 @@ function ProjectView() {
   }, []);
 
   const projectId = useParams().id;
-
+  // console.log("users", users)
   const updateTask = function (id, start_date, end_date) {
     axios
       .put(`http://localhost:8080/api/tasks/${id}`, {
@@ -138,13 +146,9 @@ function ProjectView() {
 
   const deleteTasks = function (id) {
     axios.delete(`http://localhost:8080/api/tasks/${id}`).then((result) => {
-      // console.log("result in delete", result)
       let project = cloneDeep(projects[result.data[0].project_id]);
-      // console.log("project before", project)
       let newTask = deleteTask(result.data[0].id, project.tasks);
-      // console.log("updated tasks", newTask)
       project.tasks = newTask;
-      // console.log("project after", project)
       setState((prev) => ({ ...prev, [result.data[0].project_id]: project }));
     });
   };
@@ -157,6 +161,11 @@ function ProjectView() {
     setView(!view);
   }
 
+  function toggleFilter(id) {
+    setFilter(!filter)
+    setUserId(id)
+  }
+
   const stateData = {
     projects,
     setState,
@@ -165,17 +174,38 @@ function ProjectView() {
     createTask,
     deleteTasks,
     users,
+    userId,
+    filter
   };
+
+  if (!Object.keys(users).length) {
+    return null;
+  }
+
+  const projectUsers = users[projectId].users;
+
+
+  const avatars = projectUsers.map((each, index) => (
+    <img
+      key={index}
+      className="avatar1"
+      alt={each.user_name}
+      src={each.avatar}
+      onClick={() => toggleFilter(each.id)}
+    />
+  ))
 
   return (
     <ProjectContext.Provider value={stateData}>
-      <Box display="flex" flexGrow={1}>
-        <Typography style={{ marginTop: "5px" }} variant="body2">
-          Project / {projects[projectId].name}
-        </Typography>
 
-        {/* <h4>{view ? "Project View" : "Gantt View"}</h4> */}
-        <Box ml={1.5}>
+      <Box display="flex" onclick={() => setFilter(false)}>
+
+        <Box display="flex" flexGrow={1}>
+          <Typography style={{ marginTop: "5px" }} variant="body2">
+            Project / {projects[projectId].name}
+          </Typography>
+
+          {/* <h4>{view ? "Project View" : "Gantt View"}</h4> */}
           <LightTooltip>
             <Button
               size="small"
@@ -190,6 +220,7 @@ function ProjectView() {
           </LightTooltip>
         </Box>
       </Box>
+
 
       <br />
       {view && <TasksBody />}

@@ -1,3 +1,4 @@
+
 function reformatState(tasks, projects) {
   let projectsInState = {};
 
@@ -140,8 +141,6 @@ const HaveProjectWithUsers = (projects, users) => {
   return projectWithUsers;
 };
 
-
-
 const getIncompleteTasks = function(tasks, id) {
   let incompleteTasks = [];
 
@@ -174,6 +173,28 @@ const getTaskForProject = function(tasks, project) {
   return projects
 }
 
+const tasksForUser = function(tasks, id) {
+  let userTasks = [];
+
+  for (let task of tasks) {
+    if (task.user_id===id) {
+      userTasks.push(task)
+    } 
+  }
+  
+ return userTasks;
+}
+
+const listForUser = function (lists, id) {
+
+  for (let list of lists) {
+    let newTasks = list.tasks.filter(task => task.user_id === id)
+    list.tasks = newTasks
+  }
+  return lists
+}
+
+
 module.exports = {
   reformatState,
   listForProject,
@@ -182,5 +203,7 @@ module.exports = {
   findIndex,
   getIncompleteTasks,
   getProjectNames,
-  getTaskForProject
+  getTaskForProject,
+  tasksForUser,
+  listForUser
 };

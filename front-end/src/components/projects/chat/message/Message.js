@@ -21,15 +21,15 @@ export default function Message({ project }) {
   const { user } = useContext(AuthContext);
   const scrollRef = useRef();
 
-  const { setSocketMessage, receivedMessage } = useContext(MessageContext)
-  
+  const { setSocketMessage, receivedMessage } = useContext(MessageContext);
+
   useEffect(() => {
     if (receivedMessage?.project_id === project.id) {
-      setAllMessages([...allMessages, receivedMessage])
+      setAllMessages([...allMessages, receivedMessage]);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [receivedMessage])
-  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [receivedMessage]);
+
   useEffect(() => {
     axios
       .get(`/api/projects/${project.id}/messages`)
@@ -51,7 +51,7 @@ export default function Message({ project }) {
     const newMessage = {
       user_id: user.id,
       project_id: project.id,
-      message: message
+      message: message,
     };
 
     axios
@@ -60,7 +60,7 @@ export default function Message({ project }) {
         const receivedMessage = result.data[0];
         receivedMessage["user"] = user;
         delete receivedMessage.user_id;
-        setSocketMessage(receivedMessage)
+        setSocketMessage(receivedMessage);
       })
       .catch((err) =>
         console.log("could not add message to database", err.message)
@@ -93,7 +93,7 @@ export default function Message({ project }) {
           <textarea
             className="chat_message_input"
             type="text"
-            placeholder="write something..."
+            // placeholder="write something..."
             value={inputMessage}
             onChange={(e) => {
               setInputMessage(e.target.value);

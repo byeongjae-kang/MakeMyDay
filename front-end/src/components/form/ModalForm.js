@@ -136,7 +136,7 @@ export default function Form(props) {
             variant="outlined"
             multiline
             InputLabelProps={{ shrink: true }}
-            placeholder="Enter a new task..."
+            // placeholder="Enter a new task..."
             fullWidth
             value={title}
             inputProps={{ maxLength: 50 }}

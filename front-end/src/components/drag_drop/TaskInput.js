@@ -41,7 +41,7 @@ export default function TaskInput(props) {
       <InputBase
         multiline
         fullWidth
-        placeholder={error ? error : "Enter a title..."}
+        // placeholder={error ? error : "Enter a title..."}
         value={name}
         onKeyDown={handleSubmit}
         onChange={handleKeyPress}

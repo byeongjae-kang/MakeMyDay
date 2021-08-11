@@ -110,7 +110,7 @@ export default function MiniDrawer({ children }) {
                 title={
                   <React.Fragment>
                     <Typography color="inherit">
-                      Drawer Open Feature Disabled
+                      Drawer Feature Disabled
                     </Typography>{" "}
                   </React.Fragment>
                 }
@@ -160,7 +160,7 @@ export default function MiniDrawer({ children }) {
                 style={{ cursor: "pointer" }}
                 title={
                   !user.user_name
-                    ? "User Login Feature Disabled"
+                    ? "Login Feature Disabled"
                     : `Hi ${user.user_name}`
                 }
               >

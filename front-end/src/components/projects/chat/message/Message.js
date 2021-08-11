@@ -11,8 +11,29 @@ import {
   Divider,
   Box,
   Container,
+  Tooltip,
 } from "@material-ui/core";
 import DoneAllIcon from "@material-ui/icons/DoneAll";
+import { withStyles } from "@material-ui/core/styles";
+const options = ["Edit", "Delete"];
+const LightTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: theme.palette.common.white,
+    color: "rgba(0, 0, 0, 0.87)",
+    boxShadow: theme.shadows[1],
+    fontSize: 14,
+  },
+}))(Tooltip);
+const HtmlTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: "#f5f5f9",
+    color: "rgba(0, 0, 0, 0.87)",
+    maxWidth: 220,
+    fontSize: theme.typography.pxToRem(12),
+    border: "1px solid #dadde9",
+    fontSize: 14,
+  },
+}))(Tooltip);
 const getMessagesWithUsers = (messages, usersInProject) => {
   return messages?.map((message) => {
     message["user"] = usersInProject.find(
@@ -100,6 +121,7 @@ export default function Message({ project }) {
                     {user?.user_name.charAt(0)}
                   </Avatar>{" "}
                   <Typography
+                    variant="h6"
                     style={{
                       marginLeft: "10px",
                       marginTop: "5px",
@@ -116,15 +138,27 @@ export default function Message({ project }) {
             {/* <p className="project_message_time"> */}
             <Box
               style={{
+                display: "block",
+                justifyContent: "space-between",
+                marginTop: "6px",
+              }}
+            >
+              <Typography style={{ fontFamily: "inherit" }}>
+                {message.message}
+              </Typography>
+              <br />
+            </Box>
+            <Box
+              style={{
                 display: "flex",
                 justifyContent: "space-between",
                 marginTop: "6px",
               }}
             >
-              <Typography>{message.message}</Typography>
+              <br />
               <Typography>
                 {format(message.sent_time)}
-                <DoneAllIcon style={{ color: "#673ab7", padding: "3px" }} />
+                <DoneAllIcon style={{ color: "green", paddingTop: "8px" }} />
               </Typography>
             </Box>
             <Divider style={{ backgroundColor: "#673ab7", marginTop: "3px" }} />
@@ -157,7 +191,12 @@ export default function Message({ project }) {
               marginTop: "6px",
             }}
           >
-            <div />
+            <HtmlTooltip
+              title={"Websocket Feature Not Enabled"}
+              style={{ cursor: "pointer" }}
+            >
+              <Typography>Socket.io Chatroom</Typography>
+            </HtmlTooltip>
             <Typography style={{ marginRight: "20px" }}>
               #{project.name}
             </Typography>

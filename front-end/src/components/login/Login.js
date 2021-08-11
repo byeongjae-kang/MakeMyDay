@@ -10,14 +10,15 @@ import {
   Link,
   CircularProgress,
   Grow,
-  Paper,
+  Paper
 } from "@material-ui/core";
 import axios from "axios";
 import { AuthContext } from "context/AuthContext";
 import React from "react";
 import { useContext } from "react";
 import { useRef } from "react";
-import GoogleButton from "./GoogleButton";
+import { GoogleLogin } from "react-google-login";
+
 function Login(props) {
   const email = useRef();
   const password = useRef();
@@ -41,10 +42,13 @@ function Login(props) {
     );
   };
 
+  const responseGoogle = (response) => {
+    response.profileObj?.email &&
+    loginCall({email: response.profileObj.email}, dispatch)
+  };
+
   return props.trigger ? (
     <Box className="card">
-      <Grid align="center">{/* <GoogleButton /> */}</Grid>
-      <br />
       <form onSubmit={submitHandler}>
         <TextField
           fullWidth
@@ -97,6 +101,15 @@ function Login(props) {
       {/* <Typography align="center">
         Don't have an account? <Link>Sign up</Link>
       </Typography> */}
+      <Grid align="center">
+        <GoogleLogin
+          clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+          buttonText="or Login with Google "
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          cookiePolicy={"single_host_origin"}
+        />
+      </Grid>
     </Box>
   ) : (
     ""

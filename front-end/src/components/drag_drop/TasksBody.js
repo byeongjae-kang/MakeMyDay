@@ -2,34 +2,19 @@ import React, { useContext } from "react";
 import List from "./List";
 import { Box } from "@material-ui/core";
 import { DragDropContext } from "react-beautiful-dnd";
-import { listForProject } from "hooks/helpers";
+import { listForProject, listForUser } from "hooks/helpers";
 import { useParams } from "react-router-dom";
 import ProjectContext from "../../context/ProjectContext";
+import cloneDeep from "lodash/cloneDeep";
 
-export default function TasksBody(props) {
-  // const [state, setState] = useState({
-  //   users: [],
-  //   projects: [],
-  // });
+export default function TasksBody() {
 
-  // useEffect(() => {
-  //   Promise.all([axios.get("/api/users"), axios.get("api/projects")]).then(
-  //     (all) => {
-  //       setState({
-  //         ...state,
-  //         projects: all[1].data,
-  //         users: all[0].data,
-  //       });
-  //     }
-  //   );
-  // }, []);
-
-  const { projects, updateDragDrop } = useContext(ProjectContext);
-
-  // console.log("state", state.users);
+  const { projects, updateDragDrop, userId, filter } = useContext(ProjectContext);
 
   const projectID = useParams().id;
   const projectList = listForProject(projects[projectID].tasks);
+  let listCopy = cloneDeep(projectList)
+  const userLists = listForUser(listCopy, userId)
 
   const onDragEnd = ({ destination, source, draggableId }) => {
     if (!destination) {
@@ -58,19 +43,21 @@ export default function TasksBody(props) {
     }
   };
 
-  // if (!state.users.length) {
-  //   return null;
-  // } else {
-  //   let projectUsers = HaveProjectWithUsers(projects, users)[projectID];
-  // }
-
   const lists = projectList.map((list, index) => (
     <List
       title={list.name}
       list={list}
       key={list.id}
       index={index}
-      // projectUsers={projectUsers}
+    />
+  ));
+
+  const userList = userLists.map((list, index) => (
+    <List
+      title={list.name}
+      list={list}
+      key={list.id}
+      index={index}
     />
   ));
 
@@ -78,7 +65,8 @@ export default function TasksBody(props) {
     <DragDropContext onDragEnd={onDragEnd}>
       <div>
         <Box display="flex" flexDirection="row">
-          {lists}
+
+          {filter ? userList : lists}
         </Box>
       </div>
     </DragDropContext>

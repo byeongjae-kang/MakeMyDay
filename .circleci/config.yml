@@ -29,7 +29,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "21:c4:1c:a8:b5:30:ff:20:6f:62:e5:84:29:1d:3c:97"
+            - "8f:ba:27:de:59:7d:77:a5:57:d6:ec:b2:f9:2c:26:b1"
       - checkout:
           path: ~/MakeMyDay
       - run:

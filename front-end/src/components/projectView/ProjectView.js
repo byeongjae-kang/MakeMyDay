@@ -5,7 +5,7 @@ import { Button, Box, Typography, Tooltip, Icon } from "@material-ui/core";
 import axios from "axios";
 // import FilterIcon from '@material-ui/icons/Filter';
 // import Filter1Icon from '@material-ui/icons/Filter1';
-import { HaveProjectWithUsers } from 'hooks/helpers'
+
 import {
   reformatState,
   deleteTask,
@@ -32,6 +32,24 @@ function ProjectView() {
   const [view, setView] = useState(true);
   const [filter, setFilter] = useState(false);
   const [userId, setUserId] = useState();
+
+  const HaveProjectWithUsers = (projects, users) => {
+    let projectWithUsers = {};
+    for (let project of projects) {
+      if (!projectWithUsers[project.id]) {
+        projectWithUsers[project.id] = { users: [] };
+      }
+      for (let projectUser of project.users) {
+        for (let user of users) {
+          if (projectUser === user.id) {
+            projectWithUsers[project.id].users.push(user);
+          }
+        }
+      }
+    }
+  
+    return projectWithUsers;
+  };
 
   useEffect(() => {
     Promise.all([

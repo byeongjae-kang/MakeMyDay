@@ -42,7 +42,7 @@ function ProjectView() {
         }
       }
     }
-
+  
     return projectWithUsers;
   };
 

@@ -5,12 +5,7 @@ import { Button, Box, Typography, Tooltip, Icon } from "@material-ui/core";
 import axios from "axios";
 // import FilterIcon from '@material-ui/icons/Filter';
 // import Filter1Icon from '@material-ui/icons/Filter1';
-import {
-  reformatState,
-  deleteTask,
-  HaveProjectWithUsers,
-  findIndex,
-} from "../../hooks/helpers";
+
 import Gantt from "components/gantt/Gantt";
 import TasksBody from "components/drag_drop/TasksBody";
 import cloneDeep from "lodash/cloneDeep";
@@ -32,6 +27,100 @@ function ProjectView() {
   const [view, setView] = useState(true);
   const [filter, setFilter] = useState(false);
   const [userId, setUserId] = useState();
+
+
+  function reformatState(tasks, projects) {
+    let projectsInState = {};
+  
+    for (let each of tasks) {
+      if (!projectsInState[each.project_id]) {
+        projectsInState[each.project_id] = {
+          name: each.project_name,
+          tasks: [
+            {
+              id: each.id,
+              name: each.name,
+              project_id: each.project_id,
+              description: each.description,
+              priority: each.priority,
+              status: each.status,
+              end: each.end,
+              avatar: each.avatar,
+              start: each.start,
+              user_id: each.user_id,
+              user_name: each.user_name,
+            },
+          ],
+        };
+      } else {
+        let task = {
+          id: each.id,
+          name: each.name,
+          project_id: each.project_id,
+          description: each.description,
+          priority: each.priority,
+          status: each.status,
+          end: each.end,
+          start: each.start,
+          avatar: each.avatar,
+          user_id: each.user_id,
+          user_name: each.user_name,
+        };
+        projectsInState[each.project_id].tasks.push(task);
+      }
+    }
+  
+    for (let project of projects) {
+      if (!projectsInState[project.id]) {
+        projectsInState[project.id] = {
+          name: project.name,
+          tasks: [],
+        };
+      }
+  
+    }
+    return projectsInState;
+  }
+  
+
+  function findIndex(id, tasks) {
+    let index;
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].id === id) {
+        index = i;
+      }
+    }
+    return index
+  }
+
+  function deleteTask(id, tasks) {
+    let index;
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].id === id) {
+        index = i;
+      }
+    }
+    tasks.splice(index, 1);
+    return tasks;
+  }
+
+  const HaveProjectWithUsers = (projects, users) => {
+    let projectWithUsers = {};
+    for (let project of projects) {
+      if (!projectWithUsers[project.id]) {
+        projectWithUsers[project.id] = { users: [] };
+      }
+      for (let projectUser of project.users) {
+        for (let user of users) {
+          if (projectUser === user.id) {
+            projectWithUsers[project.id].users.push(user);
+          }
+        }
+      }
+    }
+  
+    return projectWithUsers;
+  };
 
   useEffect(() => {
     Promise.all([

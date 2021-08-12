@@ -28,9 +28,8 @@ export default function List({
   projectUsers,
 }) {
   const classes = useStyle();
-  
   const sortedTasks = list.tasks.sort((a, b) => {
-    return (a.priority - b.priority || a.end.localeCompare(b.end));
+    return a.priority - b.priority;
   });
 
   return (

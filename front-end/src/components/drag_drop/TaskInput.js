@@ -18,6 +18,8 @@ export default function TaskInput(props) {
   const classes = useStyle();
   const [error, setError] = useState("");
   
+
+  console.log(error)
   function handleKeyPress(e) {
     setName(e.target.value);
   }

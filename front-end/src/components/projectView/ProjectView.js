@@ -8,7 +8,6 @@ import axios from "axios";
 
 import {
   reformatState,
-  deleteTask,
   findIndex,
 } from "hooks/helpers";
 import Gantt from "components/gantt/Gantt";
@@ -32,6 +31,17 @@ function ProjectView() {
   const [view, setView] = useState(true);
   const [filter, setFilter] = useState(false);
   const [userId, setUserId] = useState();
+
+  function deleteTask(id, tasks) {
+    let index;
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].id === id) {
+        index = i;
+      }
+    }
+    tasks.splice(index, 1);
+    return tasks;
+  }
 
   const HaveProjectWithUsers = (projects, users) => {
     let projectWithUsers = {};

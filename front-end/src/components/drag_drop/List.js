@@ -30,6 +30,7 @@ export default function List({
   const classes = useStyle();
   
   const sortedTasks = list.tasks.sort((a, b) => {
+    
     return (a.priority - b.priority || a.end.localeCompare(b.end));
   });
 

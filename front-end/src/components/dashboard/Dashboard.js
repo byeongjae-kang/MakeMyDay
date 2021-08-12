@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "context/AuthContext";
 import axios from "axios";
 import {
-  getIncompleteTasks,
   getProjectsWithTasks,
   getProjectNames,
 } from "../../hooks/helpers";
@@ -32,6 +31,18 @@ function Dashboard() {
   const [userState, setUserState] = useState({
     tasks: [],
   });
+
+  const getIncompleteTasks = function(tasks, id) {
+    let incompleteTasks = [];
+  
+    for (let task of tasks) {
+      if (task.user_id===id && task.status !== "Completed") {
+        incompleteTasks.push(task)
+      } 
+    }
+    
+   return incompleteTasks;
+  }
   useEffect(() => {
     axios.get("api/tasks").then((result) => {
       setUserState((prev) => ({ ...prev, tasks: result.data }));

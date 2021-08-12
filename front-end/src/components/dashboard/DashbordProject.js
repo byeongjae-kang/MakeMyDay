@@ -1,5 +1,6 @@
 import React from 'react'
 import { Paper, Typography } from "@material-ui/core";
+import { getTaskForProject } from 'hooks/helpers';
 import DashboardTask from './DashboardTask';
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -20,17 +21,6 @@ const useStyle = makeStyles((theme) => ({
     fontWeight: "500"
   }
 }));
-
-const getTaskForProject = function(tasks, project) {
-  let projects = []
-  for (let task of tasks) {
-    if (task.project_name === project) {
-      projects.push(task)
-    }
-  }
-  return projects
-}
-
 
 
 function DashbordProject({ title, tasks }) {

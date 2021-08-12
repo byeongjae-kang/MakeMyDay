@@ -35,7 +35,7 @@ export default function useProjectData() {
       .catch((err) => console.error("could not delete", err.message));
   };
 
-  const haveProjectWithUsers = (project, users) => {
+  const HaveProjectWithUsers = (project, users) => {
     const updatedProject = project.users.map((userId) =>
       users.find((userDetail) => userDetail.id === userId)
     );
@@ -181,7 +181,7 @@ export default function useProjectData() {
     getUserIds,
     userId,
     breakpoints,
-    haveProjectWithUsers,
+    HaveProjectWithUsers,
     handleEdit,
     handleDelete,
   };

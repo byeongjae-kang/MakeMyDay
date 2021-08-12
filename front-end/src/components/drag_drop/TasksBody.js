@@ -2,72 +2,12 @@ import React, { useContext } from "react";
 import List from "./List";
 import { Box } from "@material-ui/core";
 import { DragDropContext } from "react-beautiful-dnd";
-
+import { listForProject, listForUser } from "hooks/helpers";
 import { useParams } from "react-router-dom";
 import ProjectContext from "../../context/ProjectContext";
 import cloneDeep from "lodash/cloneDeep";
 
 export default function TasksBody() {
-
-  const listForUser = function (lists, id) {
-
-    for (let list of lists) {
-      let newTasks = list.tasks.filter(task => task.user_id === id)
-      list.tasks = newTasks
-    }
-    return lists
-  }
-
-  function listForProject(tasks) {
-    let listSchema = [
-      {
-        id: "1",
-        name: "In Progress",
-        tasks: [],
-      },
-      {
-        id: "2",
-        name: "Backlog",
-        tasks: [],
-      },
-      {
-        id: "3",
-        name: "On Hold",
-        tasks: [],
-      },
-      {
-        id: "4",
-        name: "Completed",
-        tasks: [],
-      },
-    ];
-  
-    if (!tasks.length) {
-      return listSchema
-    }
-  
-    for (let list of listSchema) {
-      for (let task of tasks) {
-        let taskDetails = {};
-        if (task.status === list.name) {
-          taskDetails["id"] = task.id;
-          taskDetails["name"] = task.name;
-          taskDetails["priority"] = task.priority;
-          taskDetails["status"] = task.status;
-          taskDetails["start"] = task.start;
-          taskDetails["end"] = task.end;
-          taskDetails["user_id"] = task.user_id;
-          taskDetails["avatar"] = task.avatar;
-          taskDetails["user_name"] = task.user_name;
-          taskDetails["description"] = task.description;
-          taskDetails["project_id"] = task.project_id;
-          list.tasks.push(taskDetails);
-        }
-      }
-    }
-    return listSchema;
-  }
-  
 
   const { projects, updateDragDrop, userId, filter } = useContext(ProjectContext);
 

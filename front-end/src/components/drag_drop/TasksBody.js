@@ -2,12 +2,21 @@ import React, { useContext } from "react";
 import List from "./List";
 import { Box } from "@material-ui/core";
 import { DragDropContext } from "react-beautiful-dnd";
-import { listForUser } from "hooks/helpers";
+
 import { useParams } from "react-router-dom";
 import ProjectContext from "../../context/ProjectContext";
 import cloneDeep from "lodash/cloneDeep";
 
 export default function TasksBody() {
+
+  const listForUser = function (lists, id) {
+
+    for (let list of lists) {
+      let newTasks = list.tasks.filter(task => task.user_id === id)
+      list.tasks = newTasks
+    }
+    return lists
+  }
 
   function listForProject(tasks) {
     let listSchema = [

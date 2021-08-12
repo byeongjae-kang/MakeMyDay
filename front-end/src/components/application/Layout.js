@@ -9,7 +9,7 @@ import {
   Avatar,
   AppBar,
   CssBaseline,
-  Divider,
+  // Divider,
   Drawer,
   IconButton,
   List,
@@ -22,18 +22,18 @@ import {
   Button,
 } from "@material-ui/core";
 import GitHubIcon from "@material-ui/icons/GitHub";
-import SubjectOutlined from "@material-ui/icons/SubjectOutlined";
+// import SubjectOutlined from "@material-ui/icons/SubjectOutlined";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
-import HomeIcon from "@material-ui/icons/Home";
+// import HomeIcon from "@material-ui/icons/Home";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import MenuIcon from "@material-ui/icons/Menu";
 import { useContext } from "react";
 import { AuthContext } from "context/AuthContext";
 import Landing from "components/landing_page/Landing";
 import { withStyles } from "@material-ui/core/styles";
-const options = ["Edit", "Delete"];
+// const options = ["Edit", "Delete"];
 const LightTooltip = withStyles((theme) => ({
   tooltip: {
     backgroundColor: theme.palette.common.white,
@@ -49,7 +49,7 @@ const HtmlTooltip = withStyles((theme) => ({
     maxWidth: 220,
     fontSize: theme.typography.pxToRem(12),
     border: "1px solid #dadde9",
-    fontSize: 14,
+    // fontSize: 14,
   },
 }))(Tooltip);
 
@@ -81,9 +81,9 @@ export default function MiniDrawer({ children }) {
     },
   ];
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+  // const handleDrawerOpen = () => {
+  //   setOpen(true);
+  // };
 
   const handleDrawerClose = () => {
     setOpen(false);

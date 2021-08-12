@@ -1,6 +1,6 @@
 import React from "react";
 import { useStyles } from "./UserSelectorStyle";
-import { Avatar, TextField } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import "../projectList/ProjectList.css";
 const getDefaultUsers = (userId, users) => {

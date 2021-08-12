@@ -1,34 +1,33 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "context/AuthContext";
 import axios from "axios";
-import {
-  getProjectsWithTasks,
-} from "../../hooks/helpers";
-import { Paper, Box, Typography, makeStyles, Tooltip } from "@material-ui/core";
+
+import { Box, Typography, makeStyles, Tooltip } from "@material-ui/core";
+
 import DashbordProject from "./DashbordProject";
 
 import { withStyles } from "@material-ui/core/styles";
-const options = ["Edit", "Delete"];
+// const options = ["Edit", "Delete"];
 const LightTooltip = withStyles((theme) => ({
   tooltip: {
     backgroundColor: theme.palette.common.white,
     color: "rgba(0, 0, 0, 0.87)",
     boxShadow: theme.shadows[1],
-    fontSize: 14,
-  },
+    fontSize: 14
+  }
 }))(Tooltip);
 const useStyle = makeStyles((theme) => ({
   text: {
     color: "black",
-    fontWeight: "500",
-  },
+    fontWeight: "500"
+  }
 }));
 
 function Dashboard() {
   const classes = useStyle();
   const { user } = useContext(AuthContext);
   const [userState, setUserState] = useState({
-    tasks: [],
+    tasks: []
   });
 
   const getProjectNames = function(tasks) {
@@ -60,6 +59,12 @@ function Dashboard() {
   }, []);
 
   console.log("user", user);
+
+  
+
+  
+
+  
 
   if (!userState.tasks.length) {
     return null;

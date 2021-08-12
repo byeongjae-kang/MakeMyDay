@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { InputBase, Paper, Typography } from "@material-ui/core";
+import { InputBase, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import ProjectContext from "../../context/ProjectContext";
 import { useParams } from "react-router";
@@ -17,7 +17,7 @@ export default function TaskInput(props) {
   const [name, setName] = useState("");
   const classes = useStyle();
   const [error, setError] = useState("");
-
+  
   function handleKeyPress(e) {
     setName(e.target.value);
   }

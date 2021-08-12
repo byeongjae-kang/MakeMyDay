@@ -10,20 +10,19 @@ import {
   Avatar,
   Divider,
   Box,
-  Container,
   Tooltip,
 } from "@material-ui/core";
 import DoneAllIcon from "@material-ui/icons/DoneAll";
 import { withStyles } from "@material-ui/core/styles";
-const options = ["Edit", "Delete"];
-const LightTooltip = withStyles((theme) => ({
-  tooltip: {
-    backgroundColor: theme.palette.common.white,
-    color: "rgba(0, 0, 0, 0.87)",
-    boxShadow: theme.shadows[1],
-    fontSize: 14,
-  },
-}))(Tooltip);
+// const options = ["Edit", "Delete"];
+// const LightTooltip = withStyles((theme) => ({
+//   tooltip: {
+//     backgroundColor: theme.palette.common.white,
+//     color: "rgba(0, 0, 0, 0.87)",
+//     boxShadow: theme.shadows[1],
+//     fontSize: 14,
+//   },
+// }))(Tooltip);
 const HtmlTooltip = withStyles((theme) => ({
   tooltip: {
     backgroundColor: "#f5f5f9",
@@ -31,7 +30,7 @@ const HtmlTooltip = withStyles((theme) => ({
     maxWidth: 220,
     fontSize: theme.typography.pxToRem(12),
     border: "1px solid #dadde9",
-    fontSize: 14,
+    // fontSize: 14,
   },
 }))(Tooltip);
 const getMessagesWithUsers = (messages, usersInProject) => {

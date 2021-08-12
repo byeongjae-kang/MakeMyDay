@@ -4,7 +4,7 @@ import axios from "axios";
 import cloneDeep from "lodash/cloneDeep";
 
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import { Avatar, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import {
   Button,
   Dialog,
@@ -13,7 +13,6 @@ import {
   FormControl,
   FormControlLabel,
   FormLabel,
-  FormGroup,
   Radio,
   RadioGroup,
   TextField,
@@ -33,6 +32,7 @@ const findUser = (userId, projectUsers) => {
   return null;
 };
 
+
 function deleteTask(id, tasks) {
   let index;
   for (let i = 0; i < tasks.length; i++) {
@@ -43,6 +43,7 @@ function deleteTask(id, tasks) {
   tasks.splice(index, 1);
   return tasks;
 }
+
 
 export default function Form(props) {
   const classes = useStyles();

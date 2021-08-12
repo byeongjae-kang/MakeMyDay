@@ -9,16 +9,16 @@ import useProjectData from "hooks/useProjectData";
 import "./ProjectList.css";
 import { MessageContextProvider } from "context/MessageContext";
 import {
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Radio,
-  RadioGroup,
+  // FormControl,
+  // FormControlLabel,
+  // FormLabel,
+  // Radio,
+  // RadioGroup,
   TextField,
 } from "@material-ui/core";
-import UserSelector from "../userSelector/UserSelector";
+// import UserSelector from "../userSelector/UserSelector";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import { wrap } from "lodash";
+// import { wrap } from "lodash";
 
 export default function ProjectList() {
   const {
@@ -67,16 +67,16 @@ export default function ProjectList() {
     setFilteredProjects(newProjects);
   };
 
-  const filterByStatus = (status) => {
-    setFilteredProjects(null);
-    setFilteredUser(null);
-    setFilteredProcess(status);
-    console.log(status);
-    const newProjects = [...state.projects].reverse().filter((project) => {
-      return status && project.status.toLowerCase() === status.toLowerCase();
-    });
-    setFilteredProjects(newProjects);
-  };
+  // const filterByStatus = (status) => {
+  //   setFilteredProjects(null);
+  //   setFilteredUser(null);
+  //   setFilteredProcess(status);
+  //   console.log(status);
+  //   const newProjects = [...state.projects].reverse().filter((project) => {
+  //     return status && project.status.toLowerCase() === status.toLowerCase();
+  //   });
+  //   setFilteredProjects(newProjects);
+  // };
 
   const projects = filteredProjects
     ? filteredProjects

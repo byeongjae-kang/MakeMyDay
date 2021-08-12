@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ProjectContext from "../../context/ProjectContext";
-import { Button, Box, Typography, Tooltip, Icon } from "@material-ui/core";
+import { Button, Box, Typography, Tooltip } from "@material-ui/core";
 import axios from "axios";
 // import FilterIcon from '@material-ui/icons/Filter';
 // import Filter1Icon from '@material-ui/icons/Filter1';
@@ -12,14 +12,14 @@ import cloneDeep from "lodash/cloneDeep";
 import EventAvailableIcon from "@material-ui/icons/EventAvailable";
 import ListIcon from "@material-ui/icons/List";
 import { withStyles } from "@material-ui/core/styles";
-const options = ["Edit", "Delete"];
+// const options = ["Edit", "Delete"];
 const LightTooltip = withStyles((theme) => ({
   tooltip: {
     backgroundColor: theme.palette.common.white,
     color: "rgba(0, 0, 0, 0.87)",
     boxShadow: theme.shadows[1],
-    fontSize: 14,
-  },
+    fontSize: 14
+  }
 }))(Tooltip);
 function ProjectView() {
   const [projects, setState] = useState({});
@@ -27,82 +27,6 @@ function ProjectView() {
   const [view, setView] = useState(true);
   const [filter, setFilter] = useState(false);
   const [userId, setUserId] = useState();
-
-
-  function reformatState(tasks, projects) {
-    let projectsInState = {};
-  
-    for (let each of tasks) {
-      if (!projectsInState[each.project_id]) {
-        projectsInState[each.project_id] = {
-          name: each.project_name,
-          tasks: [
-            {
-              id: each.id,
-              name: each.name,
-              project_id: each.project_id,
-              description: each.description,
-              priority: each.priority,
-              status: each.status,
-              end: each.end,
-              avatar: each.avatar,
-              start: each.start,
-              user_id: each.user_id,
-              user_name: each.user_name,
-            },
-          ],
-        };
-      } else {
-        let task = {
-          id: each.id,
-          name: each.name,
-          project_id: each.project_id,
-          description: each.description,
-          priority: each.priority,
-          status: each.status,
-          end: each.end,
-          start: each.start,
-          avatar: each.avatar,
-          user_id: each.user_id,
-          user_name: each.user_name,
-        };
-        projectsInState[each.project_id].tasks.push(task);
-      }
-    }
-  
-    for (let project of projects) {
-      if (!projectsInState[project.id]) {
-        projectsInState[project.id] = {
-          name: project.name,
-          tasks: [],
-        };
-      }
-  
-    }
-    return projectsInState;
-  }
-  
-
-  function findIndex(id, tasks) {
-    let index;
-    for (let i = 0; i < tasks.length; i++) {
-      if (tasks[i].id === id) {
-        index = i;
-      }
-    }
-    return index
-  }
-
-  function deleteTask(id, tasks) {
-    let index;
-    for (let i = 0; i < tasks.length; i++) {
-      if (tasks[i].id === id) {
-        index = i;
-      }
-    }
-    tasks.splice(index, 1);
-    return tasks;
-  }
 
   const HaveProjectWithUsers = (projects, users) => {
     let projectWithUsers = {};
@@ -126,21 +50,94 @@ function ProjectView() {
     Promise.all([
       axios.get("/api/users"),
       axios.get("/api/projects"),
-      axios.get("/api/tasks"),
+      axios.get("/api/tasks")
     ])
       .then((result) => {
         // console.log("result in useEfect", result);
         setState((prev) => ({
           ...prev,
-          ...reformatState(result[2].data, result[1].data),
+          ...reformatState(result[2].data, result[1].data)
         }));
         setUsers((prev) => ({
           ...prev,
-          ...HaveProjectWithUsers(result[1].data, result[0].data),
+          ...HaveProjectWithUsers(result[1].data, result[0].data)
         }));
       })
       .catch((err) => console.log(err));
   }, []);
+
+  function reformatState(tasks, projects) {
+    let projectsInState = {};
+
+    for (let each of tasks) {
+      if (!projectsInState[each.project_id]) {
+        projectsInState[each.project_id] = {
+          name: each.project_name,
+          tasks: [
+            {
+              id: each.id,
+              name: each.name,
+              project_id: each.project_id,
+              description: each.description,
+              priority: each.priority,
+              status: each.status,
+              end: each.end,
+              avatar: each.avatar,
+              start: each.start,
+              user_id: each.user_id,
+              user_name: each.user_name
+            }
+          ]
+        };
+      } else {
+        let task = {
+          id: each.id,
+          name: each.name,
+          project_id: each.project_id,
+          description: each.description,
+          priority: each.priority,
+          status: each.status,
+          end: each.end,
+          start: each.start,
+          avatar: each.avatar,
+          user_id: each.user_id,
+          user_name: each.user_name
+        };
+        projectsInState[each.project_id].tasks.push(task);
+      }
+    }
+
+    for (let project of projects) {
+      if (!projectsInState[project.id]) {
+        projectsInState[project.id] = {
+          name: project.name,
+          tasks: []
+        };
+      }
+    }
+    return projectsInState;
+  }
+
+  function findIndex(id, tasks) {
+    let index;
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].id === id) {
+        index = i;
+      }
+    }
+    return index;
+  }
+
+  function deleteTask(id, tasks) {
+    let index;
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].id === id) {
+        index = i;
+      }
+    }
+    tasks.splice(index, 1);
+    return tasks;
+  }
 
   const projectId = useParams().id;
   // console.log("users", users)
@@ -148,7 +145,7 @@ function ProjectView() {
     axios
       .put(`http://localhost:8080/api/tasks/${id}`, {
         start: start_date,
-        end: end_date,
+        end: end_date
       })
       .then((result) => {
         return axios.get(
@@ -163,33 +160,35 @@ function ProjectView() {
         project.tasks = newTask;
         setState((prev) => ({
           ...prev,
-          [response.data[0].project_id]: project,
+          [response.data[0].project_id]: project
         }));
       })
       .catch((err) => console.log(err));
   };
 
+  
+
   const listSchema = [
     {
       id: "1",
       name: "In Progress",
-      tasks: [],
+      tasks: []
     },
     {
       id: "2",
       name: "Backlog",
-      tasks: [],
+      tasks: []
     },
     {
       id: "3",
       name: "On Hold",
-      tasks: [],
+      tasks: []
     },
     {
       id: "4",
       name: "Completed",
-      tasks: [],
-    },
+      tasks: []
+    }
   ];
 
   const updateDragDrop = function (destinationId, draggableId) {
@@ -223,7 +222,7 @@ function ProjectView() {
         project.tasks.push(responce.data[0]);
         setState((prev) => ({
           ...prev,
-          [responce.data[0].project_id]: project,
+          [responce.data[0].project_id]: project
         }));
       })
       .catch((err) => console.log(err));
@@ -260,7 +259,7 @@ function ProjectView() {
     deleteTasks,
     users,
     userId,
-    filter,
+    filter
   };
 
   if (!Object.keys(users).length) {

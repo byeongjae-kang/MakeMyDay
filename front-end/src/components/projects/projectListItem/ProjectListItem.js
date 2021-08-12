@@ -7,12 +7,12 @@ import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
-import { Avatar, CardActions, Divider, Tooltip } from "@material-ui/core";
+import { CardActions, Divider, Tooltip } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { useStyles } from "./ProjectListItemStyle";
 import Chat from "../chat/Chat";
 import "../projectList/ProjectList.css";
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 const options = ["Edit", "Delete"];
 const LightTooltip = withStyles((theme) => ({
@@ -124,15 +124,16 @@ export default function ProjectListItems({
           {project.status}
         </Typography>
         <CardActions>
-          {project.users.map((user) => {
+          {project.users.map((user, index) => {
             return (
               <LightTooltip
+                key={index}
                 title={user.user_name}
                 className={classes.light}
                 aria-label="add"
               >
                 <IconButton key={user.id} className={classes.person}>
-                  <img className="avatar" src={user.avatar} />
+                  <img className="avatar" src={user.avatar} alt={user.user_name}/>
 
                   {/* <Avatar alt={user.name} src={user.avatar} /> */}
                 </IconButton>

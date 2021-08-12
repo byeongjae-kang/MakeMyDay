@@ -7,7 +7,8 @@ jobs:
     working_directory: ~/MakeMyDay/front-end
 
     steps:
-      - checkout
+      - checkout:
+          path:  ~/MakeMyDay
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}

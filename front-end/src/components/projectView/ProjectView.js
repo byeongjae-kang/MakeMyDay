@@ -6,9 +6,6 @@ import axios from "axios";
 // import FilterIcon from '@material-ui/icons/Filter';
 // import Filter1Icon from '@material-ui/icons/Filter1';
 
-import {
-  reformatState,
-} from "hooks/helpers";
 import Gantt from "components/gantt/Gantt";
 import TasksBody from "components/drag_drop/TasksBody";
 import cloneDeep from "lodash/cloneDeep";
@@ -30,6 +27,61 @@ function ProjectView() {
   const [view, setView] = useState(true);
   const [filter, setFilter] = useState(false);
   const [userId, setUserId] = useState();
+
+
+  function reformatState(tasks, projects) {
+    let projectsInState = {};
+  
+    for (let each of tasks) {
+      if (!projectsInState[each.project_id]) {
+        projectsInState[each.project_id] = {
+          name: each.project_name,
+          tasks: [
+            {
+              id: each.id,
+              name: each.name,
+              project_id: each.project_id,
+              description: each.description,
+              priority: each.priority,
+              status: each.status,
+              end: each.end,
+              avatar: each.avatar,
+              start: each.start,
+              user_id: each.user_id,
+              user_name: each.user_name,
+            },
+          ],
+        };
+      } else {
+        let task = {
+          id: each.id,
+          name: each.name,
+          project_id: each.project_id,
+          description: each.description,
+          priority: each.priority,
+          status: each.status,
+          end: each.end,
+          start: each.start,
+          avatar: each.avatar,
+          user_id: each.user_id,
+          user_name: each.user_name,
+        };
+        projectsInState[each.project_id].tasks.push(task);
+      }
+    }
+  
+    for (let project of projects) {
+      if (!projectsInState[project.id]) {
+        projectsInState[project.id] = {
+          name: project.name,
+          tasks: [],
+        };
+      }
+  
+    }
+    return projectsInState;
+  }
+  
 
   function findIndex(id, tasks) {
     let index;

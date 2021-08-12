@@ -7,13 +7,22 @@ import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
-
 import { Avatar, CardActions, Divider, Tooltip } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { useStyles } from "./ProjectListItemStyle";
 import Chat from "../chat/Chat";
 import "../projectList/ProjectList.css";
+import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
 const options = ["Edit", "Delete"];
+const LightTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: theme.palette.common.white,
+    color: "rgba(0, 0, 0, 0.87)",
+    boxShadow: theme.shadows[1],
+    fontSize: 14,
+  },
+}))(Tooltip);
 
 export default function ProjectListItems({
   project,
@@ -46,7 +55,22 @@ export default function ProjectListItems({
   return (
     <Card elevation={1} className={classes.listItem} variant="outlined">
       <CardHeader
-        title={project.name}
+        title={
+          <Typography
+            onClick={() =>
+              history.push(`${currentRoute.url}/${project.id}/tasks`)
+            }
+            variant="h5"
+            fontSize="15"
+            style={{
+              wordBreak: "break-word",
+              cursor: "pointer",
+              paddingRight: "5px",
+            }}
+          >
+            {project.name}
+          </Typography>
+        }
         style={{ color: "#406f7f" }}
         action={
           <div>
@@ -86,7 +110,9 @@ export default function ProjectListItems({
         className={classes.content}
         onClick={() => history.push(`${currentRoute.url}/${project.id}/tasks`)}
       >
-        <Typography variant="body3">{project.description}</Typography>
+        <Typography style={{ wordBreak: "break-word" }} variant="body3">
+          {project.description}
+        </Typography>
       </CardContent>
 
       <div className={classes.footer}>
@@ -100,16 +126,17 @@ export default function ProjectListItems({
         <CardActions>
           {project.users.map((user) => {
             return (
-              <Tooltip
+              <LightTooltip
                 title={user.user_name}
-                className={classes.tooltip}
+                className={classes.light}
                 aria-label="add"
               >
                 <IconButton key={user.id} className={classes.person}>
                   <img className="avatar" src={user.avatar} />
+
                   {/* <Avatar alt={user.name} src={user.avatar} /> */}
                 </IconButton>
-              </Tooltip>
+              </LightTooltip>
             );
           })}
           <Chat project={project} />

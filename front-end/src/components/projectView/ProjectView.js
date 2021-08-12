@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ProjectContext from "../../context/ProjectContext";
-import { Button, Box, Typography, Icon } from "@material-ui/core";
+import { Button, Box, Typography, Tooltip, Icon } from "@material-ui/core";
 import axios from "axios";
 // import FilterIcon from '@material-ui/icons/Filter';
 // import Filter1Icon from '@material-ui/icons/Filter1';
@@ -16,15 +16,22 @@ import TasksBody from "components/drag_drop/TasksBody";
 import cloneDeep from "lodash/cloneDeep";
 import EventAvailableIcon from "@material-ui/icons/EventAvailable";
 import ListIcon from "@material-ui/icons/List";
-
-
-
+import { withStyles } from "@material-ui/core/styles";
+const options = ["Edit", "Delete"];
+const LightTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: theme.palette.common.white,
+    color: "rgba(0, 0, 0, 0.87)",
+    boxShadow: theme.shadows[1],
+    fontSize: 14,
+  },
+}))(Tooltip);
 function ProjectView() {
   const [projects, setState] = useState({});
   const [users, setUsers] = useState({});
   const [view, setView] = useState(true);
   const [filter, setFilter] = useState(false);
-  const [userId, setUserId] = useState()
+  const [userId, setUserId] = useState();
 
   useEffect(() => {
     Promise.all([
@@ -151,8 +158,8 @@ function ProjectView() {
   }
 
   function toggleFilter(id) {
-    setFilter(!filter)
-    setUserId(id)
+    setFilter(!filter);
+    setUserId(id);
   }
 
   const stateData = {
@@ -164,7 +171,7 @@ function ProjectView() {
     deleteTasks,
     users,
     userId,
-    filter
+    filter,
   };
 
   if (!Object.keys(users).length) {
@@ -173,29 +180,33 @@ function ProjectView() {
 
   const projectUsers = users[projectId].users;
 
-
   const avatars = projectUsers.map((each, index) => (
-    <img
-      key={index}
-      className="avatar1"
-      alt={each.user_name}
-      src={each.avatar}
-      onClick={() => toggleFilter(each.id)}
-    />
-  ))
+    <LightTooltip style={{ cursor: "pointer" }} title={each.user_name}>
+      <img
+        key={index}
+        className="avatar1"
+        alt={each.user_name}
+        src={each.avatar}
+        onClick={() => toggleFilter(each.id)}
+      />
+    </LightTooltip>
+  ));
 
   return (
     <ProjectContext.Provider value={stateData}>
-
       <Box display="flex" onclick={() => setFilter(false)}>
-
         <Box display="flex" flexGrow={1}>
-          <Typography style={{ marginTop: "5px" }} variant="body2">
+          <Typography
+            style={{ marginTop: "5px", marginRight: "10px" }}
+            variant="body2"
+          >
             Project / {projects[projectId].name}
           </Typography>
 
           {/* <h4>{view ? "Project View" : "Gantt View"}</h4> */}
-          <Box ml={1.5}>
+          <LightTooltip
+            title={view ? "Switch to Gantt Chart" : "Switch to Kanban Board"}
+          >
             <Button
               size="small"
               type="submit"
@@ -206,13 +217,11 @@ function ProjectView() {
             >
               {view ? "Kanban Board" : "Gantt Chart"}
             </Button>
-          </Box>
+          </LightTooltip>
         </Box>
-        <Box>
-          {avatars}
-        </Box>
-      </Box>
 
+        <Box>{avatars}</Box>
+      </Box>
 
       <br />
       {view && <TasksBody />}

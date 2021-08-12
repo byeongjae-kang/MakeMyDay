@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: circleci/node:10.16
 
-    working_directory: ~/client
+    working_directory: ~/MakeMyDay/front-end
 
     steps:
       - checkout

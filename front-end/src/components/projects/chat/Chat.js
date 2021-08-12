@@ -14,7 +14,7 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles({
   dialog: {
     position: "absolute",
-    left: "145vh",
+    // left: "125vh",
     bottom: "9vh",
     width: "45vh",
     height: "69vh",

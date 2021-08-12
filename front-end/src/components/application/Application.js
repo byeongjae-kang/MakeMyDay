@@ -36,9 +36,9 @@ export default function Application() {
       <Router>
         <Layout>
           <Switch>
-          <Route exact path="/dashboard">
+            {/* <Route exact path="/dashboard">
               <Dashboard />
-            </Route>
+            </Route> */}
             <Route exact path="/projects">
               <ProjectList />
             </Route>

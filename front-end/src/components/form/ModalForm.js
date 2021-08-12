@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import ProjectContext from "../../context/ProjectContext";
 import axios from "axios";
 import cloneDeep from "lodash/cloneDeep";
-import { deleteTask } from "../../hooks/helpers";
+
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Avatar, Typography } from "@material-ui/core";
 import {
@@ -32,6 +32,17 @@ const findUser = (userId, projectUsers) => {
   }
   return null;
 };
+
+function deleteTask(id, tasks) {
+  let index;
+  for (let i = 0; i < tasks.length; i++) {
+    if (tasks[i].id === id) {
+      index = i;
+    }
+  }
+  tasks.splice(index, 1);
+  return tasks;
+}
 
 export default function Form(props) {
   const classes = useStyles();

@@ -11,6 +11,7 @@ import {
   CircularProgress,
   Grow,
   Paper,
+  Dialog,
 } from "@material-ui/core";
 import axios from "axios";
 import { AuthContext } from "context/AuthContext";
@@ -19,7 +20,24 @@ import { useContext } from "react";
 import { useRef } from "react";
 import { GoogleLogin } from "react-google-login";
 
+import Slide from "@material-ui/core/Slide";
+const useStyles = makeStyles({
+  dialog: {
+    position: "absolute",
+    // left: "125vh",
+    top: "15vh",
+    width: "40vh",
+    height: "50vh",
+    padding: "2em",
+    display: "flex",
+  },
+  grid: { minHeight: "100%" },
+});
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="down" ref={ref} {...props} />;
+});
 function Login(props) {
+  const { openPopup, closePopup, setOpenPopup } = props;
   const email = useRef();
   const password = useRef();
   const { isFetching, dispatch } = useContext(AuthContext);
@@ -46,15 +64,34 @@ function Login(props) {
     response.profileObj?.email &&
       loginCall({ email: response.profileObj.email }, dispatch);
   };
-
-  return props.trigger ? (
-    <Box className="card">
+  const classes = useStyles();
+  return (
+    <Dialog
+      BackdropProps={{ style: { backgroundColor: "transparent" } }}
+      PaperProps={{
+        style: {
+          backgroundColor: "rgba(64, 111, 127, 0.50)",
+          borderRadius: "25px",
+          border: "rgba(255, 255, 255, 0.25)",
+          boxShadow: "none",
+          backdropFilter: "blur(15px)",
+        },
+      }}
+      classes={{
+        paper: classes.dialog,
+      }}
+      TransitionComponent={Transition}
+      keepMounted
+      onClose={closePopup}
+      open={openPopup}
+    >
+      <br /> <br /> <br /> <br /> <br /> <br />
       <form onSubmit={submitHandler}>
         <TextField
           fullWidth
           variant="outlined"
           color="secondary"
-          label="email"
+          label="Email Address"
           // placeholder="Enter Email Address"
           required
           type="email"
@@ -63,30 +100,28 @@ function Login(props) {
         <br />
         <br />
         <TextField
+          fullWidth
           variant="outlined"
           color="secondary"
-          label="password"
           type="password"
-          placeholder="enter password"
-          fullWidth
+          placeholder="Password"
           required
           inputRef={password}
         />
-        <br />
-        <br />
 
         <div className="divide">
           {/* <Typography>Forgot password?</Typography> */}
 
-          {/* <FormControlLabel
+          <FormControlLabel
             control={<Checkbox name="checkedB" />}
             label="Remember me"
-          /> */}
+          />
         </div>
         <Button
+          className={classes.btnbtn}
           variant="contained"
           type="submit"
-          color="primary"
+          color="secondary"
           fullWidth
           disabled={isFetching}
         >
@@ -97,22 +132,18 @@ function Login(props) {
           )}
         </Button>
       </form>
-      <br />
       {/* <Typography align="center">
         Don't have an account? <Link>Sign up</Link>
       </Typography> */}
-      <Grid align="center">
-        <GoogleLogin
-          clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-          buttonText="or Login with Google "
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-          cookiePolicy={"single_host_origin"}
-        />
-      </Grid>
-    </Box>
-  ) : (
-    ""
+      <br></br>
+      <GoogleLogin
+        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+        buttonText="or Login with Google "
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+        cookiePolicy={"single_host_origin"}
+      />
+    </Dialog>
   );
 }
 

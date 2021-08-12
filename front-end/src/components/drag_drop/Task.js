@@ -161,15 +161,6 @@ export default function Task({ index, updateTask, task }) {
             >
               <Card className={classes.card} elevation={1} variant="outlined">
                 <CardHeader
-                  PaperProps={{
-                    style: {
-                      backgroundColor: "rgba(255, 255, 255, 0.44)",
-                      border: "rgba(255, 255, 255, 0.25)",
-                      borderRadius: "10px",
-                      boxShadow: "none",
-                      backdropFilter: "blur(16px)",
-                    },
-                  }}
                   title={
                     <Typography
                       variant="body3"

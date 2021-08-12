@@ -181,29 +181,30 @@ export default function ProjectList() {
               )}
             />
           </div>
+          <Button
+            startIcon={<RotateLeftIcon />}
+            onClick={resetAllFilter}
+            variant="outlined"
+            size="large"
+            color="primary"
+            style={{ marginLeft: "7px", borderRadius: "0px" }}
+          >
+            RESET
+          </Button>
         </div>
-        <Button
-          startIcon={<RotateLeftIcon />}
-          onClick={resetAllFilter}
-          variant="outlined"
-          size="small"
-          color="primary"
-          style={{ marginLeft: "7px" }}
-        >
-          RESET
-        </Button>
       </div>
-
       <br />
-      <MessageContextProvider>
-        <Masonry
-          breakpointCols={breakpoints}
-          className="my-masonry-grid"
-          columnClassName="my-masonry-grid_column"
-        >
-          {sortedProjects}
-        </Masonry>
-      </MessageContextProvider>
+      <body>
+        <MessageContextProvider>
+          <Masonry
+            breakpointCols={breakpoints}
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column"
+          >
+            {sortedProjects}
+          </Masonry>
+        </MessageContextProvider>
+      </body>
     </div>
   );
 }

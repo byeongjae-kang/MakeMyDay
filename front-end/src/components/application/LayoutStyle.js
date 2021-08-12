@@ -84,6 +84,8 @@ const useStyles = makeStyles((theme) => ({
   //   background: "blue",
   // },
   btnbtn: {
+    fontWeight: "500",
+    borderRadius: "0px",
     marginRight: "25px",
     color: "#FFF",
     backgroundColor: "#406f7f",

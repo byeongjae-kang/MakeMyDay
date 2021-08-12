@@ -48,8 +48,6 @@ export default function useProjectData() {
 
   const breakpoints = {
     default: 3,
-    1100: 2,
-    700: 1,
   };
 
   const [open, setOpen] = useState(false);

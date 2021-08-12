@@ -131,7 +131,6 @@ export default function Message({ project }) {
                     {message.user?.user_name}
                   </Typography>
                 </Box>
-
                 {/* <img src={message.user?.avatar} alt={message.user?.user_name} /> */}
               </div>
             </div>
@@ -191,12 +190,7 @@ export default function Message({ project }) {
               marginTop: "6px",
             }}
           >
-            <HtmlTooltip
-              title={"Websocket Feature Not Enabled"}
-              style={{ cursor: "pointer" }}
-            >
-              <Typography>Socket.io Chatroom</Typography>
-            </HtmlTooltip>
+            <Typography>Socket.io Chatroom</Typography>
             <Typography style={{ marginRight: "20px" }}>
               #{project.name}
             </Typography>

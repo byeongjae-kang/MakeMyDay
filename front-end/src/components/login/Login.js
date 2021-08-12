@@ -1,16 +1,9 @@
 import {
   Grid,
   Box,
-  makeStyles,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Button,
-  Typography,
-  Link,
   CircularProgress,
-  Grow,
-  Paper,
 } from "@material-ui/core";
 import axios from "axios";
 import { AuthContext } from "context/AuthContext";

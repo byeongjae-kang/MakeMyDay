@@ -17,7 +17,7 @@ import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import "./avatar.css";
 import { withStyles } from "@material-ui/core/styles";
-const options = ["Edit", "Delete"];
+// const options = ["Edit", "Delete"];
 const LightTooltip = withStyles((theme) => ({
   tooltip: {
     backgroundColor: theme.palette.common.white,

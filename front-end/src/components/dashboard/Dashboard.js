@@ -1,36 +1,32 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "context/AuthContext";
 import axios from "axios";
-import {
-  getIncompleteTasks,
-  getProjectsWithTasks,
-  getProjectNames,
-} from "../../hooks/helpers";
-import { Paper, Box, Typography, makeStyles, Tooltip } from "@material-ui/core";
+// import { getProjectsWithTasks, getProjectNames } from "../../hooks/helpers";
+import { Box, Typography, makeStyles, Tooltip } from "@material-ui/core";
 import DashbordProject from "./DashbordProject";
 
 import { withStyles } from "@material-ui/core/styles";
-const options = ["Edit", "Delete"];
+// const options = ["Edit", "Delete"];
 const LightTooltip = withStyles((theme) => ({
   tooltip: {
     backgroundColor: theme.palette.common.white,
     color: "rgba(0, 0, 0, 0.87)",
     boxShadow: theme.shadows[1],
-    fontSize: 14,
-  },
+    fontSize: 14
+  }
 }))(Tooltip);
 const useStyle = makeStyles((theme) => ({
   text: {
     color: "black",
-    fontWeight: "500",
-  },
+    fontWeight: "500"
+  }
 }));
 
 function Dashboard() {
   const classes = useStyle();
   const { user } = useContext(AuthContext);
   const [userState, setUserState] = useState({
-    tasks: [],
+    tasks: []
   });
   useEffect(() => {
     axios.get("api/tasks").then((result) => {
@@ -39,6 +35,30 @@ function Dashboard() {
   }, []);
 
   console.log("user", user);
+
+  
+
+  const getProjectNames = function (tasks) {
+    const projectNames = [];
+    for (let task of tasks) {
+      if (!projectNames.includes(task.project_name)) {
+        projectNames.push(task.project_name);
+      }
+    }
+    return projectNames;
+  };
+
+  const getIncompleteTasks = function (tasks, id) {
+    let incompleteTasks = [];
+
+    for (let task of tasks) {
+      if (task.user_id === id && task.status !== "Completed") {
+        incompleteTasks.push(task);
+      }
+    }
+
+    return incompleteTasks;
+  };
 
   if (!userState.tasks.length) {
     return null;

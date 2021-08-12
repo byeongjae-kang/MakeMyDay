@@ -1,11 +1,11 @@
 import React from "react";
 import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import { DialogContent, Divider } from "@material-ui/core";
+// import DialogTitle from "@material-ui/core/DialogTitle";
+import { DialogContent } from "@material-ui/core";
 import Slide from "@material-ui/core/Slide";
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import Message from "./message/Message";
-import Members from "./members/Members";
+// import Members from "./members/Members";
 import { Tooltip } from "@material-ui/core";
 import "./Chat.css";
 import { withStyles } from "@material-ui/core/styles";

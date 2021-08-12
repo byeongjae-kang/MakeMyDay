@@ -48,6 +48,8 @@ export default function ProjectList() {
   const [filteredProcess, setFilteredProcess] = useState(null);
   const [filteredUser, setFilteredUser] = useState(null);
 
+  console.log(filteredProcess)
+
   const resetAllFilter = () => {
     setFilteredProjects(null);
     setFilteredProcess(null);

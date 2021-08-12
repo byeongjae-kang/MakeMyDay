@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const pool = require("./db/db");
+const socket = require("socket.io");
 
 //App Config
 const app = express();
@@ -156,7 +157,7 @@ app.put(`/api/projects/:id`, (req, res) => {
       status,
       modified_date,
       due_Date,
-      projectId,
+      projectId
     ])
     .then(() => {
       pool
@@ -245,7 +246,7 @@ app.put(`/api/projects/:project_id/tasks/:task_id`, (req, res) => {
       end,
       priority,
       user_id,
-      taskId,
+      taskId
     ])
     .then((result) => {
       // console.log(result.rows[0]);
@@ -307,4 +308,24 @@ app.delete("/api/tasks/:id", async (req, res) => {
 });
 
 //Listener
-app.listen(port, () => console.log(`listening on localhost:${port}`));
+const server = app.listen(port, () =>
+  console.log(`listening on localhost:${port}`)
+);
+
+const io = socket(server, {
+  cors: {
+    origin: "http://localhost:3000"
+  }
+});
+
+io.on("connection", (socket) => {
+  console.log("a user connected");
+
+  socket.on("sent", (message) => {
+    io.emit("sentBack", message);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("a user disconnected!");
+  });
+});

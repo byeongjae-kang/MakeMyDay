@@ -28,6 +28,24 @@ function ProjectView() {
   const [filter, setFilter] = useState(false);
   const [userId, setUserId] = useState();
 
+  const HaveProjectWithUsers = (projects, users) => {
+    let projectWithUsers = {};
+    for (let project of projects) {
+      if (!projectWithUsers[project.id]) {
+        projectWithUsers[project.id] = { users: [] };
+      }
+      for (let projectUser of project.users) {
+        for (let user of users) {
+          if (projectUser === user.id) {
+            projectWithUsers[project.id].users.push(user);
+          }
+        }
+      }
+    }
+
+    return projectWithUsers;
+  };
+
   useEffect(() => {
     Promise.all([
       axios.get("/api/users"),
@@ -148,23 +166,7 @@ function ProjectView() {
       .catch((err) => console.log(err));
   };
 
-  const HaveProjectWithUsers = (projects, users) => {
-    let projectWithUsers = {};
-    for (let project of projects) {
-      if (!projectWithUsers[project.id]) {
-        projectWithUsers[project.id] = { users: [] };
-      }
-      for (let projectUser of project.users) {
-        for (let user of users) {
-          if (projectUser === user.id) {
-            projectWithUsers[project.id].users.push(user);
-          }
-        }
-      }
-    }
-
-    return projectWithUsers;
-  };
+  
 
   const listSchema = [
     {

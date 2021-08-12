@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - checkout:
-          path:  ~/MakeMyDay
+          path: ~/MakeMyDay
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
@@ -20,7 +20,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm test
 
- deploy:
+  deploy:
     machine:
       enabled: true
 
@@ -31,7 +31,7 @@ jobs:
           fingerprints:
             - "cf:97:c2:2c:14:f5:2a:25:41:5d:15:b7:24:bd:e5:a0"
       - checkout:
-          path:  ~/MakeMyDay
+          path: ~/MakeMyDay
       - run:
           name: Push Main to Production
           command: |

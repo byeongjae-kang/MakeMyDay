@@ -32,6 +32,26 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { useContext } from "react";
 import { AuthContext } from "context/AuthContext";
 import Landing from "components/landing_page/Landing";
+import { withStyles } from "@material-ui/core/styles";
+const options = ["Edit", "Delete"];
+const LightTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: theme.palette.common.white,
+    color: "rgba(0, 0, 0, 0.87)",
+    boxShadow: theme.shadows[1],
+    fontSize: 14,
+  },
+}))(Tooltip);
+const HtmlTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: "#f5f5f9",
+    color: "rgba(0, 0, 0, 0.87)",
+    maxWidth: 220,
+    fontSize: theme.typography.pxToRem(12),
+    border: "1px solid #dadde9",
+    fontSize: 14,
+  },
+}))(Tooltip);
 
 export default function MiniDrawer({ children }) {
   const classes = useStyles();
@@ -41,14 +61,22 @@ export default function MiniDrawer({ children }) {
   const location = useLocation();
 
   const menuItems = [
-    {
-      text: <Typography variant="body2">Dashboard</Typography>,
-      icon: <HomeIcon className={classes.icons} />,
-      path: "/dashboard",
-    },
+    // {
+    //   text: (
+    //     <LightTooltip style={{ cursor: "pointer" }} title={"Dashboard"}>
+    //       <Typography variant="body2">Dashboard</Typography>
+    //     </LightTooltip>
+    //   ),
+    //   icon: <HomeIcon className={classes.icons} />,
+    //   path: "/dashboard",
+    // },
     {
       text: <Typography variant="body2">Projects</Typography>,
-      icon: <AssignmentIcon className={classes.icons} />,
+      icon: (
+        <LightTooltip style={{ cursor: "pointer" }} title={"Projects"}>
+          <AssignmentIcon className={classes.icons} />
+        </LightTooltip>
+      ),
       path: "/projects",
     },
   ];
@@ -78,44 +106,66 @@ export default function MiniDrawer({ children }) {
             })}
           >
             <Toolbar>
-              <IconButton
-                // color="inherit"
-                aria-label="open drawer"
-                // onClick={handleDrawerOpen}
-                edge="start"
-                className={clsx(classes.menuButton, {
-                  [classes.hide]: open,
-                })}
+              <HtmlTooltip
+                title={
+                  <React.Fragment>
+                    <Typography color="inherit">
+                      Drawer Feature Not Enabled
+                    </Typography>{" "}
+                  </React.Fragment>
+                }
               >
-                <MenuIcon />
-              </IconButton>
-
+                <IconButton
+                  // color="inherit"
+                  aria-label="open drawer"
+                  // onClick={handleDrawerOpen}
+                  edge="start"
+                  className={clsx(classes.menuButton, {
+                    [classes.hide]: open,
+                  })}
+                >
+                  <MenuIcon />
+                </IconButton>
+              </HtmlTooltip>
               <Typography variant="h6" noWrap className={classes.app}>
                 {/* <strong>MAKE MY DAY</strong> */}
               </Typography>
               <div>
-                <Button
-                  variant="outlined"
-                  size="small"
-                  title="https://github.com/byeongjae-kang/MakeMyDay"
-                  className={classes.btnbtn}
-                  onClick={() =>
-                    window.open("https://github.com/byeongjae-kang/MakeMyDay")
+                <HtmlTooltip
+                  title={
+                    <React.Fragment>
+                      <Typography color="inherit">
+                        Visit the Github Repo:
+                      </Typography>
+                      <br />
+                      <em>{"https://github.com/byeongjae-kang/MakeMyDay"}</em>
+                    </React.Fragment>
                   }
-                  startIcon={<GitHubIcon />}
                 >
-                  Github Link
-                </Button>
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    className={classes.btnbtn}
+                    onClick={() =>
+                      window.open("https://github.com/byeongjae-kang/MakeMyDay")
+                    }
+                    startIcon={<GitHubIcon />}
+                  >
+                    Github
+                  </Button>
+                </HtmlTooltip>
                 {/* <Typography>WELCOME!! {user && user.user_name}</Typography> */}
               </div>
-              <Tooltip
+              <LightTooltip
                 style={{ cursor: "pointer" }}
-                title={`Hi ${user.user_name}`}
+                title={
+                  // user.user_name === null ?
+                  "Login Feature Not Enabled"
+                  // : `Hi ${user.user_name}`
+                }
               >
-                <Avatar className={classes.avatar}>
-                  {user.user_name.charAt(0)}
-                </Avatar>
-              </Tooltip>
+                <Avatar className={classes.avatar}></Avatar>
+              </LightTooltip>
             </Toolbar>
           </AppBar>
           <Drawer
@@ -143,6 +193,7 @@ export default function MiniDrawer({ children }) {
 
             {/* <Divider /> */}
             <br />
+
             <List>
               {menuItems.map((item) => (
                 <ListItem

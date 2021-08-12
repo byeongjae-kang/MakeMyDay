@@ -42,7 +42,7 @@ export default function UserSelector({ users, getUserIds, userId }) {
             {...params}
             variant="outlined"
             label="Select Team Members"
-            placeholder="Add members"
+            // placeholder="Add members"
             color="secondary"
           />
         )}

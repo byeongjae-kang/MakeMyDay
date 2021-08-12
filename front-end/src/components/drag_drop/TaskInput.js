@@ -31,8 +31,8 @@ export default function TaskInput(props) {
         props.setOpen(false);
         setName("");
       }
-      
-      setError(name.length ? "" : "Please type task title")
+
+      setError(name.length ? "" : props.setOpen(false));
     }
   }
 
@@ -41,7 +41,8 @@ export default function TaskInput(props) {
       <InputBase
         multiline
         fullWidth
-        placeholder={error ? error : "Enter a title..."}
+        placeholder={"Enter a title..."}
+        // placeholder={error ? error : "Enter a title..."}
         value={name}
         onKeyDown={handleSubmit}
         onChange={handleKeyPress}

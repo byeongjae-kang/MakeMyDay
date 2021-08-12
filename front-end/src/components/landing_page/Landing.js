@@ -7,7 +7,7 @@ export default function Landing() {
   return (
     <div>
       <Navbar setTrigger={setTrigger} trigger={trigger} />
-      <VideoSection trigger={trigger} setTrigger={setTrigger} />
+      {/* <VideoSection trigger={trigger} setTrigger={setTrigger} /> */}
     </div>
   );
 }

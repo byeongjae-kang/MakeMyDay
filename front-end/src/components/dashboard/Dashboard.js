@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "context/AuthContext";
 import axios from "axios";
+
 // import { getProjectsWithTasks, getProjectNames } from "../../hooks/helpers";
 import { Box, Typography, makeStyles, Tooltip } from "@material-ui/core";
+
 import DashbordProject from "./DashbordProject";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -28,6 +30,29 @@ function Dashboard() {
   const [userState, setUserState] = useState({
     tasks: []
   });
+
+  const getProjectNames = function(tasks) {
+    const projectNames =[];
+    for (let task of tasks) {
+      if (!projectNames.includes(task.project_name)){
+  projectNames.push(task.project_name)
+      }
+    }
+    return projectNames;
+  }
+  
+
+  const getIncompleteTasks = function(tasks, id) {
+    let incompleteTasks = [];
+  
+    for (let task of tasks) {
+      if (task.user_id===id && task.status !== "Completed") {
+        incompleteTasks.push(task)
+      } 
+    }
+    
+   return incompleteTasks;
+  }
   useEffect(() => {
     axios.get("api/tasks").then((result) => {
       setUserState((prev) => ({ ...prev, tasks: result.data }));

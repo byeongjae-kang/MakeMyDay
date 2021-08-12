@@ -40,7 +40,7 @@ export default function ProjectList() {
     getUserIds,
     userId,
     breakpoints,
-    HaveProjectWithUsers,
+    haveProjectWithUsers,
     handleDelete,
   } = useProjectData();
 
@@ -85,7 +85,7 @@ export default function ProjectList() {
   const sortedProjects = projects.map((project, index) => (
     <div key={index}>
       <ProjectListItems
-        project={HaveProjectWithUsers(project, state.users)}
+        project={haveProjectWithUsers(project, state.users)}
         handleDelete={handleDelete}
         handleClickOpen={handleClickOpen}
       />

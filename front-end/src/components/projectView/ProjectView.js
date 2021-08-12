@@ -5,10 +5,10 @@ import { Button, Box, Typography, Tooltip, Icon } from "@material-ui/core";
 import axios from "axios";
 // import FilterIcon from '@material-ui/icons/Filter';
 // import Filter1Icon from '@material-ui/icons/Filter1';
+import HaveProjectWithUsers from 'hooks/helpers'
 import {
   reformatState,
   deleteTask,
-  HaveProjectWithUsers,
   findIndex,
 } from "hooks/helpers";
 import Gantt from "components/gantt/Gantt";

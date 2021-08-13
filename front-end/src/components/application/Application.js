@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import { createTheme, ThemeProvider } from "@material-ui/core";
 import Layout from "./Layout";
 import ProjectList from "../projects/projectList/ProjectList";
@@ -36,9 +41,9 @@ export default function Application() {
       <Router>
         <Layout>
           <Switch>
-            {/* <Route exact path="/dashboard">
-              <Dashboard />
-            </Route> */}
+            <Route exact path="/">
+              <Redirect to="/projects" />
+            </Route>
             <Route exact path="/projects">
               <ProjectList />
             </Route>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
-
+import googleIcon from "./google-icon.svg";
 function GoogleButton() {
   const [showloginButton, setShowloginButton] = useState(true);
   const [showlogoutButton, setShowlogoutButton] = useState(false);
@@ -25,7 +25,7 @@ function GoogleButton() {
     <div>
       {showloginButton ? (
         <GoogleLogin
-          // clientId={clientId}
+          clientId={clientId}
           buttonText="Log In with Google"
           onSuccess={onLoginSuccess}
           onFailure={onLoginFailure}
@@ -36,7 +36,7 @@ function GoogleButton() {
 
       {showlogoutButton ? (
         <GoogleLogout
-          // clientId={clientId}
+          clientId={clientId}
           buttonText="Sign Out"
           onLogoutSuccess={onSignoutSuccess}
         ></GoogleLogout>

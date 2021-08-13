@@ -6,14 +6,15 @@ import Login from "components/login/Login";
 const useStyles = makeStyles({
   btnbtn: {
     fontWeight: "500",
-    borderRadius: "5px",
-    marginRight: "2em",
+    width: "10%",
+    // borderRadius: "0px",
+    marginRight: "10em",
     color: "#FFF",
     backgroundColor: "#007C89",
-    "&:hover": {
-      backgroundColor: "#406f7f",
-      boxShadow: "none",
-    },
+    // "&:hover": {
+    //   backgroundColor: "#406f7f",
+    //   boxShadow: "none",
+    // },
   },
   navtitle: {
     color: "white",
@@ -34,26 +35,26 @@ function Navbar(props) {
         <div>
           <Button
             className={classes.btnbtn}
-            size="small"
-            color="secondary"
+            size="large"
             variant="contained"
             onClick={() => setOpenPopup(true)}
           >
-            Log in
+            Login
           </Button>
           <Login
             closePopup={() => setOpenPopup(false)}
             openPopup={openPopup}
             setOpenPopup={setOpenPopup}
           />
-          <Button
+
+          {/* <Button
             className={classes.btnbtn}
             size="small"
-            color="primary"
+            color="outlined"
             variant="contained"
           >
             Register
-          </Button>
+          </Button> */}
         </div>
       </nav>
     </>

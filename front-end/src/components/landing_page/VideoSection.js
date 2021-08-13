@@ -13,15 +13,7 @@ export default function VideoSection(props) {
         data-setup='{ "playbackRates": [0.5, 1, 1.5, 2] }'
       />
       <div className="message">
-        {props.trigger ? (
-          <Login trigger={props.trigger} />
-        ) : (
-          <>
-            {/* <h1>START</h1> */}
-            {/* <p>a minimum viable demo</p> */}
-            {/* <button>Get Started</button> */}
-          </>
-        )}
+        {props.trigger ? <Login trigger={props.trigger} /> : ""}
       </div>
     </div>
   );

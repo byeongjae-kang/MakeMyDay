@@ -69,16 +69,6 @@ export default function Landing() {
             tasks.
           </Typography>
         </Paper>
-        <Paper className={classes.paper_left_right}>
-          <Typography color="secondary" variant="h6">
-            demo the app
-          </Typography>
-          <br></br>
-          <Typography variant="body2">bit.ly</Typography>
-          <br></br>
-          <br></br>
-          <br></br>
-        </Paper>
         <Paper className={classes.paper_right}>
           <img className="landing_img" id="landing_img" src={landing} />
         </Paper>

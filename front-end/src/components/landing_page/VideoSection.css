@@ -1,4 +1,4 @@
-/* video {
+video {
   margin-top: 4rem;
   object-fit: cover;
   width: 50%;
@@ -13,4 +13,4 @@
   flex-direction: column;
   align-items: center;
   object-fit: contain;
-} */
+}

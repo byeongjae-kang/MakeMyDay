@@ -19,7 +19,8 @@ import React from "react";
 import { useContext } from "react";
 import { useRef } from "react";
 import { GoogleLogin } from "react-google-login";
-
+import { Avatar } from "@material-ui/core";
+import googleIcon from "./google-icon.png";
 import Slide from "@material-ui/core/Slide";
 const useStyles = makeStyles({
   dialog: {
@@ -85,7 +86,45 @@ function Login(props) {
       onClose={closePopup}
       open={openPopup}
     >
-      <br /> <br /> <br /> <br /> <br /> <br />
+      <br /> <br />
+      <Grid style={{ display: "flex", justifyContent: "center" }}>
+        <Avatar style={{ backgroundColor: "red" }}></Avatar>
+      </Grid>
+      <br />
+      <Typography
+        variant="h6"
+        style={{ display: "flex", justifyContent: "center", fontWeight: "700" }}
+        color="secondary"
+      >
+        Log In
+      </Typography>
+      <br />
+      <GoogleLogin
+        render={(renderProps) => (
+          <Button
+            variant="contained"
+            type="submit"
+            color="secondary"
+            onClick={renderProps.onClick}
+            disabled={renderProps.disabled}
+          >
+            Sign in with Google
+          </Button>
+        )}
+        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+        buttonText="or Login with Google "
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+        cookiePolicy={"single_host_origin"}
+      />{" "}
+      <br />{" "}
+      <Typography
+        style={{ display: "flex", justifyContent: "center", fontWeight: "700" }}
+        color="secondary"
+      >
+        or
+      </Typography>
+      <br />
       <form onSubmit={submitHandler}>
         <TextField
           fullWidth
@@ -103,8 +142,8 @@ function Login(props) {
           fullWidth
           variant="outlined"
           color="secondary"
+          label="Password"
           type="password"
-          placeholder="Password"
           required
           inputRef={password}
         />
@@ -113,12 +152,12 @@ function Login(props) {
           {/* <Typography>Forgot password?</Typography> */}
 
           <FormControlLabel
+            style={{ color: "#673ab7" }}
             control={<Checkbox name="checkedB" />}
             label="Remember me"
           />
         </div>
         <Button
-          className={classes.btnbtn}
           variant="contained"
           type="submit"
           color="secondary"
@@ -136,13 +175,6 @@ function Login(props) {
         Don't have an account? <Link>Sign up</Link>
       </Typography> */}
       <br></br>
-      <GoogleLogin
-        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-        buttonText="or Login with Google "
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-        cookiePolicy={"single_host_origin"}
-      />
     </Dialog>
   );
 }

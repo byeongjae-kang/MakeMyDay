@@ -93,7 +93,7 @@ export default function MiniDrawer({ children }) {
 
   return (
     <>
-      {!user ? (
+      {user ? (
         <Landing />
       ) : (
         <div className={classes.root}>

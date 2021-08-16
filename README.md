@@ -44,7 +44,7 @@ We made this app as part our final group project at Lighthouse Labs.
 
 ## Installation
 
-### setup postgreSQL:
+### Setup postgreSQL:
 
 `cd back-end/db`<br />
 `psql -U postgres` or psql -U "yourusername" and enter your password<br />
@@ -56,7 +56,7 @@ We made this app as part our final group project at Lighthouse Labs.
 `\i schema/messages.sql;`<br />
 `\i seeds/seeds.sql;`
 
-### back-end folder root (localhost:8080):
+### Back-end folder (localhost:8080):
 
 Create a .env file by copying the .env example `cp env.example .env`. In the .env file you made, copy your PostgreSQL username to `PGUSER=` and password to `PGPASSWORD=` (leave blank if no password).
 <br />
@@ -65,15 +65,16 @@ Create a .env file by copying the .env example `cp env.example .env`. In the .en
 `npm install`<br />
 `npm run nodemon`<br />
 
-### front-end folder root (localhost:3000):
+### Front-end folder (localhost:3000):
 
 `cd front-end`<br />
 `npm install`<br />
 `npm start`<br />
 
-### extras:
+### Optional:
 
-\*To enable login: On Layout.js (front-end folder), all you need to do is change line 96 from `user` to `!user`. Login is now enabled. You can login using usernames from this [list of available usernames](https://github.com/byeongjae-kang/MakeMyDay/blob/master/back-end/db/seeds/seeds.sql). Optional: If you want to enable Google login, just create an OAUTH2 Client ID on [Google Cloud Platform](https://console.cloud.google.com/). And in the front-end folder, create a .env.local file by copying "env.local example": `cp env.local example .env.local` and then paste your Google OAUTH2 ID after `REACT_APP_GOOGLE_CLIENT_ID=` in the .env.local file that you made.
+\*To enable login: On Layout.js (front-end folder), all you need to do is change line 96 from `user` to `!user`. Login is now enabled. You can login using usernames from this [list of available usernames](https://github.com/byeongjae-kang/MakeMyDay/blob/master/back-end/db/seeds/seeds.sql). How to enable Google login
+: start by creating an OAUTH2 Client ID on [Google Cloud Platform](https://console.cloud.google.com/). In the front-end folder, create a .env.local file by copying "env.local example": `cp env.local example .env.local` and then paste your Google OAUTH2 ID after `REACT_APP_GOOGLE_CLIENT_ID=` in the .env.local file that you made.
 
 \*To enable chat: **Enable Login First**. On Messages.js (front-end folder), comment line 70 ` });` uncomment line 71 `}, [user.id, project.id, project.users]);` and finally uncomment line 173 `<form onSubmit={(e) => submitHandler(e, user, project, inputMessage)}>` Change to socket directory `cd socket` and run the following commands: `npm install` and `npm run nodemon`. Open another brower window using incognito and log in as a different user.  Chat only works locally.
 

@@ -8,13 +8,16 @@ Make My Day is a project management app that allows small teams to track tasks a
 
 Project View:
 
--
--
+- Users can create new projects and filter users by project
+- Users can chat with other users in the same project
 
 Task View:
 
-- users can drag and drop tasks
--
+- Users can create new tasks, new tasks are automatically created in the in-progress section
+- Users can drag and drop tasks to either the in-progress, backlog, on-hold or completed sections
+- Tasks can be assigned to team members and filtered by user
+- Automatic sorting: tasks are sorted by priority (low, med, high). Tasks with equal priority are sorted by due date.
+- Gantt chart displays a visual of all tasks. Users can change dates by dragging bars left or right.
 
 We made this app as part our final group project at Lighthouse Labs.
 
@@ -32,37 +35,16 @@ We made this app as part our final group project at Lighthouse Labs.
 
 - Built with React, Node, Express, PostgreSQL
 - [React Beautiful DND](https://github.com/atlassian/react-beautiful-dnd) for drag and drop and [React Natural Drag animation](https://github.com/rokborf/natural-drag-animation-rbdnd) for drag and drop animation
-- [React Gantt Timeline](https://github.com/guiqui/react-timeline-gantt) for the gantt chart
+- [React Gantt Timeline](https://github.com/guiqui/react-timeline-gantt) for gantt chart
 - Material UI for styling
 
-## Installation?
+## Installation
 
-To enable users
-To enable chat feature
+- There is a login page. Users can be enabled...
+- Chat is also not enabled. Chat can be enabled...
 
-## Dependencies
+* front-end
 
-    "@babel/runtime": "^7.14.8",
-    "@material-ui/core": "^4.12.3",
-    "@material-ui/icons": "^4.11.2",
-    "@material-ui/lab": "^4.0.0-alpha.60",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
-    "axios": "^0.21.1",
-    "chat-ui-react": "^0.2.14",
-    "lodash": "^4.17.21",
-    "natural-drag-animation-rbdnd": "^2.1.0",
-    "react": "^16.14.0",
-    "react-beautiful-dnd": "^13.1.0",
-    "react-dates": "^21.8.0",
-    "react-dom": "^16.14.0",
-    "react-gantt-timeline": "^0.4.3",
-    "react-google-login": "^5.2.2",
-    "react-masonry-css": "^1.0.16",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
-    "react-with-direction": "^1.3.1",
-    "socket.io-client": "^4.1.3",
-    "timeago.js": "^4.0.2",
-    "web-vitals": "^1.1.2"
+* back-end
+
+* socket

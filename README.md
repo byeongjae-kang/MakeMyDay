@@ -2,7 +2,7 @@
 
 ## Summary
 
-TLDR: A trello clone, task board, with a task and project view.
+TLDR: A trello clone, task board, with a project and task view.
 
 Make My Day is a project management app that allows small teams to track tasks and communicate with other team members. Features of this app include:
 

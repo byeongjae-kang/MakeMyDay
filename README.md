@@ -47,7 +47,7 @@ We made this app as part our final group project at Lighthouse Labs.
 `npm install`<br />
 `npm start`
 
-### setup PostgreSQL
+### setup postgreSQL
 
 `cd back-end/db`<br />
 `psql -U postgres` or psql -U "yourusername" and enter your password<br />
@@ -72,7 +72,7 @@ Create a .env file by copying the .env example `cp env.example .env`. In the .en
 `npm install`<br />
 `npm run nodemon`
 
-### Extra
+### extras
 
 - \*Login (front-end folder) is not enabled. To enable login: On Layout.js, change line 96 from `user` to `!user`. To enable Google login, create an OAUTH2 Client ID on [Google Cloud Platform](https://console.cloud.google.com/). In the front-end folder, create a .env.local file by copying "env.local example": `cp env.local example .env.local` and then paste your Google OAUTH2 ID after `REACT_APP_GOOGLE_CLIENT_ID=` in the .env.local file that you made.
 

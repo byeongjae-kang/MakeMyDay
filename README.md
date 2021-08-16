@@ -1,6 +1,6 @@
 # Make My Day
 
-### [Live Demo](https://makemydaydemo.netlify.app/)
+### [go][Live Demo](https://makemydaydemo.netlify.app/)
 
 ## About
 

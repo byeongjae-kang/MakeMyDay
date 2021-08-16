@@ -44,11 +44,6 @@ We made this app as part our final group project at Lighthouse Labs.
 
 ## Installation
 
-### front-end folder (localhost:3000):
-
-`npm install`<br />
-`npm start`<br />
-
 ### setup postgreSQL:
 
 `cd back-end/db`<br />
@@ -61,6 +56,8 @@ We made this app as part our final group project at Lighthouse Labs.
 `\i schema/messages.sql;`<br />
 `\i seeds/seeds.sql;`
 
+### Then on the root level of the front-end and back-end folder, run the following commands:
+
 ### back-end folder (localhost:8080):
 
 Create a .env file by copying the .env example `cp env.example .env`. In the .env file you made, copy your PostgreSQL username to `PGUSER=` and password to `PGPASSWORD=` (leave blank if no password).
@@ -69,17 +66,16 @@ Create a .env file by copying the .env example `cp env.example .env`. In the .en
 `npm install`<br />
 `npm run nodemon`<br />
 
-### socket folder:
+### front-end folder (localhost:3000):
 
-\*Optional. Only npm install and run if you have chat enabled.<br />
 `npm install`<br />
-`npm run nodemon`
+`npm start`<br />
 
 ### extras:
 
 \*Login is not enabled. To enable login: On Layout.js (front-end folder), all you need to do is change line 96 from `user` to `!user`. Login is now enabled, no further steps required. You can login using usernames from this [list of available usernames](https://github.com/byeongjae-kang/MakeMyDay/blob/master/back-end/db/seeds/seeds.sql). Optional: If you want to enable Google login, just create an OAUTH2 Client ID on [Google Cloud Platform](https://console.cloud.google.com/). And in the front-end folder, create a .env.local file by copying "env.local example": `cp env.local example .env.local` and then paste your Google OAUTH2 ID after `REACT_APP_GOOGLE_CLIENT_ID=` in the .env.local file that you made.
 
-\*Chat is not enabled. To enable chat: **First enable Login**. On Messages.js (front-end folder), comment line 70 ` });` uncomment line 71 `}, [user.id, project.id, project.users]);` and finally uncomment line 173 `<form onSubmit={(e) => submitHandler(e, user, project, inputMessage)}>` Chat only works locally. Open another brower window using incognito and log in as a different user.
+\*Chat is not enabled. To enable chat: **First enable Login**. On Messages.js (front-end folder), comment line 70 ` });` uncomment line 71 `}, [user.id, project.id, project.users]);` and finally uncomment line 173 `<form onSubmit={(e) => submitHandler(e, user, project, inputMessage)}>` In socket folder root, `npm install` and `npm run nodemon`. Chat only works locally. Open another brower window using incognito and log in as a different user.
 
 ## Dependencies
 

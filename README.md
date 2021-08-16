@@ -40,20 +40,20 @@ We made this app as part our final group project at Lighthouse Labs.
 
 ## Installation
 
-### front-end\*
+### front-end folder\*
 
-"npm install"
+`npm install`
 
-### back-end
+### back-end folder
 
-"cp env.example env"
-"npm install"
+`cp env.example env`
+`npm install`
 
-### socket\*
+### socket folder\*
 
 `npm install`
 `npm run nodemon`
 
-- \*Login is not enabled. To enable users: On Layout.js, change line 96 from `user` to `!user`. To enable Google login, create an OAUTH2 Client ID from Google Cloud Platform. In the front-end folder, copy file env.local example: `cp env.local example env.local` and then paste your ID after `REACT_APP_GOOGLE_CLIENT_ID=` in the env.local file that you made.
+\*Login is not enabled. To enable users: On Layout.js, change line 96 from `user` to `!user`. To enable Google login, create an OAUTH2 Client ID from Google Cloud Platform. In the front-end folder, copy file env.local example: `cp env.local example env.local` and then paste your ID after `REACT_APP_GOOGLE_CLIENT_ID=` in the env.local file that you made.
 
-- \*Chat is also not enabled. To enable chat: **First enable users**. On Messages.js, comment line 70 ` });` uncomment line 71 `}, [user.id, project.id, project.users]);` and finally uncomment line 173 `<form onSubmit={(e) => submitHandler(e, user, project, inputMessage)}>` Chat only works locally. Open another brower window using incognito and log in as a different user. Full user list [here](https://github.com/byeongjae-kang/MakeMyDay/blob/master/back-end/db/seeds/seeds.sql).
+\*Chat is also not enabled. To enable chat: **First enable users**. On Messages.js, comment line 70 ` });` uncomment line 71 `}, [user.id, project.id, project.users]);` and finally uncomment line 173 `<form onSubmit={(e) => submitHandler(e, user, project, inputMessage)}>` Chat only works locally. Open another brower window using incognito and log in as a different user. These are the avaliable [usernames](https://github.com/byeongjae-kang/MakeMyDay/blob/master/back-end/db/seeds/seeds.sql).

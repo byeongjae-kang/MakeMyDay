@@ -1,7 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
-const socket = io("ws://localhost:8900");
+const socket = io("");
+// const socket = io("ws://localhost:8900");
 
 export const MessageContext = createContext();
 

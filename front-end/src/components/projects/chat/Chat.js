@@ -1,15 +1,34 @@
 import React from "react";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { DialogContent, Divider } from "@material-ui/core";
+import { DialogContent, Divider, Typography } from "@material-ui/core";
 import Slide from "@material-ui/core/Slide";
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import Message from "./message/Message";
 import Members from "./members/Members";
 import { Tooltip } from "@material-ui/core";
 import "./Chat.css";
-import { withStyles } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
+const options = ["Edit", "Delete"];
+const LightTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: theme.palette.common.white,
+    color: "rgba(0, 0, 0, 0.87)",
+    boxShadow: theme.shadows[1],
+    fontSize: 14,
+  },
+}))(Tooltip);
+const HtmlTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: "#f5f5f9",
+    color: "rgba(0, 0, 0, 0.87)",
+    maxWidth: 220,
+    fontSize: theme.typography.pxToRem(12),
+    border: "1px solid #dadde9",
+    fontSize: 14,
+  },
+}))(Tooltip);
 
 const useStyles = makeStyles({
   dialog: {
@@ -20,14 +39,6 @@ const useStyles = makeStyles({
     height: "69vh",
   },
 });
-const LightTooltip = withStyles((theme) => ({
-  tooltip: {
-    backgroundColor: theme.palette.common.white,
-    color: "rgba(0, 0, 0, 0.87)",
-    boxShadow: theme.shadows[1],
-    fontSize: 14,
-  },
-}))(Tooltip);
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -47,7 +58,14 @@ export default function Chat({ project }) {
 
   return (
     <div>
-      <LightTooltip title="Chat with team members">
+      <HtmlTooltip
+        style={{ cursor: "pointer" }}
+        title={
+          <React.Fragment>
+            <Typography color="inherit">Chat Feature Not Enabled</Typography>
+          </React.Fragment>
+        }
+      >
         <QuestionAnswerIcon
           style={{
             cursor: "pointer",
@@ -57,7 +75,7 @@ export default function Chat({ project }) {
           }}
           onClick={handleClickOpen}
         />
-      </LightTooltip>
+      </HtmlTooltip>
       <Dialog
         BackdropProps={{ style: { backgroundColor: "transparent" } }}
         PaperProps={{

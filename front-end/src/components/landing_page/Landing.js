@@ -12,7 +12,8 @@ import {
 import { makeStyles } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import TabletAndroidIcon from "@material-ui/icons/TabletAndroid";
-import landing from "./kanban.png";
+import kanban from "images/kanban.png";
+// import landing from "";
 const useStyles = makeStyles({
   body: {
     display: "flex",
@@ -70,7 +71,7 @@ export default function Landing() {
           </Typography>
         </Paper>
         <Paper className={classes.paper_right}>
-          <img className="landing_img" id="landing_img" src={landing} />
+          <img className="landing_img" id="landing_img" src={kanban} />
         </Paper>
       </body>
     </>

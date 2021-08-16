@@ -17,6 +17,7 @@ import cloneDeep from "lodash/cloneDeep";
 import EventAvailableIcon from "@material-ui/icons/EventAvailable";
 import ListIcon from "@material-ui/icons/List";
 import { withStyles } from "@material-ui/core/styles";
+import avatar from "images/avatar.jpg";
 const options = ["Edit", "Delete"];
 const LightTooltip = withStyles((theme) => ({
   tooltip: {
@@ -186,7 +187,8 @@ function ProjectView() {
         key={index}
         className="avatar1"
         alt={each.user_name}
-        src={each.avatar}
+        // src={each.avatar}
+        src={avatar}
         onClick={() => toggleFilter(each.id)}
       />
     </LightTooltip>

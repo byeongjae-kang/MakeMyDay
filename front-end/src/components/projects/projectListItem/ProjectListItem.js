@@ -14,6 +14,7 @@ import Chat from "../chat/Chat";
 import "../projectList/ProjectList.css";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
+import avatar from "images/avatar.jpg";
 const options = ["Edit", "Delete"];
 const LightTooltip = withStyles((theme) => ({
   tooltip: {
@@ -132,7 +133,11 @@ export default function ProjectListItems({
                 aria-label="add"
               >
                 <IconButton key={user.id} className={classes.person}>
-                  <img className="avatar" src={user.avatar} />
+                  <img
+                    className="avatar"
+                    // src={user.avatar}
+                    src={avatar}
+                  />
 
                   {/* <Avatar alt={user.name} src={user.avatar} /> */}
                 </IconButton>

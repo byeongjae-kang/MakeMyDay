@@ -1,6 +1,6 @@
 # Make My Day
 
-### [Try the Live Demo](https://makemydaydemo.netlify.app/)
+### [Try the Live Demo!](https://makemydaydemo.netlify.app/)
 
 ## About
 
@@ -71,6 +71,7 @@ Create a .env file by copying the .env example `cp env.example .env`. In the .en
 
 ### socket folder:
 
+\*Optional. Only npm install and run if you have chat enabled.<br />
 `npm install`<br />
 `npm run nodemon`
 

@@ -44,7 +44,7 @@ We made this app as part our final group project at Lighthouse Labs.
 
 ## Installation
 
-### Setup postgreSQL:
+### Setup PostgreSQL:
 
 `cd back-end/db`<br />
 `psql -U postgres` or psql -U "yourusername" and enter your password<br />
@@ -56,16 +56,16 @@ We made this app as part our final group project at Lighthouse Labs.
 `\i schema/messages.sql;`<br />
 `\i seeds/seeds.sql;`
 
-### Back-end folder (localhost:8080):
+### Back-End Folder (localhost:8080):
 
-Create a .env file by copying the .env example `cp env.example .env`. In the .env file you made, copy your PostgreSQL username to `PGUSER=` and password to `PGPASSWORD=` (leave blank if no password).
+Create a .env file by copying the .env example `cp env.example .env`. In the .env file you made, copy your PostgreSQL username to `PGUSER=` and password to `PGPASSWORD=` 
 <br />
 <br />
 `cd back-end`<br />
 `npm install`<br />
 `npm run nodemon`<br />
 
-### Front-end folder (localhost:3000):
+### Front-End Folder (localhost:3000):
 
 `cd front-end`<br />
 `npm install`<br />

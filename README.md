@@ -2,7 +2,7 @@
 
 ## About
 
-TLDR: A trello clone, task board, with a project and task view.
+TLDR: A trello clone, task board, with a project and task view. Built with React Hooks.
 
 Make My Day is a project management app that allows small teams to track tasks and communicate with other team members. Features of this app include:
 
@@ -35,8 +35,8 @@ We made this app as part our final group project at Lighthouse Labs.
 
 ## Tech Stack
 
-- Built with React, Node, Express, PostgreSQL
-- [React Beautiful DND](https://github.com/atlassian/react-beautiful-dnd) for drag and drop and [React Natural Drag animation](https://github.com/rokborf/natural-drag-animation-rbdnd) for drag and drop animation
+- Built using React, Node, Express, PostgreSQL
+- [React Beautiful DND](https://github.com/atlassian/react-beautiful-dnd) for drag and drop and [React Natural Drag Animation](https://github.com/rokborf/natural-drag-animation-rbdnd) for drag and drop animation
 - [React Gantt Timeline](https://github.com/guiqui/react-timeline-gantt) for gantt chart
 - Material UI for styling
 

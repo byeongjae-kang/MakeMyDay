@@ -8,15 +8,15 @@ Make My Day is a project management app that allows small teams to track tasks a
 
 Project View:
 
-- Users can create new projects and filter users by project
-- Users can chat with other users in the same project
+- Users can create new projects and filter users by project.
+- Users can chat with other users in the same project.
 
 Task View:
 
-- Users can create new tasks, new tasks are automatically created in the in-progress section
-- Users can drag and drop tasks to either the in-progress, backlog, on-hold or completed sections
-- Tasks can be assigned to team members and filtered by user
-- Automatic sorting: tasks are sorted by priority (low, med, high). Tasks with equal priority are sorted by due date.
+- Users can create new tasks, new tasks are automatically created in the in-progress section.
+- Users can drag and drop tasks to either the in-progress, backlog, on-hold or completed sections.
+- Tasks can be assigned to team members and filtered by user.
+- Tasks within each section are sorted by priority (low, med, high). Tasks with equal priority are sorted by due date.
 - Gantt chart displays a visual of all tasks. Users can change dates by dragging bars left or right.
 
 We made this app as part our final group project at Lighthouse Labs.
@@ -40,11 +40,19 @@ We made this app as part our final group project at Lighthouse Labs.
 
 ## Installation
 
-- There is a login page. Users can be enabled...
-- Chat is also not enabled. Chat can be enabled...
+- front-end
 
-* front-end
+"npm install"
 
-* back-end
+- back-end
 
-* socket
+"cp env.example env"
+"npm install"
+
+- socket
+
+"npm install"
+
+- Login is not enabled. To enable users: On Layout.js, change line 96 from "user" to "!user" Google login requires OAUTH2 Client ID from Google Cloud Platform. To copy: "cp env.local example env.local" then paste your ID after REACT_APP_GOOGLE_CLIENT_ID= in the env.local file.
+
+- Chat is also not enabled. To enable chat: First enable users. On Messages.js, comment line 70 " });" uncomment line 71 " // }, [user.id, project.id, project.users]);" uncomment line 173 "<form onSubmit={(e) => submitHandler(e, user, project, inputMessage)}>"

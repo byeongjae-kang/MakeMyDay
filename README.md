@@ -74,7 +74,7 @@ Create a .env file by copying the .env example `cp env.example .env`. In the .en
 
 ### extras:
 
-\*Login is not enabled. To enable login: On Layout.js (front-end folder), change line 96 from `user` to `!user`. [List of available usernames](https://github.com/byeongjae-kang/MakeMyDay/blob/master/back-end/db/seeds/seeds.sql). To enable Google login, create an OAUTH2 Client ID on [Google Cloud Platform](https://console.cloud.google.com/). In the front-end folder, create a .env.local file by copying "env.local example": `cp env.local example .env.local` and then paste your Google OAUTH2 ID after `REACT_APP_GOOGLE_CLIENT_ID=` in the .env.local file that you made.
+\*Login is not enabled. To enable login: On Layout.js (front-end folder), change line 96 from `user` to `!user`. You can login using usernames from this [list of available usernames](https://github.com/byeongjae-kang/MakeMyDay/blob/master/back-end/db/seeds/seeds.sql). To enable Google login, create an OAUTH2 Client ID on [Google Cloud Platform](https://console.cloud.google.com/). In the front-end folder, create a .env.local file by copying "env.local example": `cp env.local example .env.local` and then paste your Google OAUTH2 ID after `REACT_APP_GOOGLE_CLIENT_ID=` in the .env.local file that you made.
 
 \*Chat is not enabled. To enable chat: **First enable Login**. On Messages.js (socket folder), comment line 70 ` });` uncomment line 71 `}, [user.id, project.id, project.users]);` and finally uncomment line 173 `<form onSubmit={(e) => submitHandler(e, user, project, inputMessage)}>` Chat only works locally. Open another brower window using incognito and log in as a different user.
 

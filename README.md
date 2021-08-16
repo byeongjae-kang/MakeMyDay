@@ -1,7 +1,5 @@
 # Make My Day
 
-### [Live Demo](https://makemydaydemo.netlify.app/)
-
 ## About
 
 TLDR: A trello clone / task board, built with React Hooks.
@@ -22,6 +20,8 @@ Task View:
 - Gantt chart displays a visual of all tasks. Users can change start and end dates by dragging bars left or right.
 
 We made this app as part our final group project at Lighthouse Labs.
+
+### [Try the Live Demo](https://makemydaydemo.netlify.app/)
 
 ## Preview
 

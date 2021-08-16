@@ -53,6 +53,6 @@ We made this app as part our final group project at Lighthouse Labs.
 
 "npm install"
 
-- Login is not enabled. To enable users: On Layout.js, change line 96 from "user" to "!user" Google login requires OAUTH2 Client ID from Google Cloud Platform. To copy: "cp env.local example env.local" then paste your ID after REACT_APP_GOOGLE_CLIENT_ID= in the env.local file.
+- Login is not enabled. To enable users: On Layout.js, change line 96 from `user` to `!user` To enable Google login, create an OAUTH2 Client ID from Google Cloud Platform. In front-end folder, copy file env.local example: `cp env.local example env.local` and then paste your ID after `REACT_APP_GOOGLE_CLIENT_ID=` in the env.local file.
 
-- Chat is also not enabled. To enable chat: First enable users. On Messages.js, comment line 70 " });" uncomment line 71 " // }, [user.id, project.id, project.users]);" uncomment line 173 "<form onSubmit={(e) => submitHandler(e, user, project, inputMessage)}>"
+- Chat is also not enabled. To enable chat: **First enable users**. On Messages.js, comment line 70 ` });` uncomment line 71 `}, [user.id, project.id, project.users]);` and finally uncomment line 173 `<form onSubmit={(e) => submitHandler(e, user, project, inputMessage)}>`

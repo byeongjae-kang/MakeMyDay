@@ -4,7 +4,7 @@
 
 ## About
 
-TLDR: A trello clone / task board, built with React Hooks.
+TLDR: A trello clone / task board built with React Hooks.
 
 Make My Day is a project management app that allows small teams to track tasks and communicate with other team members. Features of this app include:
 

@@ -74,7 +74,7 @@ Create a .env file by copying the .env example `cp env.example .env`. In the .en
 `npm install`<br />
 `npm run nodemon`
 
-### extras:
+### Extras:
 
 \*Login is not enabled. To enable login: On Layout.js (front-end folder), all you need to do is change line 96 from `user` to `!user`. Login is now enabled, no further steps required. You can login using usernames from this [list of available usernames](https://github.com/byeongjae-kang/MakeMyDay/blob/master/back-end/db/seeds/seeds.sql). Optional: If you want to enable Google login, just create an OAUTH2 Client ID on [Google Cloud Platform](https://console.cloud.google.com/). And in the front-end folder, create a .env.local file by copying "env.local example": `cp env.local example .env.local` and then paste your Google OAUTH2 ID after `REACT_APP_GOOGLE_CLIENT_ID=` in the .env.local file that you made.
 

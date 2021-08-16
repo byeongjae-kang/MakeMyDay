@@ -1,6 +1,6 @@
 # Make My Day
 
-## Summary
+## About
 
 TLDR: A trello clone, task board, with a project and task view.
 

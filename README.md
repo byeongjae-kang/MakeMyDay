@@ -45,7 +45,9 @@ We made this app as part our final group project at Lighthouse Labs.
 ### \*front-end folder:
 
 `npm install`<br />
-`npm start`
+`npm start`<br />
+<br />
+View on localhost:3000
 
 ### setup postgreSQL:
 
@@ -65,7 +67,9 @@ Create a .env file by copying the .env example `cp env.example .env`. In the .en
 <br />
 <br />
 `npm install`<br />
-`npm run nodemon`
+`npm run nodemon`<br />
+<br />
+Uses localhost:8080
 
 ### \*socket folder:
 

@@ -1,6 +1,6 @@
 # Make My Day
 
-### [Demo App Here](https://github.com/byeongjae-kang/MakeMyDay/blob/master/front-end/src/images/kanban.png)
+<!-- ### [Demo App Here]() -->
 
 ## About
 

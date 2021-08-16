@@ -44,7 +44,7 @@ We made this app as part our final group project at Lighthouse Labs.
 
 ## Installation
 
-### \*front-end folder (localhost:3000):
+### front-end folder (localhost:3000):
 
 `npm install`<br />
 `npm start`<br />
@@ -69,7 +69,7 @@ Create a .env file by copying the .env example `cp env.example .env`. In the .en
 `npm install`<br />
 `npm run nodemon`<br />
 
-### \*socket folder:
+### socket folder:
 
 `npm install`<br />
 `npm run nodemon`

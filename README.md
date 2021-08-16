@@ -8,20 +8,22 @@ Make My Day is a project management app that allows small teams to track tasks a
 
 Project View:
 
-- Users can create new projects and filter users by project.
-- Users can chat with other users in the same project.
+- Users can create new projects and filter project by username.
+- Users can chat with other team members of the same project.
 
 Task View:
 
-- Users can create new tasks, new tasks are automatically created in the in-progress section.
-- Users can drag and drop tasks to either the in-progress, backlog, on-hold or completed sections.
-- Tasks can be assigned to team members and filtered by user.
-- Tasks within each section are sorted by priority (low, med, high). Tasks with equal priority are sorted by due date.
-- Gantt chart displays a visual of all tasks. Users can change dates by dragging bars left or right.
+- Users can create new tasks. New tasks are automatically created in the In-Progress section.
+- Users can drag and drop tasks to one of four sections: In-Progress, Backlog, On-Hold or Completed.
+- Tasks can be assigned to team members and filtered by username.
+- Tasks within each section are automatically sorted by priority (low, medium, high). Tasks with equal priority are sorted by due date.
+- Gantt chart displays a visual of all tasks. Users can change start and end dates by dragging bars left or right.
 
 We made this app as part our final group project at Lighthouse Labs.
 
-## Gif
+## Task View and Gif
+
+!["MMD Task View"](https://github.com/byeongjae-kang/MakeMyDay/blob/master/front-end/src/images/kanban.png)
 
 !["MMD Demo"](https://github.com/byeongjae-kang/MakeMyDay/blob/master/docs/demo.gif)
 
@@ -60,8 +62,8 @@ We made this app as part our final group project at Lighthouse Labs.
 ### back-end folder
 
 Create a .env file by copying the .env example `cp env.example .env`<br />
-In the .env file you made, copy your username and password in PostgreSQL to `PGUSER=`
-`PGPASSWORD=`<br />
+In the .env file you made, copy your username to `PGUSER=` and password in PostgreSQL to `PGPASSWORD=`
+<br />
 `npm install`<br />
 `npm run nodemon`
 

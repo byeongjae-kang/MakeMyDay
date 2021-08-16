@@ -66,7 +66,7 @@ app.get("/api/users", (req, res) => {
     })
     .catch((err) => {
       res.status(500).send(err.message);
-      pool.end();
+   //   pool.end();
     });
 });
 
@@ -93,7 +93,7 @@ app.get("/api/projects", (req, res) => {
     })
     .catch((err) => {
       res.status(500).send(err.message);
-      pool.end();
+ //     pool.end();
     });
 });
 

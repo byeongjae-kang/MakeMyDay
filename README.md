@@ -61,11 +61,12 @@ We made this app as part our final group project at Lighthouse Labs.
 
 ### back-end folder
 
-- Create a .env file by copying the .env example `cp env.example .env`<br />
-- In the .env file you made, copy your PostgreSQL username to `PGUSER=` and password to `PGPASSWORD=` (leave blank if no password)
-  <br />
-  `npm install`<br />
-  `npm run nodemon`
+Create a .env file by copying the .env example `cp env.example .env`<br />
+In the .env file you made, copy your PostgreSQL username to `PGUSER=` and password to `PGPASSWORD=` (leave blank if no password)
+<br />
+<br />
+`npm install`<br />
+`npm run nodemon`
 
 ### socket folder\*
 

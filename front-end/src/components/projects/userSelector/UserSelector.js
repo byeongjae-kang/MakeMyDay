@@ -2,6 +2,7 @@ import React from "react";
 import { useStyles } from "./UserSelectorStyle";
 import { Avatar, TextField } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import avatar from "images/avatar.jpg";
 import "../projectList/ProjectList.css";
 const getDefaultUsers = (userId, users) => {
   return userId.map((id) => {
@@ -24,7 +25,12 @@ export default function UserSelector({ users, getUserIds, userId }) {
         getOptionLabel={(user) => user.user_name}
         renderOption={(user) => (
           <div className={classes.members}>
-            <img className="avatar" alt={user.name} src={user.avatar} />
+            <img
+              className="avatar"
+              alt={user.name}
+              // src={user.avatar}
+              src={avatar}
+            />
             {/* <Avatar
               className={classes.avatar}
    

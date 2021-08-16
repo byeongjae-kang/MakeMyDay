@@ -59,8 +59,8 @@ We made this app as part our final group project at Lighthouse Labs.
 
 ### back-end folder
 
-`cp env.example env`<br />
-copy your username and password in PostgreSQL to `PGUSER=`
+Create a .env file by copying the .env example `cp env.example .env`<br />
+In the .env file you made, copy your username and password in PostgreSQL to `PGUSER=`
 `PGPASSWORD=`<br />
 `npm install`<br />
 `npm run nodemon`
@@ -70,7 +70,7 @@ copy your username and password in PostgreSQL to `PGUSER=`
 `npm install`<br />
 `npm run nodemon`
 
-\*Login is not enabled. To enable users: On Layout.js, change line 96 from `user` to `!user`. To enable Google login, create an OAUTH2 Client ID from Google Cloud Platform. In the front-end folder, copy file env.local example: `cp env.local example env.local` and then paste your ID after `REACT_APP_GOOGLE_CLIENT_ID=` in the env.local file that you made.
+\*Login is not enabled. To enable users: On Layout.js, change line 96 from `user` to `!user`. To enable Google login, create an OAUTH2 Client ID from Google Cloud Platform. In the front-end folder, create a .env.local file by copying "env.local example": `cp env.local example .env.local` and then paste your Google OAUTH2 ID after `REACT_APP_GOOGLE_CLIENT_ID=` in the env.local file that you made.
 
 \*Chat is also not enabled. To enable chat: **First enable users**. On Messages.js, comment line 70 ` });` uncomment line 71 `}, [user.id, project.id, project.users]);` and finally uncomment line 173 `<form onSubmit={(e) => submitHandler(e, user, project, inputMessage)}>` Chat only works locally. Open another brower window using incognito and log in as a different user. These are the avaliable [usernames](https://github.com/byeongjae-kang/MakeMyDay/blob/master/back-end/db/seeds/seeds.sql).
 

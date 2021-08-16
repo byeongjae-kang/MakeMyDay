@@ -156,8 +156,18 @@ export default function MiniDrawer({ children }) {
                 </HtmlTooltip>
                 {/* <Typography>WELCOME!! {user && user.user_name}</Typography> */}
               </div>
-
-              <Avatar className={classes.avatar}></Avatar>
+              <HtmlTooltip
+                style={{ cursor: "pointer" }}
+                title={
+                  <React.Fragment>
+                    <Typography color="inherit">
+                      User Login Feature Not Enabled
+                    </Typography>
+                  </React.Fragment>
+                }
+              >
+                <Avatar className={classes.avatar}></Avatar>
+              </HtmlTooltip>
             </Toolbar>
           </AppBar>
           <Drawer

@@ -20,7 +20,7 @@ import { useContext } from "react";
 import { useRef } from "react";
 import { GoogleLogin } from "react-google-login";
 import { Avatar } from "@material-ui/core";
-import googleIcon from "./google-icon.png";
+
 import Slide from "@material-ui/core/Slide";
 const useStyles = makeStyles({
   dialog: {

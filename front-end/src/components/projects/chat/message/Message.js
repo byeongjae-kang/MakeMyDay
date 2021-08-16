@@ -59,15 +59,18 @@ export default function Message({ project }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [receivedMessage]);
 
-  useEffect(() => {
-    axios
-      .get(`/api/projects/${project.id}/messages`)
-      .then((result) => {
-        const messages = getMessagesWithUsers(result.data, project.users);
-        setAllMessages([...messages]);
-      })
-      .catch((err) => console.log("could not get messages", err.message));
-  }, [user.id, project.id, project.users]);
+  useEffect(
+    () => {
+      axios
+        .get(`/api/projects/${project.id}/messages`)
+        .then((result) => {
+          const messages = getMessagesWithUsers(result.data, project.users);
+          setAllMessages([...messages]);
+        })
+        .catch((err) => console.log("could not get messages", err.message));
+    }
+    // [user.id, project.id, project.users]
+  );
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });

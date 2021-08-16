@@ -7,6 +7,7 @@ import ProjectForm from "../projectForm/ProjectForm";
 import ProjectListItems from "../projectListItem/ProjectListItem";
 import useProjectData from "hooks/useProjectData";
 import "./ProjectList.css";
+import avatar from "images/avatar.jpg";
 import { MessageContextProvider } from "context/MessageContext";
 import {
   FormControl,
@@ -161,7 +162,12 @@ export default function ProjectList() {
               getOptionLabel={(user) => user.user_name}
               renderOption={(user) => (
                 <div className="filter_by_users_options">
-                  <img className="avatar" alt={user.name} src={user.avatar} />
+                  <img
+                    className="avatar"
+                    alt={user.name}
+                    // src={user.avatar}
+                    src={avatar}
+                  />
                   <p>
                     {user.user_name}
                     <br />

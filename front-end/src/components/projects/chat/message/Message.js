@@ -172,34 +172,34 @@ export default function Message({ project }) {
 
       <div>
         <br />
-        <form onSubmit={(e) => submitHandler(e, user, project, inputMessage)}>
-          <TextField
-            variant="outlined"
-            size="small"
-            placeholder="Enter Message..."
-            color="secondary"
-            className="chat_message_input"
-            type="text"
-            // placeholder="write something..."
-            value={inputMessage}
-            onChange={(e) => {
-              setInputMessage(e.target.value);
-            }}
-          ></TextField>{" "}
-          <Box
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              marginTop: "6px",
-            }}
-          >
-            <Typography>Socket.io Chatroom</Typography>
-            <Typography style={{ marginRight: "20px" }}>
-              #{project.name}
-            </Typography>
-          </Box>
-          {/* d<button type="submit">Send</button> */}
-        </form>
+        {/* <form onSubmit={(e) => submitHandler(e, user, project, inputMessage)}> */}
+        <TextField
+          variant="outlined"
+          size="small"
+          placeholder="Enter Message..."
+          color="secondary"
+          className="chat_message_input"
+          type="text"
+          // placeholder="write something..."
+          value={inputMessage}
+          onChange={(e) => {
+            setInputMessage(e.target.value);
+          }}
+        ></TextField>{" "}
+        <Box
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: "6px",
+          }}
+        >
+          <Typography>Socket.io Chatroom</Typography>
+          <Typography style={{ marginRight: "20px" }}>
+            #{project.name}
+          </Typography>
+        </Box>
+        {/* d<button type="submit">Send</button> */}
+        {/* </form> */}
       </div>
     </div>
   );

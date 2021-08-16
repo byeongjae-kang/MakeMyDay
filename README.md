@@ -21,7 +21,7 @@ Task View:
 
 We made this app as part our final group project at Lighthouse Labs.
 
-## Task View and Gif
+## Preview
 
 !["MMD Task View"](https://github.com/byeongjae-kang/MakeMyDay/blob/master/front-end/src/images/kanban.png)
 
@@ -62,7 +62,7 @@ We made this app as part our final group project at Lighthouse Labs.
 ### back-end folder
 
 Create a .env file by copying the .env example `cp env.example .env`<br />
-In the .env file you made, copy your username to `PGUSER=` and password in PostgreSQL to `PGPASSWORD=`
+In the .env file you made, copy your PostgreSQL username to `PGUSER=` and password to `PGPASSWORD=`
 <br />
 `npm install`<br />
 `npm run nodemon`

@@ -43,11 +43,27 @@ We made this app as part our final group project at Lighthouse Labs.
 ### front-end folder\*
 
 `npm install`<br />
+`npm start`
+
+### setup PostgreSQL
+
+`cd back-end/db`<br />
+`psql -U postgres` or psql -U "yourusername" and enter your password<br />
+`CREATE DATABASE make_my_day`<br />
+`\c make_my_day`<br />
+`\i schema/users.sql`<br />
+`\i schema/projects.sql`<br />
+`\i schema/tasks.sql`<br />
+`\i schema/messages.sql`<br />
+`\i seeds/seeds.sql`
 
 ### back-end folder
 
 `cp env.example env`<br />
-`npm install`
+copy your username and password in PostgreSQL to `PGUSER=`
+`PGPASSWORD=`<br />
+`npm install`<br />
+`npm run nodemon`
 
 ### socket folder\*
 
@@ -58,6 +74,6 @@ We made this app as part our final group project at Lighthouse Labs.
 
 \*Chat is also not enabled. To enable chat: **First enable users**. On Messages.js, comment line 70 ` });` uncomment line 71 `}, [user.id, project.id, project.users]);` and finally uncomment line 173 `<form onSubmit={(e) => submitHandler(e, user, project, inputMessage)}>` Chat only works locally. Open another brower window using incognito and log in as a different user. These are the avaliable [usernames](https://github.com/byeongjae-kang/MakeMyDay/blob/master/back-end/db/seeds/seeds.sql).
 
-## Installation
+## Dependencies
 
 - Node v14.17.3 or higher

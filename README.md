@@ -11,7 +11,7 @@ Make My Day is a project management app that allows small teams to track tasks a
 Project View:
 
 - Users can create new projects and filter project by username.
-- Users can chat with other team members of the same project.
+- Users can chat with other team members within the same project.
 
 Task View:
 

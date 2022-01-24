@@ -32,7 +32,7 @@ We made this app as part our final group project at Lighthouse Labs.
 ## Contributors
 
 - [Byeongjae Kang](https://github.com/byeongjae-kang)
-- [Korlan Kassembayeva](https://github.com/Okenai)
+- [Korlan Kassembayeva](https://github.com/korlank)
 - [Bernard Yang](https://github.com/WebDevBernard)
 
 ## Tech Stack
